@@ -1,0 +1,269 @@
+@charset "utf-8";
+/* CSS Document */
+
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p,
+blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td, /* table elements 表格元素 */
+img/* img elements 图片元素 */{
+border:medium none;
+margin: 0;
+padding: 0;
+}
+/** 设置默认字体 **/
+body,button, input, select, textarea {
+font: 12px/1.5 '宋体',tahoma, Srial, helvetica, sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+em{font-style:normal;}
+/** 重置列表元素 **/
+ul, ol { list-style: none; }
+/** 重置超链接元素 **/
+a { text-decoration: none; color:#333;}
+a:hover { text-decoration: underline; color:#F40; }
+/** 重置图片元素 **/
+img{ border:0px;}
+/** 重置表格元素 **/
+table { border-collapse: collapse; border-spacing: 0; }
+
+.top {
+	background-image: url(../images/bj1.jpg);
+	background-repeat:no-repeat;
+	height: 86px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.logo {
+	height: 29px;
+	width: 336px;
+	margin-top: 35px;
+	float: left;
+}
+.xinxi {
+	float: right;
+	margin-top: 10px;
+	width: 285px;
+	height: 75px;
+}
+.about {
+	margin-left: 145px;
+	height: 20px;
+	color: #0c6ca8;
+}
+.about a {
+	font-size: 12px;
+	color: #AAEFFF;
+}
+.anniu {
+	background-image: url(../images/bj2.jpg);
+	background-repeat: no-repeat;
+	height: 28px;
+	margin-top: 19px;
+	padding-top: 7px;
+	padding-left: 32px;
+}
+.menu {
+	background-image: url(../images/bj3.jpg);
+	background-repeat: repeat;
+	height: 30px;
+	padding-left: 30px;
+	padding-top: 12px;
+	font-size: 12px;
+	font-weight: normal;
+}
+ 
+.left {
+	 
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #e0e0e0;
+	height:100%;
+	 
+	}
+ 
+.guanlicaidan {
+	width: 100%;
+	 
+	height: 37px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #e0e0e0;
+	background:url(../images/caozuo.jpg) no-repeat ;
+}
+
+.guanli {
+	background:url(../images/left.jpg) no-repeat ;
+	height: 29px;
+	width: 142px;
+	padding-top: 15px;
+	color: #0a71ba;
+	font-size: 14px;
+	font-weight: bold;
+	float: left;
+}
+.an {
+	float: right;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #e0e0e0;
+	
+}
+.shu {
+	font-size: 14px;
+	margin-right: 0px;
+	margin-bottom: 10px;
+	margin-left: 0px;
+	background-color:#FFF;
+	
+}
+.right {
+height:100%;
+}
+.sousuo {
+  background:url(../images/dhbj.jpg) repeat-x ;
+ 	height: 36px;
+ 	border:1px solid #8DB2E3;
+	font-size: 14px;
+	color:#616161;
+}
+ 
+.sousuo1 {
+	background-color:#ffffff;
+	height: 36px;
+	line-height:36px;
+	border-bottom:none;
+	padding-left: 20px;
+	font-size: 14px;
+	color:#616161;
+}
+.sousuo table tr td a{
+	color:#616161;
+}
+.sousuo1 input{background:url(../images/buttonbg1.jpg) no-repeat ;width: 69px;height: 24px;border: none}
+.so {
+	background-color: #e7f0f9;
+	height:500px;
+	border: 1px solid #e0e0e0;
+	margin-bottom: 5px;
+	padding-left: 20px;
+	padding-top: 8px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #0970b9;
+}
+#pre{height:1400px}
+.sousuo a {
+	color: #0970B9;
+}
+#tabs-1,#tabs-2,#tabs-3,#tabs-4,#tabs-5{width:100.2%; margin-left:-1px;}
+#keyWord{width:170px;height: 20px;line-height:20px;background-color:white;background-image: none;border-left: 1px solid black;border-top: 1px solid black;}
+#search{width: 46px;height: 29px;background:url(../images/searchbg.jpg) no-repeat ;}
+.biao {
+}
+#ejiaA1 {
+	width: 1000px;
+	border-top: #E3E3E3 1px solid;
+	border-left: #E3E3E3 1px solid;
+}
+#ejiaA1 td,#ejiaA1 th {
+padding: 5px;border-right: #E3E3E3 1px solid;
+border-bottom: #E3E3E3 1px solid;
+font-size:12px;
+height:16px; line-height:16px;
+}
+
+#ejiaA1 tr td span {color: #686868}
+#ejiaA1 tr td span.st1 {color: #ff0000}
+.foot {
+	height: 25px;
+	margin:0 auto;
+	padding-top: 15px;
+	width:100%;
+	font-size: 12px;
+	border-top:1px solid #e0e0e0;
+}
+.foot a{color:#666666;}
+.foot .indiv1{float: left;margin:0 0 0 10px}
+.foot .indiv2{float: right;margin:0 10px 0 0}
+.bianji {
+	background-image: url(../images/bj4.jpg);
+	background-repeat: repeat;
+	height: 28px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-top-color: #e0e0e0;
+	border-right-color: #e0e0e0;
+	border-left-color: #e0e0e0;
+	padding-left: 20px;
+
+}
+.z {
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	color: #666666;
+	margin-top: 8px;
+}
+.y {
+	float: right;
+	margin-right: 10px;
+	background-image: url(../images/y.jpg);
+	background-repeat: no-repeat;
+	width: 105px;
+	height: 20px;
+	padding-top: 8px;
+}
+.y a {
+	color: #666666;
+	font-size: 12px;
+}
+.y a:hover {
+	text-decoration: underline;
+}
+
+.fanhui {
+	float: right;
+}
+.tian {
+	font-size: 12px;
+}
+.tian input{ background-color:#f4f4f4;  border:none; border-top:#000 1px solid; border-left:#000 1px solid; border-right:#e3e3e3 1px solid;border-bottom:#e3e3e3 1px solid; height:22px
+}
+.tian textarea{background-color:#f4f4f4; border:none;border:none; border-top:#000 1px solid; border-left:#000 1px solid;border-right:#e3e3e3 1px solid;border-bottom:#e3e3e3 1px solid; }
+.tian select{background-color:#f4f4f4; border:none;border:none; border-top:#000 1px solid; border-left:#000 1px solid;border-right:#e3e3e3 1px solid;border-bottom:#e3e3e3 1px solid; }
+#btnUpload,#btnAbort,#btnClose,#btnSelect,#updateimages{ background:url(../images/buttonbg.png) no-repeat; width:70px; height:26px; border:none}
+#button1{ background:url(../images/restbg.png) no-repeat; width:62px; height:27px; border:none }
+#button2{ background:url(../images/submitbg.jpg) no-repeat; width:125px; height:37px;border:none  }
+
+#form1 {
+	text-align: center;
+	margin-top: 5px;
+}
+/*设置表头过长时自动换行*/  
+        th.ui-th-column div{  
+            white-space:normal !important;  
+            height:auto !important;  
+            padding:0px;  
+        }  
+#infobg {background:url(../images/infobg.png) repeat-x;	font-size: 14px;font-weight: bold;color: #0970b9;padding-left: 20px;}
+#userimages{ background:url(../images/userimages.png) no-repeat; width:65px; height:60px;margin: 20px 20px;float: left}
+#info{float:left;margin: 20px 0px}
+#info1{margin:0px 20px}
+.button1{background:url(../images/selectbg.jpg) no-repeat; width:74px; height:26px;display:inline-block;
+}
+
+.commentdel{
+cursor:pointer;
+	background:url(../images/buttonbg.jpg);
+	border-style:none; 
+	width:70px; 
+	height:25px; 
+	background-repeat:no-repeat;
+}
+ 

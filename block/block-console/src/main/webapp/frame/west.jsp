@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
      <div class="easyui-accordion" data-options="fit:true,border:false"  style="width:700px;height:300px;" >
      		<div title="个人信息"  data-options="iconCls:'icon-personal'"  style="padding:10px;">
-				<input type="button" value=" 个人信息" onclick="tab_add('centertabs','个人信息','filecenter/listallPage')"/>
+				<input type="button" value=" 个人信息" onclick="tab_add('centertabs','个人信息','user/userList.do')"/>
 			</div>
 			<div title="用户管理"  data-options="iconCls:'icon-usermanager'"  style="padding:10px;">
 				<input type="button" value=" 用户管理 "  />
