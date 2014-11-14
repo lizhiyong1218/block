@@ -1,0 +1,13 @@
+.classpath
+*.log
+/target
+.settings/
+
+block-api/target
+block-api/.settings/
+
+block-core/target
+block-core/.settings/
+
+block-console/target
+block-console/.settings/

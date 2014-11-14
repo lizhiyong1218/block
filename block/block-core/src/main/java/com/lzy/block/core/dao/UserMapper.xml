@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzy.block.core.dao.UserMapper" >
+
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/> -->
+
+  <resultMap id="BaseResultMap" type="com.lzy.block.api.model.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="CHAR" />
+    <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_pwd 
+  </sql>
+  
+  <sql id="table_name">
+		 t_test_user
+  </sql>
+  
+  <sql id="pageModelwhere">
+	<if test="userName != null and userName != ''">
+		AND user_name =  #{userName,jdbcType=VARCHAR}
+	</if>
+	<if test="userPwd != null and userPwd != ''">
+		AND user_pwd =  #{userPwd,jdbcType=VARCHAR}
+	</if>
+  </sql>
+  
+  <insert id="insert" parameterType="user" useGeneratedKeys="true" keyProperty="userId">
+    insert into 
+    <include refid="table_name" />
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPwd != null" >
+        user_pwd, 
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Integer">
+		delete from <include refid="table_name" />
+		where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  
+  <update id="update" parameterType="user" >
+    update <include refid="table_name" />
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  
+    <select id="getOneById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  <include refid="table_name" />
+		where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    
+    <select id="getByName" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  <include refid="table_name" />
+		where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+    
+  
+    <select id="getOneByNamePrefix"  parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from  <include refid="table_name" />
+		where  user_name like CONCAT(#{namePrefix,jdbcType=VARCHAR},'%') 
+	</select>
+	
+	<select id="findAll" parameterType="user" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from <include refid="table_name" /> where 1=1
+		<include refid="pageModelwhere" />
+		order by user_id asc
+	</select>
+  
+</mapper>
