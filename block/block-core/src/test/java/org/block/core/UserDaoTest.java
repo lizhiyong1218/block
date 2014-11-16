@@ -21,7 +21,7 @@ import com.lzy.block.core.dao.UserMapper;
 @ContextConfiguration(locations = { "classpath:applicationContext.xml"})
 @TransactionConfiguration(transactionManager="transactionManager",defaultRollback=false)
 public class UserDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
-	@Autowired
+	@Autowired 
 	UserMapper userMapper;
 	
 	@Test

@@ -7,7 +7,7 @@
  */
 /**
  * @ClassName: package-info
- * @Description: TODO 
+ * @Description: api公共包 
  * @author 李志勇
  * @date 2014年11月14日 下午3:38:16
  *

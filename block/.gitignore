@@ -5,9 +5,12 @@
 
 block-api/target
 block-api/.settings/
+block-api/bin
 
 block-core/target
 block-core/.settings/
+block-core/bin
 
 block-console/target
 block-console/.settings/
+block-console/bin

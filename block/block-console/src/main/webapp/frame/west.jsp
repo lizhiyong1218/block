@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="button" value=" 用户管理 "  />
 			</div>
 			<div title="文件管理" data-options="iconCls:'icon-filemanage'"  style="padding:10px;">
-				<a onclick="openPanel('fileList')" style="cursor:pointer;">文件列表</a></br>
+				<a onclick="openPanel('fileList')" style="cursor:pointer;">文件列表</a>
 			</div>
 			<div title="我的邮箱"  data-options="iconCls:'icon-mailmanage'" style="padding:10px">
 				任务管理
