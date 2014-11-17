@@ -30,8 +30,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div title="我的邮箱"  data-options="iconCls:'icon-mailmanage'" style="padding:10px">
 				任务管理
 			</div>
-			<div title="任务管理" data-options="selected:true,iconCls:'icon-taskmanage'" style="padding:10px">
-				任务管理
+			<div title="系统管理" data-options="selected:true,iconCls:'icon-taskmanage'" style="padding:10px">
+				<input type="button" value="数据字典" onclick="tab_add('centertabs','数据字典','user/userList.do')"/>
 			</div>
 		</div>
  </body> 

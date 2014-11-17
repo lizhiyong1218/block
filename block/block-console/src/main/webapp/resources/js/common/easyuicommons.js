@@ -40,5 +40,45 @@
 		    });
 		    tab.panel('refresh');
 	}
+	
+	function openMyDialog(url, title) {
+	    var dialog= $('<div/>').dialog({
+	        href: url,
+	        width: 500,
+	        height: 400,
+	        modal: true,
+			collapsible : true,
+			minimizable : true,
+			maximizable : true,
+	        title: title,
+			buttons : [ 
+			
+			/*{
+				text : '提交',
+				iconCls : 'icon-ok',
+				handler : function() {
+					alert("ok");
+				}
+			}, {
+				text : '取消',
+				handler : function() {
+					alert("cancel");
+				}
+			},*/
+			{
+				text : '关闭',
+				handler : function() {
+					 var d = $(this).closest('.window-body');
+		             d.dialog('destroy');
+				}
+			}],
+	        onClose: function () {
+	            $(this).dialog('destroy');
+	        }
+	    });
+	    
+	    return dialog;
+	    
+	}
 	 
   		 

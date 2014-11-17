@@ -18,10 +18,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript" src='<%=basePath %>resources/js/user/userList.js' ></script>
 <table id="allfiletable"></table>
-<div id="toolbar">
-	<a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="Open_Dialog()">add</a>
+<!-- <div id="toolbar">
+	<a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="openAddUserDialog()">add</a>
 	<a class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeM()">del</a>
 	<a class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="updPage()">upd</a>
-</div>
+</div> -->
  <div id="mydialog" style="display:none;padding:5px;width:400px;height:200px;" title="弹框练习"> 
 </div> 

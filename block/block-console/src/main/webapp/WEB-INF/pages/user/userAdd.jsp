@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ page isELIgnored="false"%> 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-<script type="text/javascript" src='<%=basePath %>resources/js/filecenter/file_listall.js' ></script>
+<script type="text/javascript" src='<%=basePath %>resources/js/user/userList.js' ></script>
 
 <script language="javascript" type="text/javascript">
 </script> 
