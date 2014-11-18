@@ -21,11 +21,7 @@ import com.lzy.block.core.dao.UserMapper;
 import com.lzy.block.core.service.IUserService;
 
 
-/**       
- * @author: ZhiYong.Li  
- * @date:2014年10月16日  
- * @Copyright:Copyright (c) 中国电子器材深圳有限公司 2014 ~ 2015 版权所有   
- */
+ 
 @Service
 public class UserServiceImpl implements IUserService {
 	@Resource

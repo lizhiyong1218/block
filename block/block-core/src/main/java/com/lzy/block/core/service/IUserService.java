@@ -13,11 +13,7 @@ import com.lzy.block.api.model.User;
 
 
 
-/**       
- * @author: ZhiYong.Li  
- * @date:2014年10月16日  
- * @Copyright:Copyright (c) 中国电子器材深圳有限公司 2014 ~ 2015 版权所有   
- */
+ 
 
 public interface IUserService {
 	

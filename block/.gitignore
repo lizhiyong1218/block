@@ -14,3 +14,4 @@ block-core/bin
 block-console/target
 block-console/.settings/
 block-console/bin
+block-console/files

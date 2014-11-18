@@ -38,7 +38,7 @@
 .icon-redo{background:url(../images/icons/redo.png) no-repeat;}
 .icon-back{background:url(../images/icons/back.png) no-repeat;}
 .icon-sum{background:url(../images/icons/sum.png) no-repeat;}
-.icon-tip{background:url(../images/icons/tip.png) no-repeat;}
+
 .icon-sucai{background:url(../images/icons/sucai.gif) no-repeat;}
 .icon-add-sucai{background:url(../images/icons/addsucai.gif) no-repeat;}
 .icon-lock{background:url(../images/icons/lock.gif) no-repeat;}
@@ -114,3 +114,15 @@
 .icon-down-1{background:url(../images/icons/icon-down-1.png) no-repeat;}
 .icon-ts-1{background:url(../images/icons/icon-ts-1.png) no-repeat;}
 .icon-xq{background:url(../images/icons/icon-xq.png) no-repeat;}
+
+
+.icon-mini-add{
+	background:url('../images/mini_add.png') no-repeat center center;
+}
+.icon-mini-edit{
+	background:url('../images/mini_edit.png') no-repeat center center;
+}
+.icon-mini-refresh{
+	background:url('../images/mini_refresh.png') no-repeat center center;
+}
+.icon-tip{background:url(../images/tip.png) no-repeat;}

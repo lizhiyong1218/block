@@ -67,4 +67,9 @@ public class ProjectUtil {
 		} 
 		return basePath;
 	}
+	
+	public static String getOpUser(){
+		return "test";
+	}
+	
 }

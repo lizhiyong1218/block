@@ -15,7 +15,7 @@
 		<!-- 多个包用,或者;分隔即可 -->
 		<property name="typeAliasesPackage" value="com.lzy.block.api.model" />
 		<!-- 没有把mapper文件放到与dao相同的深层目录，显式指定Mapper文件位置 -->
-		<property name="mapperLocations" value="classpath:/com/lzy/block/core/mapper/*Mapper.xml" />
+		<property name="mapperLocations" value="classpath:/com/lzy/block/core/mapper/**/*Mapper.xml" />
 		
 		<!-- 分页 -->
 		<property name="plugins">

@@ -16,6 +16,7 @@
 			loadMsg:'数据装载中......',
 			singleSelect:false,   
 			rownumbers:true,
+			checkOnSelect: true,
 			pagination : true,
 			columns:[[
 				{checkbox:true,field:'ck',width:'100',align:'center'},           
@@ -26,9 +27,6 @@
 				{title:'创建时间',field:'crtime',width:'200',align:'center'},
 				{title:'创建人',field:'cruser',width:'50',align:'center'} 
 	    	]],
-	    	onLoadSuccess:function(data){
-	    	},
-//	    	toolbar: "#toolbar"//工具栏
 	    	toolbar: [{
 	  				    text:'添加',
 	  				    iconCls:'icon-add',

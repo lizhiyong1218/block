@@ -1,28 +1,26 @@
-	 $(document).ready(function() {
+	 
+	 $(function(){
+		 	
 			initDictionaryList();
-			initToolBar();
-		});
+//			initToolBar();
+	});
 
  
  
 	function initDictionaryList(){
 		 $('#dictionaryList').datagrid({
 		 url: basePath+'/dictionary/dictionaryList.do',
-		 striped:true,
-		 idField:'dictionaryId',
+		 width :'auto',  
+		 height:'auto',
+		 fitColumns : true,
+		 nowrap:false,
+		 striped: true,//隔行变色
+		 collapsible:true,
+		 loadMsg:'数据装载中......',
 		 singleSelect:true,
 		 rownumbers:true,
 		 checkOnSelect: true,
-		 
-		 frozenColumns: [
-		     [
-		         {
-		             title:'dictionaryId',
-		             field:'dictionaryId',
-		             checkbox: true
-		         }
-		     ]
-		 ],
+		 pagination : true,
 		 columns: [
 		     [
 		         {
@@ -71,6 +69,14 @@
 			 dictionaryItemList(rowData.dictionaryValue);
 		 }
 		});
+		 
+		 var pager = $('#dictionaryList').datagrid('getPager');  
+			pager.pagination({
+				beforePageText: '第',              
+				afterPageText: '页    共 {pages} 页',                    
+				displayMsg: '当前显示 {from} - {to} 条   共 {total} 条'
+			});
+			
 	}
 
 	function initToolBar(){
@@ -300,11 +306,11 @@
 	    }
   
 	function dictionaryItemList(dictionaryValue){
+		console.log("11:"+dictionaryValue);
 	     $('#dictionaryItemList').datagrid({
 	        url: basePath+'/dictionary/dictionaryItemList.do',
 	        singleSelect:true,
 	        striped:true,
-	        idField:'itemId',
 	        rownumbers:true,
 	        checkOnSelect: true,
 	        selectOnCheck:true,

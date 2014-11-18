@@ -10,12 +10,15 @@ package com.lzy.block.api.model;
 
 import java.io.Serializable;
 
-/**       
- * @author: ZhiYong.Li  
- * @date:2014年10月13日  
- * @Copyright:Copyright (c) 中国电子器材深圳有限公司 2014 ~ 2015 版权所有   
+ 
+/**
+ * 
+* @ClassName: User
+* @Description: 用户 
+* @author 李志勇
+* @date 2014年11月18日 上午11:54:11
+*
  */
-
 public class User implements Serializable{
 	private static final long serialVersionUID = 2734339282011057392L;
 	private Integer userId;

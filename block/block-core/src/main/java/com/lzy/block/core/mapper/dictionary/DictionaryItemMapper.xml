@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzy.block.core.dao.dictionary.DictionaryItemMapper" >
+  <resultMap id="BaseResultMap" type="dictionaryItemModel" >
+    <id column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="item_value" property="itemValue" jdbcType="VARCHAR" />
+    <result column="item_label" property="itemLabel" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_by" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="isavailable" property="isavailable" jdbcType="CHAR" />
+    <result column="dictionary_value" property="dictionaryValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    item_id, item_value, item_label, order_no, remarks, create_by, create_time, modify_by, 
+    modify_time, isavailable, dictionary_value
+  </sql>
+  
+   <sql id="table_name">
+		 t_sys_dictionary
+  </sql>
+  
+  <sql id="pageModelwhere">
+	 <if test="dictionaryValue != null and dictionaryValue != ''">
+		AND dictionary_value like CONCAT(#{dictionaryValue,jdbcType=VARCHAR},'%')
+	</if>
+	<if test="dictionaryLabel != null and dictionaryLabel != ''">
+		AND dictionary_label like CONCAT(#{dictionaryLabel,jdbcType=VARCHAR},'%')
+	</if>
+	AND isavailable = 1
+  </sql>
+  
+   <select id="getAll" parameterType="dictionaryModel" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from <include refid="table_name" /> where 1=1
+		<include refid="pageModelwhere" />
+	</select>
+	
+	<select id="getCount" parameterType="dictionaryModel" resultType="java.lang.Long">
+		select	count(1)
+		from <include refid="table_name" /> where 1=1
+		<include refid="pageModelwhere" />
+	</select>
+	
+	<select id="selectModel" parameterType="dictionaryModel" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from <include refid="table_name" /> where 1=1
+		<include refid="pageModelwhere" />
+	</select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_dictionary_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_sys_dictionary_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="dictionaryItemModel" >
+    insert into t_sys_dictionary_item (item_id, item_value, item_label, 
+      order_no, remarks, create_by, 
+      create_time, modify_by, modify_time, 
+      isavailable, dictionary_value)
+    values (#{itemId,jdbcType=INTEGER}, #{itemValue,jdbcType=VARCHAR}, #{itemLabel,jdbcType=VARCHAR}, 
+      #{orderNo,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{isavailable,jdbcType=CHAR}, #{dictionaryValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="dictionaryItemModel" >
+    insert into t_sys_dictionary_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemValue != null" >
+        item_value,
+      </if>
+      <if test="itemLabel != null" >
+        item_label,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyBy != null" >
+        modify_by,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="isavailable != null" >
+        isavailable,
+      </if>
+      <if test="dictionaryValue != null" >
+        dictionary_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemValue != null" >
+        #{itemValue,jdbcType=VARCHAR},
+      </if>
+      <if test="itemLabel != null" >
+        #{itemLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isavailable != null" >
+        #{isavailable,jdbcType=CHAR},
+      </if>
+      <if test="dictionaryValue != null" >
+        #{dictionaryValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="dictionaryItemModel" >
+    update t_sys_dictionary_item
+    <set >
+      <if test="itemValue != null" >
+        item_value = #{itemValue,jdbcType=VARCHAR},
+      </if>
+      <if test="itemLabel != null" >
+        item_label = #{itemLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        modify_by = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isavailable != null" >
+        isavailable = #{isavailable,jdbcType=CHAR},
+      </if>
+      <if test="dictionaryValue != null" >
+        dictionary_value = #{dictionaryValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="dictionaryItemModel" >
+    update t_sys_dictionary_item
+    set item_value = #{itemValue,jdbcType=VARCHAR},
+      item_label = #{itemLabel,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_by = #{modifyBy,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      isavailable = #{isavailable,jdbcType=CHAR},
+      dictionary_value = #{dictionaryValue,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+</mapper>
