@@ -10,8 +10,10 @@ block-api/bin
 block-core/target
 block-core/.settings/
 block-core/bin
+block-core/files
 
 block-console/target
 block-console/.settings/
 block-console/bin
 block-console/files
+

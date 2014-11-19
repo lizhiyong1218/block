@@ -19,14 +19,17 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.lzy.block.api.common.Pagination;
 import com.lzy.block.api.constant.common.AvaliableEnum;
+import com.lzy.block.api.constant.common.ResultStatus;
 import com.lzy.block.api.model.dictionary.DictionaryItemModel;
 import com.lzy.block.api.model.dictionary.DictionaryModel;
+import com.lzy.block.api.vo.ResultVo;
 import com.lzy.block.console.common.ProjectUtil;
 import com.lzy.block.core.service.dictionary.IDictionaryItemService;
 import com.lzy.block.core.service.dictionary.IDictionaryService;
@@ -47,9 +50,21 @@ public class DictionaryController  {
 	@Resource
 	private IDictionaryItemService dictionaryItemService;
 	
+	/**
+	 * 
+	* @Title: dictionaryList
+	* @Description: 数据字典列表
+	* @param dictionaryModel
+	* @param page
+	* @param rows
+	* @param req
+	* @return:     
+	* Map<String,Object>    
+	* @throws
+	 */
 	@ResponseBody
 	@RequestMapping(value="/dictionaryList")
-	public  Map<String, Object>  dictionaryList(DictionaryModel dictionaryModel,int page,int rows,HttpServletRequest req) {
+	public  Map<String, Object>  dictionaryList(DictionaryModel dictionaryModel,int page,int rows) {
 		logger.debug("Dictionarylist in!!!");
 		Pagination<DictionaryModel> pm = new Pagination<DictionaryModel>();
 		try {				
@@ -65,9 +80,20 @@ public class DictionaryController  {
 	}
 	
 	
+	/**
+	 * 
+	* @Title: addDictionary
+	* @Description: 添加数据字典
+	* @param dictionaryModel
+	* @param dictionaryItemJsonData
+	* @param sessionId
+	* @return:     
+	* String    
+	* @throws
+	 */
 	@ResponseBody
 	@RequestMapping("/addDictionary")
-	public String addDictionary(DictionaryModel dictionaryModel,String dictionaryItemJsonData,String sessionId) {
+	public String addDictionary(DictionaryModel dictionaryModel,String dictionaryItemJsonData) {
 		logger.debug("save in"+"===");
 		//把json字符串转换成集合对象
 		List<DictionaryItemModel> items=new ArrayList<DictionaryItemModel>();
@@ -89,12 +115,16 @@ public class DictionaryController  {
 		return null;
 	}	
 	
-	 /**
-	 * 删除数据字典(软删除)
-	 * @param dictionaryModel
-	 * @param sessionId
-	 * @return  
-	 * @throws
+	
+	/**
+	 * 
+	* @Title: delDictionary
+	* @Description: 删除数据字典(软删除)
+	* @param dictionaryModel
+	* @param sessionId
+	* @return:     
+	* String    
+	* @throws
 	 */
 	@ResponseBody
 	@RequestMapping("/delDictionary")
@@ -172,104 +202,153 @@ public class DictionaryController  {
 	    return null;
 	}
 	
-	
+	/**
+	 * 
+	* @Title: dictionaryItemList
+	* @Description: 数据字典项列表
+	* @param dictionaryItemModel
+	* @param page
+	* @param req
+	* @return:     
+	* String    
+	* @throws
+	 */
 	@ResponseBody
 	@RequestMapping(value="/dictionaryItemList")
-	public String dictionaryItemList(DictionaryItemModel dictionaryModel,PageBounds page,HttpServletRequest req) {
+	public Map<String, Object> dictionaryItemList(DictionaryItemModel dictionaryItemModel,int page,int rows,HttpServletRequest req) {
 		logger.debug("dictionaryItemList in!!!");
 		Pagination<DictionaryItemModel> pm = new Pagination<DictionaryItemModel>();
 		try {				
-			pm = dictionaryItemService.getPagination(dictionaryModel, page);			
+			PageBounds pageBounds=new PageBounds(page, rows);
+			pm = dictionaryItemService.getPagination(dictionaryItemModel, pageBounds);			
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
 		}
-	    return null;
+		ModelMap map=new ModelMap();
+		map.put("rows", pm.getRecordList());  
+		map.put("total", pm.getRecordCount()); 
+		return map;
 	}
 	
+	/**
+	 * 
+	* @Title: editItemPage
+	* @Description: 修改数据字典页面
+	* @param itemId 数据字典id
+	* @return:     
+	* ModelAndView    
+	* @throws
+	 */
 	@RequestMapping(value="/editItemPage")
-	public ModelAndView editItemPage(int itemId,String sessionId){
-		logger.debug("editItemPage in");
-//		String bootPath= BaseController.BOOT_PATH;
+	public ModelAndView editItemPage(@RequestParam(value = "itemId", required = false)int itemId){
+		logger.info("editItemPage in:"+itemId);
 		DictionaryItemModel model=new DictionaryItemModel();
 		try {
 			model= dictionaryItemService.getOneById(itemId);
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
 		}
-		logger.debug(model);
 		ModelMap modelMap=new ModelMap();
 		modelMap.addAttribute("dictionaryItemModel", model);
-//		modelMap.addAttribute("bootPath", bootPath);
 		return new ModelAndView("/dictionary/dictionaryItemEdit",modelMap);
 	}
 	
 	
+	/**
+	 * 
+	* @Title: addItemPage
+	* @Description: 数据字典项添加页面
+	* @param dictionaryValue 数据字典值
+	* @return:     
+	* ModelAndView    
+	* @throws
+	 */
 	@RequestMapping(value="/addItemPage")
-	public ModelAndView addItemPage(String dictionaryValue,String sessionId){
+	public ModelAndView addItemPage(String dictionaryValue){
 		ModelMap modelMap=new ModelMap();
 		modelMap.addAttribute("dictionaryValue", dictionaryValue);
 		return new ModelAndView("/dictionary/dictionaryItemEdit",modelMap);
 	}
 	
-	
+	/**
+	 * 
+	* @Title: editItem
+	* @Description: 修改数据字典项
+	* @param dictionaryItemModel
+	* @return:     
+	* String    
+	* @throws
+	 */
 	@ResponseBody
 	@RequestMapping("/editItem")
-	public String editItem(DictionaryItemModel dictionaryItemModel,String sessionId) {
-		logger.debug("ediItem in"+"===");
-//		SimpleReturnVo vo;
+	public ResultVo editItem(DictionaryItemModel dictionaryItemModel) {
+		logger.info("修改数据字典项");
+		ResultVo res=new ResultVo();
 		try {
 			dictionaryItemModel.setModifyBy(ProjectUtil.getOpUser());;
 			dictionaryItemModel.setModifyTime(new Date());
+			logger.info(dictionaryItemModel);
 			dictionaryItemService.update(dictionaryItemModel);
-//			vo = new SimpleReturnVo(this.SUCCESS, "成功");
+			res.setStatus(ResultStatus.SUCCESS.value());
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
-//			vo = new SimpleReturnVo(this.FAIL, "异常");
+			res.setStatus(ResultStatus.FAILURE.value());
+			res.setMessage(e.getMessage());
 		}
-		return null;
+		return res;
 	}	
 	
+	/**
+	 * 
+	* @Title: addItem
+	* @Description: 新增数据字典项
+	* @param refDictionaryValue 数据字典值
+	* @param dictionaryItemModel 
+	* @return:     
+	* String    
+	* @throws
+	 */
 	@ResponseBody
 	@RequestMapping("/addItem")
-	public String addItem(String refDictionaryValue, DictionaryItemModel dictionaryItemModel,String sessionId) {
-		logger.debug("addItem in"+"===");
-//		SimpleReturnVo vo;
+	public ResultVo addItem(@RequestParam(value = "refDictionaryValue", required = false)String refDictionaryValue, DictionaryItemModel dictionaryItemModel) {
+		logger.info("新增数据字典项:"+refDictionaryValue);
+		ResultVo resultVo=new ResultVo();
 		try {
 			dictionaryItemModel.setCreateBy(ProjectUtil.getOpUser());
 			dictionaryItemModel.setCreateTime(new Date());
 			dictionaryItemModel.setDictionaryValue(refDictionaryValue);
 			dictionaryItemService.insert(dictionaryItemModel);
-//			vo = new SimpleReturnVo(this.SUCCESS, "成功");
+			resultVo.setStatus(ResultStatus.SUCCESS.value());
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
-//			vo = new SimpleReturnVo(this.FAIL, "异常");
+			resultVo.setStatus(ResultStatus.FAILURE.value());
+			resultVo.setMessage(e.getMessage());
 		}
-		return null;
+		return resultVo;
 	}
 	
 	
-	
-	 /**
-	 * 删除数据字典项(软删除)
-	 * @param dictionaryModel
-	 * @param sessionId
-	 * @return  
-	 * @throws
-	 */ 
+	/**
+	 * 
+	* @Title: delDictionaryItem
+	* @Description: 删除数据字典项 (物理删除)
+	* @param dictionaryItemModel
+	* @return:     
+	* String    
+	* @throws
+	 */
 	@ResponseBody
 	@RequestMapping("/delDictionaryItem")
-	public String delDictionaryItem(DictionaryItemModel dictionaryItemModel,String sessionId){
-//		SimpleReturnVo vo;
+	public ResultVo delDictionaryItem(@RequestParam(value = "itemId", required = false)Integer itemId){
+		ResultVo resultVo=new ResultVo();
 		try {
-			dictionaryItemModel.setIsavailable(AvaliableEnum.DISAVAILABLE.value());
-			dictionaryItemModel.setModifyBy(ProjectUtil.getOpUser());
-			dictionaryItemModel.setModifyTime(new Date());
-			dictionaryItemService.update(dictionaryItemModel);
-//			vo = new SimpleReturnVo(this.SUCCESS, "成功");
+			dictionaryItemService.delete(itemId);
+			resultVo.setStatus(ResultStatus.SUCCESS.value());
 		} catch (Exception e) {
+			resultVo.setStatus(ResultStatus.FAILURE.value());
+			resultVo.setMessage(e.getMessage());
 			logger.error(e.getMessage(),e);
-//			vo = new SimpleReturnVo(this.FAIL, "异常");
 		}
-		return null;
+		return resultVo;
 	}
 }

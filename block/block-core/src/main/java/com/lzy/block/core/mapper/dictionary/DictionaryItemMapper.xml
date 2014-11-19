@@ -20,16 +20,13 @@
   </sql>
   
    <sql id="table_name">
-		 t_sys_dictionary
+		 t_sys_dictionary_item
   </sql>
   
   <sql id="pageModelwhere">
 	 <if test="dictionaryValue != null and dictionaryValue != ''">
-		AND dictionary_value like CONCAT(#{dictionaryValue,jdbcType=VARCHAR},'%')
-	</if>
-	<if test="dictionaryLabel != null and dictionaryLabel != ''">
-		AND dictionary_label like CONCAT(#{dictionaryLabel,jdbcType=VARCHAR},'%')
-	</if>
+		AND dictionary_value = #{dictionaryValue,jdbcType=VARCHAR}
+	</if> 
 	AND isavailable = 1
   </sql>
   

@@ -1,31 +1,36 @@
-
+/**  
+* @Title: ResultStatus.java
+* @Package com.lzy.block.api.constant.common
+* @author 李志勇  
+* @date 2014年11月19日 下午4:07:03
+* @version V1.0  
+*/ 
 package com.lzy.block.api.constant.common;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * 
-* @ClassName: AvaliableEnum
-* @Description: 是否可用枚举 
-* @author 李志勇
-* @date 2014年11月18日 上午11:53:27
-*
+ * @ClassName: ResultStatus
+ * @Description: 执行结果状态枚举 
+ * @author 李志勇
+ * @date 2014年11月19日 下午4:07:03
+ *
  */
-public enum AvaliableEnum {
-	AVAILABLE("可用", "1"), DISAVAILABLE("不可用", "0");
+public enum ResultStatus {
+	SUCCESS("可用", "101"), FAILURE("不可用", "102");
 
 	private String text;
 	private String value;
 
-	private AvaliableEnum(String text, String value) {
+	private ResultStatus(String text, String value) {
 		this.text = text;
 		this.value = value;
 	}
 
 	// 根据value获取中文名称
 	public static String getZhName(String value) {
-		for (AvaliableEnum state : AvaliableEnum.values()) {
+		for (ResultStatus state : ResultStatus.values()) {
 			if (state.value().equals(value)) {
 				return state.text;
 			}
@@ -35,7 +40,7 @@ public enum AvaliableEnum {
 
 	// 根据text获取value
 	public static String getText(String value) {
-		for (AvaliableEnum state : AvaliableEnum.values()) {
+		for (ResultStatus state : ResultStatus.values()) {
 			if (state.text().equals(value)) {
 				return state.value;
 			}
@@ -53,7 +58,7 @@ public enum AvaliableEnum {
 
 	public static Map<String, String> getEnumMap() {
 		Map<String, String> map = new TreeMap<String, String>();
-		for (AvaliableEnum state : AvaliableEnum.values()) {
+		for (ResultStatus state : ResultStatus.values()) {
 			map.put(state.value, state.text);
 		}
 		return map;

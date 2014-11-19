@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="UTF-8"%>
 	
-	<%
+<%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
 %>
 	
 	<div class="easyui-layout" data-options="fit:true">
 		<div data-options="region:'center',border:false">
-				<div class="easyui-panel" data-options="title:'基本信息',plain:true,fitWidth:true,cls:'mt20'" >
+				<!-- <div class="easyui-panel" data-options="title:'基本信息',plain:true,fitWidth:true,cls:'mt20'" > -->
 					<form id="itemEditForm" method="post">
 					<input type="hidden"  name="refDictionaryValue"  value="${dictionaryValue}"> <!-- 新增数据字典项时关联数据字典值,name不能为dictionaryValue，否则修改数据字典项会为空 -->
 					<input type="hidden" name="itemId" value="${dictionaryItemModel.itemId }"> <!-- 修改数据字典的id  -->
@@ -56,8 +56,9 @@
 							</tbody>
 						</table>
 					</form>
-				</div>
+				<!-- </div> -->
 		</div>
 	</div> 
-	 
+	<%--  
 	<script src="<%=basePath %>resources/js/dictionary/DictionaryItemEdit.js?jsVersion=${jsVersion}"></script> 
+ --%>
