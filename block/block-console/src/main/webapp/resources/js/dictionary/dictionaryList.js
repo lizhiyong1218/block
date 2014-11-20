@@ -216,24 +216,6 @@
 		});
     }
     
-  //数据字典工具栏
-    var dictionaryItemEditTableToolbar = [{
-		text:'添加',
-		iconCls:'icon-add',
-		handler:function(){
-			insertRow();
-		}
-	},
-	'-',{
-		text:'删除',
-		iconCls:'icon-del',
-		handler:function(){
-			delRow();
-		}
-	}
-  ];
-    
-   
     //新增行
     function insertRow(){
     	var tb= $('#dictionaryItemEditTable');

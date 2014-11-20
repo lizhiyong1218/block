@@ -40,7 +40,7 @@
 				</div>
 				
 			 <div  class="easyui-panel" data-options="plain:true,fitWidth:true,cls:'mt20'" style="border:0">
-				 <table id="dictionaryItemEditTable"   class="easyui-datagrid"   
+				<!--  <table id="dictionaryItemEditTable"   class="easyui-datagrid"   
 						data-options="toolbar:dictionaryItemEditTableToolbar,pagination:false,rownumbers:true,singleSelect:true,checkOnSelect: true, width :'auto',  
 		 				height:'auto',fitColumns : true,	striped:true,fit:false">
 					<thead>
@@ -52,8 +52,12 @@
 							<th data-options="field:'remarks',width:100,editor: {type: 'text'}">备注</th>
 						</tr>
 					</thead>
-				</table>  
+				</table>   -->
+				
+				<table id="dictionaryItemEditTable"></table>
+				
 			</div>
 		</div>
 	</div> 
-	 
+
+<script src="${basePath}/resources/js/dictionary/dictionaryAdd.js?jsVersion=${jsVersion}"></script> 
