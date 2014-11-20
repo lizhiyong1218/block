@@ -3,7 +3,7 @@
 	<div class="easyui-layout" data-options="fit:true">
 		<div data-options="region:'center',border:false">
 			
-				<div class="easyui-panel" data-options="title:'基本信息',plain:true,fitWidth:true,cls:'mt20'" >
+				<div class="easyui-panel" data-options="plain:true,fitWidth:true,cls:'mt20'" style="border:0" >
 					<form id="dictionaryAddForm" method="post">
 					
 						<input type="hidden" name="dictionaryItemJsonData" id="dictionaryItemJsonData">
@@ -39,12 +39,10 @@
 					</form>
 				</div>
 				
-			<!-- 将商品列表转换为json字符串传到后台 -->
-			<input type="hidden" id="productsJsonData" name="productsJsonData">
-			 <div  class="easyui-panel" data-options="title:'数据字典项信息',plain:true,fitWidth:true,cls:'mt20'" >
-				 <table id="dictionaryItemEditTable"   class="easyui-datagrid"  style="width:auto;"
-						data-options="toolbar:dictionaryItemEditTableToolbar,pagination:false,rownumbers:true,singleSelect:true,checkOnSelect: true,
-						striped:true,fit:false">
+			 <div  class="easyui-panel" data-options="plain:true,fitWidth:true,cls:'mt20'" style="border:0">
+				 <table id="dictionaryItemEditTable"   class="easyui-datagrid"   
+						data-options="toolbar:dictionaryItemEditTableToolbar,pagination:false,rownumbers:true,singleSelect:true,checkOnSelect: true, width :'auto',  
+		 				height:'auto',fitColumns : true,	striped:true,fit:false">
 					<thead>
 						<tr>
 							<th  data-options="field:'ck',checkbox:'true'"></th>
@@ -54,7 +52,7 @@
 							<th data-options="field:'remarks',width:100,editor: {type: 'text'}">备注</th>
 						</tr>
 					</thead>
-				</table>
+				</table>  
 			</div>
 		</div>
 	</div> 

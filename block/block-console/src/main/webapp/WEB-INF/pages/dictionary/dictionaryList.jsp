@@ -7,14 +7,45 @@
 	src="${basePath}/resources/js/dictionary/dictionaryIndex.js?jsVersion=${jsVersion}"></script>
 
 <div class="easyui-layout" data-options="fit:true">
-	<div data-options="region:'north',border:false" class="toolbar-region">
-	    <div id="toolbar" class="easyui-toolbar">
-    		<a href="javascript:void(0)" iconCls="icon-add" onclick="openAddRmaDialog()">新增</a><a>-</a>
-    		<a href="javascript:void(0)" iconCls="icon-aduit" onclick="checkRma()">审核</a><a>-</a>
-    		<a href="javascript:void(0)" iconCls="icon-ok" onclick="confirmRma()">确认</a><a>-</a>
-    		<a href="javascript:void(0)" iconCls="icon-cancel" onclick="cancelRma()">取消</a><a>-</a>
-    		<a href="javascript:void(0)" iconCls="icon-export" onclick="exportRma('rmaReport')">导出</a>
-	    </div>
+	<div data-options="region:'north',border:false" class="toolbar-region" style=" background-color: #f4f4f4;">
+		<table class="toolbar-wrapper toolbar-align-left " >
+		    	<tbody>
+		    		<tr>
+		    			<td class="toolbar-item-container">
+		    				<a  class="toolbar-item l-btn   l-btn-plain" onclick="openAddDictionaryDialog()"   href="javascript:void(0)" >
+		    					<span class="l-btn-left l-btn-icon-left">
+									<span class="l-btn-icon-left icon-add"> </span>
+									<span class="l-btn-text">新增</span>
+								</span>
+		    				</a>
+		    			</td>
+		    			<td class="toolbar-item-container">
+		    				<a class="toolbar-item dialog-tool-separator"></a>
+		    			</td>
+		    			
+		    			 <td class="toolbar-item-container">
+		    				<a  class="toolbar-item l-btn   l-btn-plain" onclick="delDictionary()"   href="javascript:void(0)" >
+		    					<span class="l-btn-left l-btn-icon-left">
+									<span class="l-btn-icon-left icon-del"> </span>
+									<span class="l-btn-text">删除</span>
+								</span>
+		    				</a>
+		    			</td>
+		    			<td class="toolbar-item-container">
+		    				<a class="toolbar-item dialog-tool-separator"></a>
+		    			</td>
+		    			
+		    			<td class="toolbar-item-container">
+		    				<a  class="toolbar-item l-btn   l-btn-plain" onclick="openEdtDictionaryDialog()"   href="javascript:void(0)" >
+		    					<span class="l-btn-left l-btn-icon-left">
+									<span class="l-btn-icon-left icon-edit"> </span>
+									<span class="l-btn-text">修改</span>
+								</span>
+		    				</a>
+		    			</td>
+		    		</tr>
+		    	</tbody>
+		</table>  
 	</div>
 	<div data-options="region:'center',border:false">
 		<div class="easyui-layout" data-options="fit:true">

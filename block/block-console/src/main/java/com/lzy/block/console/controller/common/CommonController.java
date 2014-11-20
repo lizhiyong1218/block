@@ -40,11 +40,16 @@ public class CommonController {
 	@RequestMapping(value="/toListPage")
 	public ModelAndView toListPage(String pagePath, HttpServletRequest request){
 		logger.debug("toListPage in");
-		logger.info(pagePath+"==");
 		ModelMap modelMap=new ModelMap();
 		modelMap.addAttribute("basePath",  ProjectUtil.getBasePath(request));
 		modelMap.addAttribute("jsVersion", ProjectUtil.getJsVersion(request));
 		return new ModelAndView(pagePath,modelMap);
+	}
+	
+	@RequestMapping(value="/toPage")
+	public String toPage(String pagePath){
+		logger.debug("toPage in");
+		return pagePath;
 	}
 	
 }

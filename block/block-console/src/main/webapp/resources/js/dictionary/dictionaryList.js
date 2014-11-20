@@ -1,10 +1,17 @@
 	 
 	 $(function(){
-		 	
 			initDictionaryList();
-//			initToolBar();
 	});
 
+		/*查询*/
+		function doSearch(){
+			$('#dictionaryList').datagrid('load',$('#searchForm').serializeJson());
+		}
+
+		//重置
+		function doReset(){
+			$('#searchForm').form('reset');
+		}
  
 	/**
 	 * 数据字典
@@ -83,49 +90,6 @@
 		
 		initPager("#dictionaryList");
 	}
-
-	function initToolBar(){
-		$('#toolbar').toolbar({
-	        items: [
-	            {
-	                text: '新增',
-	                iconCls: 'icon-add',
-	                handler: function () {
-	                	openAddDictionaryDialog();
-	                }
-	            },
-	            {
-	            	 text: '删除',
-		                iconCls: 'icon-del',
-		                handler: function () {
-		                	delDictionary();
-		                }
-	            } ,
-	            {
-	            	 text: '修改',
-		                iconCls: 'icon-edit',
-		                handler: function () {
-		                	openEdtDictionaryDialog();
-		                }
-	            } 
-	            /*,
-	            {
-	            	 text: '导入数据字典',
-		                iconCls: 'icon-edit',
-		                handler: function () {
-		                	uploadFilebyParas("DictionaryImport",'{}');
-		                }
-	            },
-	            {
-	            	 text: '导入数据字典项',
-		                iconCls: 'icon-edit',
-		                handler: function () {
-		                	uploadFilebyParas("DictionaryItemImport",'{}');
-		                }
-	            }*/
-	        ]
-	    });
-	}
 	
 	function delDictionary(){
 		var row = $('#dictionaryList').datagrid('getSelected');
@@ -158,18 +122,6 @@
 	     }  
 	   });
 	}
-
-	/*查询*/
-	function doSearch(){
-		$('#dictionaryList').datagrid('load',$('#searchForm').serializeJson());
-	}
-
-	//重置
-	function doReset(){
-		$('#searchForm').form('reset');
-	}
-	
-	
 	
 	//修改数据字典弹窗
     function openEdtDictionaryDialog(){
@@ -190,7 +142,22 @@
 	
 	//新增数据字典弹窗
     function openAddDictionaryDialog(){
-    	ygDialog({
+    	
+    	var path=basePath+'common/toPage.do?pagePath=dictionary/dictionaryAdd';
+  	   	var mydialog= openMyDialog(path,'添加数据字典');
+  	   	mydialog.dialog({
+  		   width:600,
+  		   height:400,
+  		   buttons:[{
+  						text : '提交',
+  						iconCls : 'icon-ok',
+  						handler : function() {
+  							saveDictionary(mydialog);
+  						}
+  					} ]
+  		   }); 
+    	
+    	/*ygDialog({
             width: 600,
             height: 400,
             title: '新增数据字典',
@@ -198,7 +165,7 @@
             onSave: function (dg) {
             	saveDictionary(dg);
             }
-        });
+        });*/
     }
     
     function saveEditDictionary(dg){
@@ -230,7 +197,7 @@
     		showInfo('保存失败, 数据字典项不能为空!');
     		return;
     	}
-		var url = basePath+'/dictionary/addDictionary.do?sessionId='+sessionId;
+		var url = basePath+'/dictionary/addDictionary.do';
 		var myform=$('#dictionaryAddForm');
 		myform.form("submit",{
 			url:url,
@@ -243,7 +210,7 @@
 	            } else {
 	            	showInfo('操作成功！'); 
 	            	$('#dictionaryList').datagrid("reload"); 
-	            	dg.close();
+	            	closeMyDialog(dg);
 	            }
 			}
 		});
@@ -299,7 +266,7 @@
 	  }
 	  
 	  
-	//删除行
+	  	//删除行
 	    function delRow(){
 			var row = $('#dictionaryItemEditTable').datagrid('getSelected');
 			if (row){
