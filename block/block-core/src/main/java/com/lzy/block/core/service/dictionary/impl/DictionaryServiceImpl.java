@@ -27,8 +27,6 @@ import com.lzy.block.core.dao.dictionary.DictionaryItemMapper;
 import com.lzy.block.core.dao.dictionary.DictionaryMapper;
 import com.lzy.block.core.service.dictionary.IDictionaryService;
 
-
-
  
 @Service
 public class DictionaryServiceImpl implements IDictionaryService{
@@ -59,8 +57,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 
 	@Override
 	public void delete(Integer id) throws Exception {
-		dictionaryMapper.selectByPrimaryKey(id);
-		
+		dictionaryMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
@@ -114,6 +111,13 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		}
 		Pagination<DictionaryModel> pagination=new Pagination<DictionaryModel>(pageBounds.getPage(),pageBounds.getLimit(),recordCount,recordList);
 		return pagination;
+	}
+
+	@Override
+	public void deleteDictionary(Integer dictionaryId, String dictionaryValue) {
+		dictionaryMapper.deleteByPrimaryKey(dictionaryId);
+		dictionaryItemMapper.deleteByDictionaryValue(dictionaryValue);
+		
 	} 
 
 }

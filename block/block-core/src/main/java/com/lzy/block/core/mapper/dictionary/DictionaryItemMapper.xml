@@ -60,6 +60,13 @@
     delete from t_sys_dictionary_item
     where item_id = #{itemId,jdbcType=INTEGER}
   </delete>
+  
+  <!-- 根据数据字典值删除数据字典项 -->
+  <delete id="deleteByDictionaryValue" parameterType="java.lang.String" >
+    delete from <include refid="table_name" />
+    where dictionary_value = #{dictionaryValue,jdbcType=VARCHAR}
+  </delete>
+  
   <insert id="insert" parameterType="dictionaryItemModel" >
     insert into t_sys_dictionary_item (item_id, item_value, item_label, 
       order_no, remarks, create_by, 

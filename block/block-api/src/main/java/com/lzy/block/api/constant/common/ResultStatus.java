@@ -18,7 +18,7 @@ import java.util.TreeMap;
  *
  */
 public enum ResultStatus {
-	SUCCESS("可用", "101"), FAILURE("不可用", "102");
+	SUCCESS("成功", "101"), FAILURE("失败", "102");
 
 	private String text;
 	private String value;

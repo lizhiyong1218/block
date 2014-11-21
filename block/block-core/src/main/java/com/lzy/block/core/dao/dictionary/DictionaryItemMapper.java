@@ -28,4 +28,6 @@ public interface DictionaryItemMapper {
 			PageBounds pageBounds);
     
     public long getCount(DictionaryItemModel record);
+    
+    public void deleteByDictionaryValue(String dictionaryValue);
 }

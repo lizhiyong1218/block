@@ -1,14 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="UTF-8"%>
 	
-	<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
-	%>
-	
 	<div class="easyui-layout" data-options="fit:true">
 		<div data-options="region:'center',border:false">
-				<div class="easyui-panel" data-options="title:'基本信息',plain:true,fitWidth:true,cls:'mt20'" >
+				<div class="easyui-panel" data-options="plain:true,fitWidth:true,cls:'mt20'" style="border:0px" >
 					<form id="dictionaryEditForm" method="post">
 					<input type="hidden" name="dictionaryId" value="${dictionaryModel.dictionaryId }">
 						<table id="dictionaryEditInfoTable" class="pertb" style="padding:20px 20px;" >
@@ -26,9 +21,6 @@
 								<tr>
 									<th><em class="cred">*</em>是否启用:</th>
 									<td>
-									<%-- 
-										<input name="isavailable"   id="isavailable"   value="${ dictionaryModel.isavailable}"/>
-									 --%>
 									 	<select name="isavailable" id="isavailable" value="${ dictionaryModel.isavailable}">
 											<option value="1">是</option>
 											<option value="0">否</option>
@@ -48,4 +40,3 @@
 		</div>
 	</div> 
 	 
-	<script src="<%=basePath %>resources/js/dictionary/dictionaryEdit.js?jsVersion=${jsVersion}"></script> 

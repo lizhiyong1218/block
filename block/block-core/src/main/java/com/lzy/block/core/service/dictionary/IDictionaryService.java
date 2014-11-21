@@ -22,4 +22,5 @@ public interface IDictionaryService extends IBaseService<DictionaryModel>  {
 	 */
 	public void insertDictionarys(List<?> datas);
 	
+	public void deleteDictionary(Integer dictionaryId,String dictionaryValue);
 }

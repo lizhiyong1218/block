@@ -28,4 +28,6 @@ public interface DictionaryMapper {
 			PageBounds pageBounds);
     
     public long getCount(DictionaryModel record);
+    
+    
 }

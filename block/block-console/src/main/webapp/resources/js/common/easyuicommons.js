@@ -134,5 +134,13 @@
 			showType:'slide'
 		});
 	}
+	
+	/**
+	 * 消息警告框
+	 * @param msg
+	 */
+	function showWarm(msg){
+		$.messager.alert('警告',msg);  
+	}
 	 
   		 

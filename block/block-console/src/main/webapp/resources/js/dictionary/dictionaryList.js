@@ -1,7 +1,7 @@
 	 
-	 $(function(){
-			initDictionaryList();
-	});
+		 $(function(){
+				initDictionaryList();
+		});
 
 		/*查询*/
 		function doSearch(){
@@ -91,58 +91,28 @@
 		initPager("#dictionaryList");
 	}
 	
+	/**
+	 * 删除数据字典弹窗
+	 */
 	function delDictionary(){
 		var row = $('#dictionaryList').datagrid('getSelected');
 		if(row){
 			$.messager.confirm('请选择','确定要删除该数据字典吗?',function(r){ 
 				if (r){
-					doDelDictionary(row.dictionaryId);
+					doDelDictionary(row.dictionaryId,row.dictionaryValue);
 				} 
 			});
 		}else{
-			showInfo('请选择要删除的数据字典');
+			showWarm('请选择要删除的数据字典');
 		}
 	}
 	
-	function doDelDictionary(dictionaryId){
-		 $.ajax({
-	     type:"POST",
-		 url:basePath+'/dictionary/delDictionary.do',
-		 data:{
-			 dictionaryId:dictionaryId
-		},
-		 success:function(result){ 
-			 if (result.responseCode == 101){
-	                showInfo('操作失败！原因：'+result.message);
-	            } else {
-	            	showInfo('操作成功！'); 
-	            	$('#dictionaryList').datagrid("reload"); 
-	                $('#dictionaryItemList').datagrid('loadData', { total: 0, rows: [] });
-	         }
-	     }  
-	   });
-	}
 	
-	//修改数据字典弹窗
-    function openEdtDictionaryDialog(){
-    	var row = $('#dictionaryList').datagrid('getSelected');
-    	var dictionaryId=row.dictionaryId;
-    	ygDialog({
-            width: 600,
-            height: 400,
-            title: '修改数据字典',
-            href: basePath+'/dictionary/editDictionaryPage.do?dictionaryId='+dictionaryId+'&sessionId='+sessionId,
-            onSave: function (dg) {
-            	saveEditDictionary(dg);
-            }
-        });
-    }
-    
-   
 	
-	//新增数据字典弹窗
+	/**
+	 * 新增数据字典弹窗
+	 */
     function openAddDictionaryDialog(){
-    	
     	var path=basePath+'common/toPage.do?pagePath=dictionary/dictionaryAdd';
   	   	var mydialog= openMyDialog(path,'添加数据字典');
   	   	mydialog.dialog({
@@ -156,38 +126,12 @@
   						}
   					} ]
   		   }); 
-    	
-    	/*ygDialog({
-            width: 600,
-            height: 400,
-            title: '新增数据字典',
-            href: basePath+'/dictionary/redirect.do?redirect=dictionary/dictionaryAdd&sessionId='+sessionId,
-            onSave: function (dg) {
-            	saveDictionary(dg);
-            }
-        });*/
     }
     
-    function saveEditDictionary(dg){
-		var url = basePath+'/dictionary/editDictionary.do';
-		var myform=$('#dictionaryEditForm');
-		myform.form("submit",{
-			url:url,
-			onSubmit:function(){
-				return $(this).form('validate');
-			},
-			success:function(result){
-	            if (result.responseCode == 101){
-	                showInfo('操作失败！原因：'+result.message);
-	            } else {
-	            	showInfo('操作成功！'); 
-	            	$('#dictionaryList').datagrid("reload"); 
-	            	dg.close();
-	            }
-			}
-		});
-    }
-    
+    /**
+     * 保存数据字典
+     * @param dg
+     */
     function saveDictionary(dg){
     	endEditing();//结束编辑数据项框,否则不能拿到最后一行的数据
     	var dictionaryItemJsonData= $("#dictionaryItemEditTable").datagrid("getData").rows;//获得选中数据项信息
@@ -205,8 +149,9 @@
 				return $(this).form('validate');
 			},
 			success:function(result){
-	            if (result.responseCode == 101){
-	                showInfo('操作失败！原因：'+result.message);
+				var dataObj=eval("("+result+")");//转换为json对象 
+	            if (dataObj.status == 102){
+	                showInfo('操作失败！原因：'+dataObj.message);
 	            } else {
 	            	showInfo('操作成功！'); 
 	            	$('#dictionaryList').datagrid("reload"); 
@@ -216,50 +161,84 @@
 		});
     }
     
-    //新增行
-    function insertRow(){
-    	var tb= $('#dictionaryItemEditTable');
-    	var index = tb.datagrid('getRows').length;//获得所有行
-    	if (editIndex != index){
-	        if (endEditing()){
-	        	tb.datagrid('appendRow',{});
-		    	tb.datagrid('selectRow', index).datagrid('beginEdit', index);
-		    	editIndex = index;
-		      }
-    	}
-        
-        tb.datagrid('uncheckAll');	
+    
+    /**
+	 * 修改数据字典弹窗
+	 */
+    function openEdtDictionaryDialog(){
+    	var row = $('#dictionaryList').datagrid('getSelected');
+    	var dictionaryId=row.dictionaryId;
+    	var path= basePath+'/dictionary/dictionaryEditPage.do?dictionaryId='+dictionaryId;
+    	var mydialog= openMyDialog(path,'修改数据字典');
+  	   	mydialog.dialog({
+  		   width:500,
+  		   height:200,
+  		   buttons:[{
+  						text : '提交',
+  						iconCls : 'icon-ok',
+  						handler : function() {
+  							saveEditDictionary(mydialog);
+  						}
+  					} ]
+  		   }); 
+    }
+    
+    /**
+     * 修改数据字典
+     * @param dg
+     */
+    function saveEditDictionary(dg){
+		var url = basePath+'/dictionary/editDictionary.do';
+		var myform=$('#dictionaryEditForm');
+		myform.form("submit",{
+			url:url,
+			onSubmit:function(){
+				return $(this).form('validate');
+			},
+			success:function(result){
+				var dataObj=eval("("+result+")");//转换为json对象 
+	            if (dataObj.status == 102){
+	                showInfo('操作失败！原因：'+dataObj.message);
+	            } else {
+	            	showInfo('操作成功！'); 
+	            	$('#dictionaryList').datagrid("reload"); 
+	            	closeMyDialog(dg);
+	            }
+			}
+		});
+    }
+    
+    /**
+	 * 删除数据字典
+	 * @param dictionaryId 数据字典id
+	 * @param dictionaryValue 数据字典
+	 */
+	function doDelDictionary(dictionaryId,dictionaryValue){
+		 $.ajax({
+	     type:"POST",
+		 url:basePath+'dictionary/delDictionary.do',
+		 data:{
+			 dictionaryId:dictionaryId,
+			 dictionaryValue:dictionaryValue
+		},
+		 success:function(dataObj){ 
+	            if (dataObj.status == 102){
+	                showInfo('操作失败！原因：'+dataObj.message);
+	            } else if(dataObj.status == 101){
+	            	showInfo('操作成功！'); 
+	            	$('#dictionaryList').datagrid("reload"); 
+	                $('#dictionaryItemList').datagrid('loadData', { total: 0, rows: [] });
+	            }else{
+	            	showInfo('异常！');
+	            }
+	     }  
+	   });
+		
 	}
     
+    /*****数据字典项******/
     
-	  var editIndex = undefined;
-	  //结束编辑
-	  function endEditing(){
-	      if (editIndex == undefined){
-	    	  	return true;
-	    	  }
-	      if ($("#dictionaryItemEditTable").datagrid('validateRow', editIndex)){
-	      		$("#dictionaryItemEditTable").datagrid('endEdit', editIndex);
-	      		editIndex = undefined;
-	      		return true;
-	      } else {
-	          return false;
-	      }
-	  }
-	  
-	  
-	  	//删除行
-	    function delRow(){
-			var row = $('#dictionaryItemEditTable').datagrid('getSelected');
-			if (row){
-				var index = $('#dictionaryItemEditTable').datagrid('getRowIndex', row);
-				$('#dictionaryItemEditTable').datagrid('deleteRow', index);
-			} else {
-				showInfo('请选择要删除的行');
-			}
-	    }
-  
-	/**
+    /**
 	 * 数据字典项
 	 * @param dictionaryValue 数据字典值
 	 */
@@ -361,7 +340,7 @@
     }
 	
 	/**
-	 * 数据字典项添加弹窗
+	 * 添加数据字典项弹窗
 	 */
 	function openAddItemDialog(){
 		var row = $('#dictionaryList').datagrid('getSelected');
@@ -415,8 +394,9 @@
 				return $(this).form('validate');
 			},
 			success:function(result){
-	            if (result.responseCode == 101){
-	            	showInfo('操作失败！原因：'+result.message);
+				var dataObj=eval("("+result+")");//转换为json对象 
+	            if (dataObj.status == 102){
+	                showInfo('操作失败！原因：'+dataObj.message);
 	            } else {
 	            	showInfo('操作成功！'); 
 	            	$('#dictionaryItemList').datagrid("reload"); 
@@ -439,8 +419,9 @@
 				return $(this).form('validate');
 			},
 			success:function(result){
-	            if (result.responseCode == 101){
-	                showInfo('操作失败！原因：'+result.message);
+				var dataObj=eval("("+result+")");//转换为json对象 
+	            if (dataObj.status == 102){
+	                showInfo('操作失败！原因：'+dataObj.message);
 	            } else {
 	            	showInfo('操作成功！'); 
 	            	$('#dictionaryItemList').datagrid("reload"); 
@@ -478,8 +459,9 @@
 			 itemId:itemId
 		 },
 		 success:function(result){ 
-			 if (result.responseCode == 101){
-	                showInfo('操作失败！原因：'+result.message);
+			 var dataObj=eval("("+result+")");//转换为json对象 
+	            if (dataObj.status == 102){
+	                showInfo('操作失败！原因：'+dataObj.message);
 	            } else {
 	            	showInfo('操作成功！'); 
 	            	$('#dictionaryItemList').datagrid("reload"); 
@@ -487,25 +469,3 @@
 	     }  
 	   });
 	}
-    
-	
-	function checkExist(){
-		var dictionaryValue=$("#dictionaryValueId").val().trim();
-		if(dictionaryValue!=null&&dictionaryValue!=""){
-			$.ajax({
-			     type:"POST",
-				 url:basePath+'/dictionary/getDictionary.do',
-				 data:{
-					 dictionaryValue:dictionaryValue
-				},
-				 success:function(result){ 
-					 var dataObj=eval("("+result+")");
-					 if(dataObj!=null){
-						 showInfo('该数据字典已经存在!');
-						 $("#dictionaryValueId").focus();
-					 }
-			     }  
-			});
-		}
-	}
- 

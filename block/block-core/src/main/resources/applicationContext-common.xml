@@ -102,4 +102,12 @@
 		</tx:attributes>
 	</tx:advice> 
 	
+	<!-- 定义切面 -->
+	<aop:config proxy-target-class="true">
+		<!-- 事物切面 -->
+		<aop:pointcut id="interceptorPointCuts" 
+			expression="execution(* com.lzy.block.core.service..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
+	</aop:config>
+	
 </beans>

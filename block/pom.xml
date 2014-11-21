@@ -34,6 +34,7 @@
 		<freemarker.version>2.3.16</freemarker.version>
 		<cglib.version>3.1</cglib.version>
 		<jsonlib.version>2.4</jsonlib.version>
+		<jackson.version>1.9.13</jackson.version>
 		<gson.version>2.3</gson.version>
 		<dubbo.version>2.5.3</dubbo.version>
 		<zookeeper.version>3.3.3</zookeeper.version>
@@ -320,19 +321,19 @@
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
-				<version>1.9.13</version>
+				<version>${jackson.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-lgpl</artifactId>
-				<version>1.9.13</version>
+				<version>${jackson.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>
-				<version>1.9.13</version>
+				<version>${jackson.version}</version>
 			</dependency>
 			<!-- Jackson JSON Processor  -->
 			
