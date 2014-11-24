@@ -127,3 +127,25 @@
 	background:url('../images/mini_refresh.png') no-repeat center center;
 }
 .icon-tip{background:url(../images/tip.png) no-repeat;}
+
+ 
+.icon-personal{
+	background:url('../images/personal.png') no-repeat center center;
+}
+.icon-usermanager{
+	background:url('../images/usermanager.png') no-repeat center center;
+}
+.icon-filemanage{
+	background:url('../images/filemanage.png') no-repeat center center;
+}
+.icon-mailmanage{
+	background:url('../images/mailmanage.png') no-repeat center center;
+}
+.icon-taskmanage{
+	background:url('../images/taskmanage.png') no-repeat center center;
+}
+.icon-indexmanager{
+	background:url('../images/indexmanager.png') no-repeat center center;
+}
+
+
