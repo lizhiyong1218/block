@@ -22,7 +22,7 @@ public class DictionaryModel implements Serializable {
 	private String dictionaryValue;
 	/*数据字典名称*/
 	private String dictionaryLabel;
-	/* 数据 */
+	/* */
 	private String isavailable;
 	/**/
 	private String remarks;

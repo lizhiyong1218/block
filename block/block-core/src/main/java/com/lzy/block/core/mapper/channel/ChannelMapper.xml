@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzy.block.core.dao.channel.ChannelMapper" >
+  <resultMap id="BaseResultMap" type="channelModel" >
+    <id column="channel_id" property="channelId" jdbcType="INTEGER" />
+    <result column="channel_parent_id" property="channelParentId" jdbcType="INTEGER" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+    <result column="channel_showname" property="channelShowname" jdbcType="VARCHAR" />
+    <result column="channel_logo" property="channelLogo" jdbcType="VARCHAR" />
+    <result column="channel_desc" property="channelDesc" jdbcType="VARCHAR" />
+    <result column="crate_by" property="crateBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+    <result column="isAvailable" property="isavailable" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    channel_id, channel_parent_id, channel_name, channel_showname, channel_logo, channel_desc, 
+    crate_by, create_time, update_by, update_time, isAvailable
+  </sql>
+  
+   <sql id="table_name">
+		 t_blog_channel
+  </sql>
+  
+  <sql id="pageModelwhere">
+	 
+	AND isavailable = 1
+  </sql>
+  
+   <select id="getAll" parameterType="channelModel" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from <include refid="table_name" /> where 1=1
+		<include refid="pageModelwhere" />
+	</select>
+	
+	<select id="getCount" parameterType="channelModel" resultType="java.lang.Long">
+		select	count(1)
+		from <include refid="table_name" /> where 1=1
+		<include refid="pageModelwhere" />
+	</select>
+	
+	<select id="selectModel" parameterType="channelModel" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from <include refid="table_name" /> where 1=1
+		<include refid="pageModelwhere" />
+	</select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_blog_channel
+    where channel_id = #{channelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_blog_channel
+    where channel_id = #{channelId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="channelModel" >
+    insert into t_blog_channel (channel_id, channel_parent_id, channel_name, 
+      channel_showname, channel_logo, channel_desc, 
+      crate_by, create_time, update_by, 
+      update_time, isAvailable)
+    values (#{channelId,jdbcType=INTEGER}, #{channelParentId,jdbcType=INTEGER}, #{channelName,jdbcType=VARCHAR}, 
+      #{channelShowname,jdbcType=VARCHAR}, #{channelLogo,jdbcType=VARCHAR}, #{channelDesc,jdbcType=VARCHAR}, 
+      #{crateBy,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=DATE}, #{isavailable,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="channelModel" >
+    insert into t_blog_channel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="channelParentId != null" >
+        channel_parent_id,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="channelShowname != null" >
+        channel_showname,
+      </if>
+      <if test="channelLogo != null" >
+        channel_logo,
+      </if>
+      <if test="channelDesc != null" >
+        channel_desc,
+      </if>
+      <if test="crateBy != null" >
+        crate_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="isavailable != null" >
+        isAvailable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="channelParentId != null" >
+        #{channelParentId,jdbcType=INTEGER},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelShowname != null" >
+        #{channelShowname,jdbcType=VARCHAR},
+      </if>
+      <if test="channelLogo != null" >
+        #{channelLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelDesc != null" >
+        #{channelDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="crateBy != null" >
+        #{crateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="isavailable != null" >
+        #{isavailable,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="channelModel" >
+    update t_blog_channel
+    <set >
+      <if test="channelParentId != null" >
+        channel_parent_id = #{channelParentId,jdbcType=INTEGER},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelShowname != null" >
+        channel_showname = #{channelShowname,jdbcType=VARCHAR},
+      </if>
+      <if test="channelLogo != null" >
+        channel_logo = #{channelLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelDesc != null" >
+        channel_desc = #{channelDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="crateBy != null" >
+        crate_by = #{crateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="isavailable != null" >
+        isAvailable = #{isavailable,jdbcType=CHAR},
+      </if>
+    </set>
+    where channel_id = #{channelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="channelModel" >
+    update t_blog_channel
+    set channel_parent_id = #{channelParentId,jdbcType=INTEGER},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      channel_showname = #{channelShowname,jdbcType=VARCHAR},
+      channel_logo = #{channelLogo,jdbcType=VARCHAR},
+      channel_desc = #{channelDesc,jdbcType=VARCHAR},
+      crate_by = #{crateBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=DATE},
+      isAvailable = #{isavailable,jdbcType=CHAR}
+    where channel_id = #{channelId,jdbcType=INTEGER}
+  </update>
+</mapper>

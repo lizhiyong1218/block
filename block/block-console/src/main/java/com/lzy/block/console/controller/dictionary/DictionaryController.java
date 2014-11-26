@@ -158,7 +158,7 @@ public class DictionaryController  {
 	public ModelAndView dictionaryEditPage(int dictionaryId){
 		DictionaryModel model=new DictionaryModel();
 		try {
-			model= dictionaryService.getOneById(dictionaryId);
+			model= dictionaryService.selectByPrimaryKey(dictionaryId);
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
 		}
@@ -186,7 +186,7 @@ public class DictionaryController  {
 		try {
 			dictionaryModel.setModifiBy(ProjectUtil.getOpUser());
 			dictionaryModel.setModifiTime(new Date());
-			dictionaryService.update(dictionaryModel);
+			dictionaryService.updateByPrimaryKeySelective(dictionaryModel);
 			res.setStatus(ResultStatus.SUCCESS.value());
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
@@ -296,7 +296,7 @@ public class DictionaryController  {
 		logger.info("editItemPage in:"+itemId);
 		DictionaryItemModel model=new DictionaryItemModel();
 		try {
-			model= dictionaryItemService.getOneById(itemId);
+			model= dictionaryItemService.selectByPrimaryKey(itemId);
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
 		}
@@ -340,7 +340,7 @@ public class DictionaryController  {
 			dictionaryItemModel.setModifyBy(ProjectUtil.getOpUser());;
 			dictionaryItemModel.setModifyTime(new Date());
 			logger.info(dictionaryItemModel);
-			dictionaryItemService.update(dictionaryItemModel);
+			dictionaryItemService.updateByPrimaryKeySelective(dictionaryItemModel);
 			res.setStatus(ResultStatus.SUCCESS.value());
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
@@ -395,7 +395,7 @@ public class DictionaryController  {
 		logger.info("删除数据字典项:"+itemId);
 		ResultVo resultVo=new ResultVo();
 		try {
-			dictionaryItemService.delete(itemId);
+			dictionaryItemService.deleteByPrimaryKey(itemId);
 			resultVo.setStatus(ResultStatus.SUCCESS.value());
 		} catch (Exception e) {
 			resultVo.setStatus(ResultStatus.FAILURE.value());

@@ -51,17 +51,17 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	}
 
 	@Override
-	public int update(DictionaryModel o) throws Exception {
+	public int updateByPrimaryKeySelective(DictionaryModel o) throws Exception {
 		return  dictionaryMapper.updateByPrimaryKeySelective(o);
 	}
 
 	@Override
-	public void delete(Integer id) throws Exception {
+	public void deleteByPrimaryKey(Integer id) throws Exception {
 		dictionaryMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
-	public DictionaryModel getOneById(Integer id) throws Exception {
+	public DictionaryModel selectByPrimaryKey(Integer id) throws Exception {
 		return  dictionaryMapper.selectByPrimaryKey(id);
 	}
 

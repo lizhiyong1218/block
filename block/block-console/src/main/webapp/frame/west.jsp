@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="button" value="数据字典" onclick="tab_add('centertabs','数据字典','common/toListPage.do?pagePath=/dictionary/dictionaryList')"/>
 			</div>
 			<div title="首页管理" data-options="selected:true,iconCls:'icon-indexmanager'" style="padding:10px">
-				<input type="button" value="照片墙管理" onclick="tab_add('centertabs','照片墙','common/toListPage.do?pagePath=/dictionary/dictionaryList')"/>
+				<input type="button" value="文章管理" onclick="tab_add('centertabs','文章管理','common/toListPage.do?pagePath=/article/articleList')"/>
 			</div>
 		</div>
  </body> 

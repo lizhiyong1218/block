@@ -4,15 +4,15 @@ Source Host: localhost
 Source Database: purespringmvc
 Target Host: localhost
 Target Database: purespringmvc
-Date: 2014/11/24 16:55:36
+Date: 2014/11/26 16:53:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for t_block_type
+-- Table structure for t_blog_type
 -- ----------------------------
-DROP TABLE IF EXISTS `t_block_type`;
-CREATE TABLE `t_block_type` (
+DROP TABLE IF EXISTS `t_blog_type`;
+CREATE TABLE `t_blog_type` (
   `type_id` int(11) NOT NULL auto_increment,
   `type_name` varchar(20) default NULL COMMENT '类型名称',
   `type_desc` varchar(200) default NULL COMMENT '类型描述',

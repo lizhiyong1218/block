@@ -10,9 +10,7 @@ package com.lzy.block.core.service;
 import java.util.List;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.lzy.block.api.common.Pagination;
-import com.lzy.block.api.model.dictionary.DictionaryModel;
 
 /**
  * @ClassName: IBaseService
@@ -26,12 +24,12 @@ public interface IBaseService<T> {
 	public int insert(T o) throws Exception;
 
 	 
-	public int update(T o) throws Exception;
+	public int updateByPrimaryKeySelective(T o) throws Exception;
 
 	 
-	public void delete(Integer id) throws Exception;
+	public void deleteByPrimaryKey(Integer id) throws Exception;
  
-	public T getOneById(Integer id) throws Exception;
+	public T selectByPrimaryKey(Integer id) throws Exception;
 
 	public List<T> getAll(T o) throws Exception;
 	 

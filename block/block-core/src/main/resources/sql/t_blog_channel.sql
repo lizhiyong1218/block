@@ -4,15 +4,15 @@ Source Host: localhost
 Source Database: purespringmvc
 Target Host: localhost
 Target Database: purespringmvc
-Date: 2014/11/24 16:55:28
+Date: 2014/11/26 16:53:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for t_block_channel
+-- Table structure for t_blog_channel
 -- ----------------------------
-DROP TABLE IF EXISTS `t_block_channel`;
-CREATE TABLE `t_block_channel` (
+DROP TABLE IF EXISTS `t_blog_channel`;
+CREATE TABLE `t_blog_channel` (
   `channel_id` int(11) NOT NULL auto_increment COMMENT '栏目id',
   `channel_parent_id` int(11) default NULL COMMENT '父栏目id',
   `channel_name` varchar(40) default NULL COMMENT '栏目名称(唯一)',

@@ -38,17 +38,17 @@ public class DictionaryItemServiceImpl implements IDictionaryItemService{
 	}
 
 	@Override
-	public int update(DictionaryItemModel o) throws Exception {
+	public int updateByPrimaryKeySelective(DictionaryItemModel o) throws Exception {
 		return dictionaryItemMapper.updateByPrimaryKeySelective(o);
 	}
 
 	@Override
-	public void delete(Integer id) throws Exception {
+	public void deleteByPrimaryKey(Integer id) throws Exception {
 		dictionaryItemMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
-	public DictionaryItemModel getOneById(Integer id) throws Exception {
+	public DictionaryItemModel selectByPrimaryKey(Integer id) throws Exception {
 		return dictionaryItemMapper.selectByPrimaryKey(id);
 	}
 
