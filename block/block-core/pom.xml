@@ -26,6 +26,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 		</dependency>
+		
+		<!-- <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.aop</artifactId>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -108,21 +113,20 @@
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 		
+	   <dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
 		
-		   <dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-mapper-asl</artifactId>
-			</dependency>
-			
-			<!-- <dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-mapper-lgpl</artifactId>
-			</dependency> -->
-			
-			<!-- <dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-core-asl</artifactId>
-			</dependency> -->
+		<dependency>  
+	        <groupId>org.springframework.data</groupId>  
+	        <artifactId>spring-data-redis</artifactId>  
+	    </dependency> 
+	     
+	    <dependency>  
+	        <groupId>redis.clients</groupId>  
+	        <artifactId>jedis</artifactId>  
+	    </dependency> 
 		
 	</dependencies>
 

@@ -24,6 +24,18 @@ public class User implements Serializable{
 	private Integer userId;
 	private String userName;
 	private String userPwd;
+	
+	public User(){
+		
+	}
+	
+	public User(Integer userId,String userName,String userPwd){
+		super();
+		this.userId=userId;
+		this.userName=userName;
+		this.userPwd=userPwd;
+	}
+	
 	public Integer getUserId() {
 		return userId;
 	}

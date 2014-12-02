@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c" xmlns:util="http://www.springframework.org/schema/util"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
-    <!-- MyBatis配置 -->
+	<!-- MyBatis配置 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 直接使用Jpa事物 -->
 		<property name="dataSource" ref="dataSource" />
@@ -15,20 +17,23 @@
 		<!-- 多个包用,或者;分隔即可 -->
 		<property name="typeAliasesPackage" value="com.lzy.block.api.model" />
 		<!-- 没有把mapper文件放到与dao相同的深层目录，显式指定Mapper文件位置 -->
-		<property name="mapperLocations" value="classpath:/com/lzy/block/core/mapper/**/*Mapper.xml" />
-		
+		<property name="mapperLocations"
+			value="classpath:/com/lzy/block/core/mapper/**/*Mapper.xml" />
+
 		<!-- 分页 -->
 		<property name="plugins">
 			<list>
-				<bean class="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
-					<property name="dialect" >
-	   					<bean class="com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect"></bean>
-	   				</property>
+				<bean
+					class="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+					<property name="dialect">
+						<bean
+							class="com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect"></bean>
+					</property>
 				</bean>
 			</list>
 		</property>
 	</bean>
-	<!-- 扫描basePackage下所有的Dao接口，动态创建其实现类-->
+	<!-- 扫描basePackage下所有的Dao接口，动态创建其实现类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.lzy.block.core.dao" />
 	</bean>

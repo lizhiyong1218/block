@@ -90,6 +90,11 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -185,6 +190,17 @@
 			</exclusions>
 		</dependency>
 		<!-- jstl -->
+		
+		<!--  redis -->
+		<dependency>  
+	        <groupId>org.springframework.data</groupId>  
+	        <artifactId>spring-data-redis</artifactId>  
+	    </dependency> 
+	     
+	    <dependency>  
+	        <groupId>redis.clients</groupId>  
+	        <artifactId>jedis</artifactId>  
+	    </dependency> 
 
 	</dependencies>
 	<build>
