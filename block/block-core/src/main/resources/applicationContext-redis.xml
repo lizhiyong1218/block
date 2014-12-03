@@ -29,7 +29,7 @@
 		<property name="poolConfig" ref="jedisPoolConfig" />
 		<property name="hostName" value="${redis.host}" />
 		<property name="port" value="${redis.port}" />
-		<property name="password" value="${redis.pass}" />
+		<!-- <property name="password" value="${redis.pass}" /> 如果没有设置密码，则去掉此项，否则会报错 -->
 		<property name="timeout" value="${redis.timeout}" />
 	</bean>
 

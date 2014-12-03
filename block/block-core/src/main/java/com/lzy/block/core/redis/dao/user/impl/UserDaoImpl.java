@@ -43,7 +43,7 @@ public class UserDaoImpl extends AbstractBaseRedisDao<String, User> implements I
                     throws DataAccessException {  
                 RedisSerializer<String> serializer = getRedisSerializer();  
                 byte[] key  = serializer.serialize(user.getUserId().toString());  
-                byte[] name = serializer.serialize(user.getUserName());  
+                byte[] name = serializer.serialize(user.toString());  
                 return connection.setNX(key, name);  
             }  
         });  
@@ -138,6 +138,12 @@ public class UserDaoImpl extends AbstractBaseRedisDao<String, User> implements I
             }  
         });  
         return result;  
-    }  
+    } 
+    
+    public static void main(String[] args) {
+		String str ="[userId=1, userName=java2000_wl22, userPwd=testpwd],";
+//		User user=
+	}
+    
 
 }
