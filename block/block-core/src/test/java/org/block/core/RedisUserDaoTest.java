@@ -139,6 +139,9 @@ public class RedisUserDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 //        Assert.assertEquals(user.getUserName(), "java2000_wl");  
     }  
    
-      
+    @Test  
+    public void testOpList() {  
+    	userDao.listOp(); 
+    }   
 	
 }

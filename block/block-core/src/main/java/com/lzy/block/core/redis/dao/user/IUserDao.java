@@ -66,5 +66,7 @@ public interface IUserDao {
      */  
     User get(String keyId);  
     
+    public void listOp();
+    
     
 }  

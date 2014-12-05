@@ -51,10 +51,10 @@ public class SpringRedisTest extends AbstractTransactionalJUnit4SpringContextTes
     @Test  
     public void testAddUser() {    
     	 // String读写
-        stringRedisTemplate.delete("myStr");
-        stringRedisTemplate.opsForValue().set("myStr", "http://yjmyzz.cnblogs.com/");
-        System.out.println(stringRedisTemplate.opsForValue().get("myStr"));
-        System.out.println("---------------");
+//        stringRedisTemplate.delete("myStr");
+//        stringRedisTemplate.opsForValue().set("myStr", "http://yjmyzz.cnblogs.com/");
+//        System.out.println(stringRedisTemplate.opsForValue().get("myStr"));
+//        System.out.println("---------------");
 
         // List读写
         stringRedisTemplate.delete("myList");
@@ -68,28 +68,28 @@ public class SpringRedisTest extends AbstractTransactionalJUnit4SpringContextTes
         }
         System.out.println("---------------");
 
-        // Set读写
-        stringRedisTemplate.delete("mySet");
-        stringRedisTemplate.opsForSet().add("mySet", "A");
-        stringRedisTemplate.opsForSet().add("mySet", "B");
-        stringRedisTemplate.opsForSet().add("mySet", "C");
-        Set<String> setCache = stringRedisTemplate.opsForSet().members(
-                "mySet");
-        for (String s : setCache) {
-            System.out.println(s);
-        }
-        System.out.println("---------------");
-
-        // Hash读写
-        stringRedisTemplate.delete("myHash");
-        stringRedisTemplate.opsForHash().put("myHash", "PEK", "北京");
-        stringRedisTemplate.opsForHash().put("myHash", "SHA", "上海虹桥");
-        stringRedisTemplate.opsForHash().put("myHash", "PVG", "浦东");
-        Map<Object, Object> hashCache = stringRedisTemplate.opsForHash()
-                .entries("myHash");
-        for (Map.Entry<Object, Object> entry : hashCache.entrySet()) {
-            System.out.println(entry.getKey() + " - " + entry.getValue());
-        }
+//        // Set读写
+//        stringRedisTemplate.delete("mySet");
+//        stringRedisTemplate.opsForSet().add("mySet", "A");
+//        stringRedisTemplate.opsForSet().add("mySet", "B");
+//        stringRedisTemplate.opsForSet().add("mySet", "C");
+//        Set<String> setCache = stringRedisTemplate.opsForSet().members(
+//                "mySet");
+//        for (String s : setCache) {
+//            System.out.println(s);
+//        }
+//        System.out.println("---------------");
+//
+//        // Hash读写
+//        stringRedisTemplate.delete("myHash");
+//        stringRedisTemplate.opsForHash().put("myHash", "PEK", "北京");
+//        stringRedisTemplate.opsForHash().put("myHash", "SHA", "上海虹桥");
+//        stringRedisTemplate.opsForHash().put("myHash", "PVG", "浦东");
+//        Map<Object, Object> hashCache = stringRedisTemplate.opsForHash()
+//                .entries("myHash");
+//        for (Map.Entry<Object, Object> entry : hashCache.entrySet()) {
+//            System.out.println(entry.getKey() + " - " + entry.getValue());
+//        }
 
         System.out.println("---------------");   
     }  

@@ -140,10 +140,13 @@ public class UserDaoImpl extends AbstractBaseRedisDao<String, User> implements I
         return result;  
     } 
     
-    public static void main(String[] args) {
-		String str ="[userId=1, userName=java2000_wl22, userPwd=testpwd],";
-//		User user=
-	}
+    public void listOp(){
+    	User user=new User();
+    	user.setUserId(1);
+    	user.setUserName("test");
+    	user.setUserPwd("pwd");
+    	redisTemplate.opsForList().rightPush("users",user );
+    }
     
 
 }
