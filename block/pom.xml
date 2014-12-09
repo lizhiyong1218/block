@@ -21,6 +21,7 @@
 		<spring.version>3.2.8.RELEASE</spring.version>
 		<aspectj.version>1.6.10</aspectj.version>
 		<aspectjrt.version>1.5.3</aspectjrt.version>
+		<!-- mybatis -->
 		<mybatis.version>3.2.3</mybatis.version>
 		<mybatis.spring.version>1.2.1</mybatis.spring.version>
 		<mybatis.paginator.version>1.2.9</mybatis.paginator.version>
@@ -36,11 +37,22 @@
 		<jsonlib.version>2.4</jsonlib.version>
 		<jackson.version>1.9.13</jackson.version>
 		<gson.version>2.3</gson.version>
+		
+		<!-- fasterxml.jackson -->
+		<fasterxml.jackson.version>2.2.2</fasterxml.jackson.version>
+		
+		<!-- dubbo -->
 		<dubbo.version>2.5.3</dubbo.version>
+		<!-- zookeeper -->
 		<zookeeper.version>3.3.3</zookeeper.version>
 		<zkclient.version>0.1</zkclient.version>
-		<spring.data.redis.version>1.1.0.RELEASE</spring.data.redis.version> 
-		<redis.clients.version>2.0.0</redis.clients.version>
+		<!-- redis -->
+		<spring.data.redis.version>1.4.1.RELEASE</spring.data.redis.version> 
+		<redis.clients.version>2.4.2</redis.clients.version>
+		<!-- quartz -->
+		<quartz.version>2.2.1</quartz.version>
+		<!--rabbitmq  -->
+		<spring.rabbit.version>1.2.2.RELEASE</spring.rabbit.version>
 		<nexus.content>http://10.1.100.61:8044/content</nexus.content>
 	</properties>
  
@@ -89,7 +101,11 @@
 				<version>${spring.version}</version>
 			</dependency>
 			
-		 
+			 <dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-aop</artifactId>
+			    <version>${spring.version}</version>
+			</dependency>
 			
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -342,11 +358,25 @@
 			</dependency>
 			
 			<dependency>
+			    <groupId>org.codehaus.jackson</groupId>
+			    <artifactId>jackson-core-lgpl</artifactId>
+			    <version>${jackson.version}</version>
+			</dependency>
+			
+			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
 			<!-- Jackson JSON Processor  -->
+			
+			<!-- fasterxml.jackson -->
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-databind</artifactId>
+			    <version>${fasterxml.jackson.version}</version>
+			</dependency>
+			<!-- fasterxml.jackson -->
 			
 			<!-- json lib -->
 			<dependency>
@@ -373,6 +403,22 @@
 			    <groupId>redis.clients</groupId>
 			    <artifactId>jedis</artifactId>
 			    <version>${redis.clients.version}</version>
+			</dependency>
+			<!--  redis -->
+			
+			<!-- quartz -->
+			<dependency>
+			    <groupId>org.quartz-scheduler</groupId>
+			    <artifactId>quartz</artifactId>
+			    <version>${quartz.version}</version>
+			</dependency>
+			<!-- quartz -->
+			
+			<!-- rabbitmq -->
+			<dependency>
+				<groupId>org.springframework.amqp</groupId>
+				<artifactId>spring-rabbit</artifactId>
+				<version>${spring.rabbit.version}</version>
 			</dependency>
 
 		</dependencies>

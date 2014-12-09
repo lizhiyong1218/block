@@ -58,7 +58,7 @@ public class PriceRecordTest extends AbstractTransactionalJUnit4SpringContextTes
 	
 	@Test
 	public void testAddInList() { 
-		PriceRecord priceRecord=new PriceRecord("1",300d,"user2",null,null);
+		PriceRecord priceRecord=new PriceRecord("1",300d,"user2",new Date(),null);
 		long res = priceDao.addRecordInList("pm1", priceRecord);
 		System.out.println(res);
 	}
@@ -121,12 +121,6 @@ public class PriceRecordTest extends AbstractTransactionalJUnit4SpringContextTes
 		}
 //		System.out.println(recordInList.size());
 	}
-	
-	@Test
-	public void testAdd() { 
-		PriceRecord priceRecord=new PriceRecord("1",300d,"user2",null,null);
-		boolean res = priceDao.add("pm222", priceRecord);
-		System.out.println(res);
-	}
+	 
 	
 }

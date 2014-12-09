@@ -36,9 +36,8 @@ public interface IPriceRecordDao {
 	
 	public List<PriceRecord> getRecordInList(String listKey,long start,long end);
 	
-	public PriceRecord getFirstPriceRecord(String listKey);
+	public PriceRecord getFirstPriceRecord(String listKey); 
 	
 	public long addPrice(String listKey,Date endTime, PriceRecord priceRecord);
 	
-	 public boolean add(final String listKey, final PriceRecord priceRecord) ;
 }

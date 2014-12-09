@@ -13,19 +13,13 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.Assert;
 
 import com.lzy.block.api.common.StrUtil;
-import com.lzy.block.api.model.User;
 import com.lzy.block.api.model.auction.PriceRecord;
 import com.lzy.block.core.redis.dao.auction.IPriceRecordDao;
 
@@ -99,9 +93,9 @@ public class PriceRecordDaoImpl implements IPriceRecordDao{
 	public long addRecordInList(String listKey, PriceRecord priceRecord) {
 		ListOperations<String, PriceRecord> opsForList = redisTemplate.opsForList();
 		
-//		opsForList.leftPush(listKey, priceRecord);
+		Long count =opsForList.leftPush(listKey, priceRecord);
 		
-		Long count = opsForList.leftPushIfPresent(listKey, priceRecord);
+//		Long count = opsForList.leftPushIfPresent(listKey, priceRecord);
 		return count;
 	}
 	
@@ -218,22 +212,5 @@ public class PriceRecordDaoImpl implements IPriceRecordDao{
 		}
 		return false;
 	}
-	
-	
-	  public boolean add(final String listKey, final PriceRecord priceRecord) {  
-	        boolean result = redisTemplate.execute(new RedisCallback<Boolean>() {  
-	            public Boolean doInRedis(RedisConnection connection)  
-	                    throws DataAccessException {  
-	            	RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
-	            	RedisSerializer<PriceRecord> valueSerializer = (RedisSerializer<PriceRecord>) redisTemplate.getValueSerializer();
-	            	byte[] key  = stringSerializer.serialize(listKey);  
-                    byte[] value =valueSerializer.serialize(priceRecord);
-	            	Long lPush = connection.lPush(key, value);
-	            	System.out.println(lPush);
-	                return true;  
-	            }  
-	        }, false, true);  
-	        return result;  
-	    }
 	
 }

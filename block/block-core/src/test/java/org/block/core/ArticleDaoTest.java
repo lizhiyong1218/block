@@ -4,7 +4,6 @@ package org.block.core;
  * defaultRollback=true 不会往数据库中插入数据
  */
 
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,12 +13,8 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.lzy.block.api.model.article.Article;
-import com.lzy.block.api.model.dictionary.DictionaryModel;
 import com.lzy.block.core.dao.article.ArticleMapper;
-import com.lzy.block.core.dao.dictionary.DictionaryMapper;
  
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:applicationContext.xml"})

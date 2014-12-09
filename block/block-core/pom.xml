@@ -26,12 +26,9 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 		</dependency>
-		
-		<!-- <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>org.springframework.aop</artifactId>
-		</dependency> -->
 
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>org.springframework.aop</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
@@ -73,16 +70,9 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-	<!-- 	<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
- -->
+		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
+			</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>com.github.miemiedev</groupId>
 			<artifactId>mybatis-paginator</artifactId>
@@ -107,27 +97,38 @@
 			<groupId>org.mybatis.caches</groupId>
 			<artifactId>mybatis-ehcache</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
-		
-	   <dependency>
+
+		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
 		
-		<dependency>  
-	        <groupId>org.springframework.data</groupId>  
-	        <artifactId>spring-data-redis</artifactId>  
-	    </dependency> 
-	     
-	    <dependency>  
-	        <groupId>redis.clients</groupId>  
-	        <artifactId>jedis</artifactId>  
-	    </dependency> 
+		<!-- rabbitmq -->
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+		</dependency>
 		
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-databind</artifactId>
+			</dependency>
+
 	</dependencies>
 
 	<build>
@@ -142,14 +143,10 @@
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
-				<!-- 打包时排除resources目录下的文件
-				 <excludes> 
-					<exclude>config/config.properties</exclude>
-					<exclude>log4j.properties</exclude>
-				 </excludes>
-				  --> 
+				<!-- 打包时排除resources目录下的文件 <excludes> <exclude>config/config.properties</exclude> 
+					<exclude>log4j.properties</exclude> </excludes> -->
 			</resource>
 		</resources>
 	</build>
-	
+
 </project>

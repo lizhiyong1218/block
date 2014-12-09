@@ -40,9 +40,9 @@ public class RedisClient {
     { 
         // 池基本配置 
         JedisPoolConfig config = new JedisPoolConfig(); 
-        config.setMaxActive(20); 
+//        config.setMaxActive(20); 
         config.setMaxIdle(5); 
-        config.setMaxWait(1000l); 
+//        config.setMaxWait(1000l); 
         config.setTestOnBorrow(false); 
         
         jedisPool = new JedisPool(config,"192.168.137.128",6379);
@@ -55,9 +55,9 @@ public class RedisClient {
     { 
         // 池基本配置 
         JedisPoolConfig config = new JedisPoolConfig(); 
-        config.setMaxActive(20); 
+//        config.setMaxActive(20); 
         config.setMaxIdle(5); 
-        config.setMaxWait(1000l); 
+//        config.setMaxWait(1000l); 
         config.setTestOnBorrow(false); 
         // slave链接 
         List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>(); 
@@ -68,12 +68,12 @@ public class RedisClient {
     } 
 
     public void show() {     
-//        KeyOperate(); 
-//        StringOperate(); 
-//        ListOperate(); 
-//        SetOperate();
+        KeyOperate(); 
+        StringOperate(); 
+        ListOperate(); 
+        SetOperate();
         SortedSetOperate();
-//        HashOperate(); 
+        HashOperate(); 
         jedisPool.returnResource(jedis);
         shardedJedisPool.returnResource(shardedJedis);
     } 
