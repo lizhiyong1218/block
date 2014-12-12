@@ -16,6 +16,10 @@
 	<import resource="classpath:/applicationContext-cache.xml" />
 	 -->
 	 <import resource="classpath:/applicationContext-redis.xml" />
-	 <!-- <import resource="classpath:/applicationContext-quartz.xml" /> -->
+	 <!-- 
+	 <import resource="classpath:/applicationContext-quartz.xml" />
+	  -->
+	 <!-- 
 	 <import resource="classpath:/applicationContext-rabbitmq.xml" />
+	  -->
 </beans>
