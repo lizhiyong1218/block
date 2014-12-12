@@ -35,6 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div title="首页管理" data-options="selected:true,iconCls:'icon-indexmanager'" style="padding:10px">
 				<input type="button" value="文章管理" onclick="tab_add('centertabs','文章管理','common/toListPage.do?pagePath=/article/articleList')"/>
+				<input type="button" value="任务管理" onclick="tab_add('centertabs','让我管理','common/toListPage.do?pagePath=/quartz/quartzList')"/>
 			</div>
 		</div>
  </body> 

@@ -57,7 +57,7 @@ public class PriceRecordTest extends AbstractTransactionalJUnit4SpringContextTes
 //	}
 	
 	@Test
-	public void testAddInList() { 
+	public void testAddInList() {   
 		PriceRecord priceRecord=new PriceRecord("1",300d,"user2",new Date(),null);
 		long res = priceDao.addRecordInList("pm1", priceRecord);
 		System.out.println(res);
