@@ -91,11 +91,12 @@ public class PriceRecordDaoImpl implements IPriceRecordDao{
 	 */
 	@Override
 	public long addRecordInList(String listKey, PriceRecord priceRecord) {
+		
+		
 		ListOperations<String, PriceRecord> opsForList = redisTemplate.opsForList();
 		
 		Long count =opsForList.leftPush(listKey, priceRecord);
 		
-//		Long count = opsForList.leftPushIfPresent(listKey, priceRecord);
 		return count;
 	}
 	
@@ -153,6 +154,9 @@ public class PriceRecordDaoImpl implements IPriceRecordDao{
 		logger.info(priceRecord);
 		long res = 0;
 		if(validatePrice(listKey, endTime, priceRecord)){
+			
+			redisTemplate.multi();
+			
 			PriceRecord firstPriceRecord = getFirstPriceRecord(listKey);
 			if(firstPriceRecord!=null){//list列表中有出价记录
 				if(priceRecord.getPrice()>firstPriceRecord.getPrice()){
@@ -171,6 +175,9 @@ public class PriceRecordDaoImpl implements IPriceRecordDao{
 			}else{//在所有人出价之前list是空的,这个时候只需要将该出价记录增加到list中
 				res=addRecordInList(listKey, priceRecord);
 			}
+			
+			redisTemplate.exec();
+			
 		}else{
 			logger.error("验证价格信息失败!");
 		}

@@ -92,18 +92,12 @@ public class PriceRecordTest extends AbstractTransactionalJUnit4SpringContextTes
 		
 		
 		String recordId="";
-		Double price=100000d;
+		Double price=100001d;
 		String userId="u2";
 		Date priceDate=new Date();
 		PriceRecord priceRecord=new PriceRecord(recordId, price, userId, priceDate, auctionId);
 		long res= priceDao.addPrice(auctionId, endTime, priceRecord);
 		System.out.println(res+"=====");
-//		for(int i=0;i<10000;i++){
-//			price=(double) i;
-//			userId="u"+i;
-//			priceRecord=new PriceRecord(recordId, price, userId, priceDate, auctionId);
-//			priceDao.addPrice(auctionId, endTime, priceRecord);
-//		}
 		
 	}
 	

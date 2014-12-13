@@ -7,11 +7,9 @@
 */ 
 package com.lzy.block.console.controller.quartz;
 
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
@@ -20,7 +18,6 @@ import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.SimpleTrigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.springframework.beans.factory.annotation.Autowired;
