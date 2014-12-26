@@ -22,4 +22,10 @@
 	 <!-- 
 	 <import resource="classpath:/applicationContext-rabbitmq.xml" />
 	  -->
+	  
+	 <!-- 动态引入quartz任务
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+	 -->
+	  
+	  
 </beans>

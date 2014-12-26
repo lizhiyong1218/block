@@ -9,21 +9,14 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.block.core.BaseTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.lzy.block.api.model.auction.PriceRecord;
 
  
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml"})
-@TransactionConfiguration(transactionManager="transactionManager",defaultRollback=false)
-public class RabbitmqTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class RabbitmqTest extends BaseTest {
 	@Resource
 	private RabbitTemplate rabbitTemplate;
 	

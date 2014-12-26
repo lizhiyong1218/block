@@ -13,13 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.block.core.BaseTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.lzy.block.api.model.auction.PriceRecord;
 import com.lzy.block.core.redis.dao.auction.IPriceRecordDao;
@@ -31,10 +27,7 @@ import com.lzy.block.core.redis.dao.auction.IPriceRecordDao;
  * @date 2014年12月5日 上午10:05:34
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml"})
-@TransactionConfiguration(transactionManager="transactionManager",defaultRollback=false)
-public class PriceRecordTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class PriceRecordTest extends  BaseTest {
 	@Autowired 
 	IPriceRecordDao priceDao;
 	
@@ -66,9 +59,10 @@ public class PriceRecordTest extends AbstractTransactionalJUnit4SpringContextTes
 	@Test
 	public void testGetListInZset() { 
 		Set<PriceRecord> prices = priceDao.getPricesInZset("pm1", 0, -1);
-		for (PriceRecord priceRecord : prices) { 
-			System.out.println(priceRecord);
-		}
+		System.out.println(prices.size());
+//		for (PriceRecord priceRecord : prices) { 
+//			System.out.println(priceRecord);
+//		}
 	}
 	
 	/**

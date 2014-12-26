@@ -134,6 +134,15 @@
 		    <groupId>org.quartz-scheduler</groupId>
 		    <artifactId>quartz</artifactId>
 		</dependency>	
+		
+		<!-- 多线程测试 -->
+		<dependency> 
+	      <groupId>com.lzy.test</groupId>
+		  <artifactId>GroboUtils-core</artifactId>
+		  <version>1.2.1</version>
+		  <scope>test</scope>
+	    </dependency>
+		
 
 	</dependencies>
 

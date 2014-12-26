@@ -110,7 +110,4 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
 	</aop:config>
 	
-	<!-- 动态引入任务 -->
-	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
-	
 </beans>
