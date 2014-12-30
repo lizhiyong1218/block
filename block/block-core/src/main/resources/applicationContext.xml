@@ -9,23 +9,24 @@
 	http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
 	default-lazy-init="true">
+	<!-- spring基本信息 -->
 	<import resource="classpath:/applicationContext-common.xml"/>
-	
+	<!-- mybatis配置 -->
 	<import resource="classpath:/applicationContext-mybatis.xml" />
-	<!-- 
+	<!-- 缓存配置
 	<import resource="classpath:/applicationContext-cache.xml" />
 	 -->
+	 <!-- redis配置 -->
 	 <import resource="classpath:/applicationContext-redis.xml" />
-	 <!-- 
-	 <import resource="classpath:/applicationContext-quartz.xml" />
-	  -->
-	 <!-- 
+	  <!-- rabbitmq配置
 	 <import resource="classpath:/applicationContext-rabbitmq.xml" />
 	  -->
-	  
-	 <!-- 动态引入quartz任务
-	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
-	 -->
-	  
+	 <!-- 写死的任务，灵活性小
+	 <import resource="classpath:/applicationContext-quartz.xml" />
+	  -->
+	 <!-- 动态引入quartz任务-->
+	 <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+	 
+	
 	  
 </beans>

@@ -52,8 +52,29 @@
 	</bean>
 	<context:property-placeholder properties-ref="customProperties" />
 
- <!-- 配置数据源 -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+ <!-- 配置单数据源 -->
+	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://${db.ip}:${db.port}/${db.name}?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull" />
+		<property name="user" value="${db.user}" />
+		<property name="password" value="${db.pwd}" />
+		<property name="minPoolSize" value="10" />
+		<property name="maxPoolSize" value="30" />
+		<property name="maxIdleTime" value="30" />
+		<property name="acquireIncrement" value="5" />
+		<property name="idleConnectionTestPeriod" value="60" />
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="breakAfterAcquireFailure" value="false" />
+		<property name="numHelperThreads" value="5" />
+		<property name="acquireRetryDelay" value="500" />
+		<property name="autoCommitOnClose" value="true" />
+		<property name="propertyCycle" value="300" />
+		<property name="checkoutTimeout" value="5000" />
+	</bean> -->
+	
+	<!-- 主数据源 -->
+	<bean id="masterDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUrl"
 			value="jdbc:mysql://${db.ip}:${db.port}/${db.name}?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull" />
@@ -72,7 +93,45 @@
 		<property name="propertyCycle" value="300" />
 		<property name="checkoutTimeout" value="5000" />
 	</bean>
-
+	
+	<!-- 从数据源 -->
+	<bean id="slaveDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://${slavedb.ip}:${slavedb.port}/${slavedb.name}?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull" />
+		<property name="user" value="${slavedb.user}" />
+		<property name="password" value="${slavedb.pwd}" />
+		<property name="minPoolSize" value="10" />
+		<property name="maxPoolSize" value="30" />
+		<property name="maxIdleTime" value="30" />
+		<property name="acquireIncrement" value="5" />
+		<property name="idleConnectionTestPeriod" value="60" />
+		<property name="acquireRetryAttempts" value="30" />
+		<property name="breakAfterAcquireFailure" value="false" />
+		<property name="numHelperThreads" value="5" />
+		<property name="acquireRetryDelay" value="500" />
+		<property name="autoCommitOnClose" value="true" />
+		<property name="propertyCycle" value="300" />
+		<property name="checkoutTimeout" value="5000" />
+	</bean>
+	
+	<!-- 
+		 多数据源  自定义数据源选择
+	-->
+	<bean id="dataSource" class="com.lzy.block.core.db.ChooseDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<!-- write --> 
+				<entry key="master" value-ref="masterDataSource" />
+				<!-- read -->
+				<entry key="slave" value-ref="slaveDataSource" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="masterDataSource" />
+	</bean> 
+	
+	 
+	
 	<!-- 定义事务通知 -->
 	 <bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -99,15 +158,22 @@
 			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
-		</tx:attributes>
+		</tx:attributes> 
 	</tx:advice> 
 	
-	<!-- 定义切面 -->
+	<!-- 事务切面-->	
 	<aop:config proxy-target-class="true">
-		<!-- 事物切面 -->
-		<aop:pointcut id="interceptorPointCuts" 
-			expression="execution(* com.lzy.block.core.service..*.*(..))" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
+		<aop:pointcut id="interceptorPointCuts" expression="execution(* com.lzy.block.core.service..*.*(..))" />
+		<aop:advisor  pointcut-ref="interceptorPointCuts" advice-ref="txAdvice"/>
 	</aop:config>
+	
+	<!-- 多数据源选择切面 -->
+	<bean id="dataSourceAspect" class="com.lzy.block.core.db.DataSourceAspect" />
+	 <aop:config>
+        <aop:aspect id="c" ref="dataSourceAspect">
+            <aop:pointcut id="tx" expression="execution(* com.lzy.block.core.service..*.*(..))"/>
+            <aop:before pointcut-ref="tx" method="before"/>
+        </aop:aspect>
+    </aop:config> 
 	
 </beans>

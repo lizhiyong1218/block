@@ -25,6 +25,7 @@ import com.lzy.block.api.model.dictionary.DictionaryItemModel;
 import com.lzy.block.api.model.dictionary.DictionaryModel;
 import com.lzy.block.core.dao.dictionary.DictionaryItemMapper;
 import com.lzy.block.core.dao.dictionary.DictionaryMapper;
+import com.lzy.block.core.db.DataSource;
 import com.lzy.block.core.service.dictionary.IDictionaryService;
 
  
@@ -38,6 +39,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	private Logger logger=Logger.getLogger(DictionaryServiceImpl.class.getName());
 	 
 	@Override
+	@DataSource("master")
 	public int insert(DictionaryModel o) throws Exception {
 		List<DictionaryItemModel> items=o.getItems();
 		for (DictionaryItemModel dictionaryItemModel : items) {
@@ -46,6 +48,7 @@ public class DictionaryServiceImpl implements IDictionaryService{
 			dictionaryItemModel.setCreateBy(o.getCreateBy());
 			dictionaryItemModel.setCreateTime(o.getCreateTime());
 			dictionaryItemMapper.insert(dictionaryItemModel);
+//			throw new Exception("============");
 		}
 		return dictionaryMapper.insert(o);
 	}
@@ -94,13 +97,12 @@ public class DictionaryServiceImpl implements IDictionaryService{
 		}
 	}
 
-	 
-
 	@Override
 	public DictionaryModel selectModel(DictionaryModel o) {
 		return dictionaryMapper.selectModel(o);
 	}
 
+	@DataSource("slave")
 	@Override
 	public Pagination<DictionaryModel> getPagination(DictionaryModel o,
 			PageBounds pageBounds) {
