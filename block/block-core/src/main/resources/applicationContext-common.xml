@@ -140,21 +140,15 @@
 	
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-		    <tx:method name="gernerateSerialNumber*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception" />
-			<tx:method name="save*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="insert*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-			<tx:method name="update*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="edit*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
+			<tx:method name="save*" propagation="REQUIRED"	 rollback-for="java.lang.Exception" />
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="add*" propagation="REQUIRED"    rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="edit*" propagation="REQUIRED"   rollback-for="java.lang.Exception" />
 			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-			<tx:method name="remove*" propagation="REQUIRED"
-				rollback-for="java.lang.Exception" />
-			<tx:method name="generateCreate*" propagation="REQUIRES_NEW"
-				rollback-for="java.lang.Exception" />
+			<tx:method name="remove*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<!-- 开启新事物 REQUIRES_NEW -->
+			<tx:method name="genCreate*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception" />
 			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="*" propagation="SUPPORTS" read-only="true" />

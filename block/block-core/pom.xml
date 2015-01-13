@@ -135,6 +135,18 @@
 		    <artifactId>quartz</artifactId>
 		</dependency>	
 		
+		<!-- activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+		</dependency>
+		<!-- commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version> 
+		</dependency>
+		
 		<!-- 多线程测试 -->
 		<dependency> 
 	      <groupId>com.lzy.test</groupId>
@@ -142,6 +154,8 @@
 		  <version>1.2.1</version>
 		  <scope>test</scope>
 	    </dependency>
+	    
+	    
 		
 
 	</dependencies>

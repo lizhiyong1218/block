@@ -26,7 +26,8 @@
 	  -->
 	 <!-- 动态引入quartz任务-->
 	 <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
-	 
+	 <!-- activiti配置 -->
+	 <import resource="classpath:/applicationContext-activiti.xml" />
 	
 	  
 </beans>
