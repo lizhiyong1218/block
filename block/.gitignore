@@ -16,4 +16,5 @@ block-console/target
 block-console/.settings/
 block-console/bin
 block-console/files
+block-console/src/main/webapp/activiti/
 
