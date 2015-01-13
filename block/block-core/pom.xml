@@ -140,6 +140,14 @@
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-engine</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		
 		<!-- commons-io -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -155,8 +163,17 @@
 		  <scope>test</scope>
 	    </dependency>
 	    
-	    
-		
+	    <!-- hibernate  -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 

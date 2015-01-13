@@ -32,7 +32,7 @@
 								</span>
 		    				</a>
 		    			</td>
-		    			<td class="toolbar-item-container">
+		    			<!-- <td class="toolbar-item-container">
 		    				<a class="toolbar-item dialog-tool-separator"></a>
 		    			</td>
 		    			
@@ -43,7 +43,7 @@
 									<span class="l-btn-text">修改</span>
 								</span>
 		    				</a>
-		    			</td>
+		    			</td> -->
 		    		</tr>
 		    	</tbody>
 		</table>  
