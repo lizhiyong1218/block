@@ -1,4 +1,4 @@
-package com.lzy.block.api.vo.workflow;
+package com.lzy.block.api.vo.activiti;
 
 import java.io.Serializable;
 import java.util.Date;

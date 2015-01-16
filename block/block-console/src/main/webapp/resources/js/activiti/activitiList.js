@@ -100,20 +100,36 @@
 	            //配置任务审核人和分组
 	            $('.taskAssigneeConfig').click(function() {
 	                var processId = $(this).attr('data-id');
-	                var url = basePath+'/activiti/redirect.do?redirect=task/taskAssigneeConfig&processDefinitionId='+processId+'&sessionId='+sessionId;
+//	                var url = basePath+'/activiti/redirect.do?redirect=task/taskAssigneeConfig&processDefinitionId='+processId;
 	                //打开新窗口
-	                ygDialog({
+	                /*ygDialog({
                         width: 1000,
                         height: 620,
                         title: '配置任务审核人和分组',
                         scrollable:true,
                         href: url,
-                   });
+                   });*/
+	                var path = basePath + 'workflow/taskAssigneeConfigPage.do?processDefinitionId='+processId;
+	        		var mydialog = openMyDialog(path, '配置任务审核人和分组');
+	        		mydialog.dialog({
+	        			width : 1000,
+	        			height : 620,
+	        			buttons : [ {
+	        				text : '提交',
+	        				iconCls : 'icon-ok',
+	        				handler : function() {
+	        					ajaxFileUpload(mydialog);
+	        				}
+	        			} ]
+	        		});
+	                
+	                
+	                
 	            });
 	            
 	            //配置邮件模板
 	            $('.mailConfig').click(function() {
-	                var processId = $(this).attr('data-id');
+	               /* var processId = $(this).attr('data-id');
 	                var url = basePath+'/activiti/redirect.do?redirect=task/mailConfig&processDefinitionId='+processId+'&sessionId='+sessionId;
 	                //打开新窗口
 	                ygDialog({
@@ -122,7 +138,10 @@
                         title: '配置邮件模板',
                         scrollable:true,
                         href: url,
-                   });
+                   });*/
+	            	
+	            	selectPeople();
+	            	
 	            });
 	            
 	        }
@@ -259,13 +278,16 @@
 		}
 	}
 	
-	function doDelProcess(id){
-		console.log(id);
+	/**
+	 * 执行删除工作流
+	 * @param deploymentId
+	 */
+	function doDelProcess(deploymentId){
 		$.ajax({
 		     type:"POST",
 			 url:basePath+'workflow//process/delete.do',
 			 data:{
-				 deploymentId:id
+				 deploymentId:deploymentId
 			},
 			 success : function(dataObj) {
 					if (dataObj.status == 102) {
@@ -280,7 +302,27 @@
 		 });
 	}
 	
-	
+	function selectPeople(){
+		   $('<div/>').dialog({
+		        href: basePath+"/selectPeople.jsp",
+		        width: 500,
+		        height: 400,
+		        modal: true,
+				collapsible : true,
+		        title: "选择框",
+				buttons : [
+	            	{
+					text : '关闭',
+					handler : function() {
+						 var d = $(this).closest('.window-body');
+			             d.dialog('destroy');
+					}
+				}],
+		        onClose: function () {
+		            $(this).dialog('destroy');
+		        }
+		    });
+	}
 	 
 	
 	

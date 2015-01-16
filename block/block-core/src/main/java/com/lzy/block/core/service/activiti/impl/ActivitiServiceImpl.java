@@ -9,10 +9,18 @@ package com.lzy.block.core.service.activiti.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.zip.ZipInputStream;
 
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.delegate.Expression;
+import org.activiti.engine.impl.RepositoryServiceImpl;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.impl.task.TaskDefinition;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.apache.commons.io.FilenameUtils;
@@ -88,6 +96,51 @@ public class ActivitiServiceImpl implements IActivitiService {
 		
 		logger.info("部署流程结束!");
 
+	}
+
+	@Override
+	public String getUserGroupJsonTree() throws Exception {
+		 
+		return null;
+	}
+	
+
+	/**
+	 * 流程跟踪图
+	 * 
+	 * @param processDefinitionId流程定义ID
+	 * @return 封装了各种节点信息
+	 */
+	@Override
+	public List<Map<String, Object>> traceTaskDefinations(String processDefinitionId) {
+		ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
+				.getDeployedProcessDefinition(processDefinitionId);
+		List<Map<String, Object>> taskInfos = new ArrayList<Map<String, Object>>();
+		Map<String, TaskDefinition> taskDefinitions = processDefinition.getTaskDefinitions();
+        for (TaskDefinition taskDefinition : taskDefinitions.values()) {
+        	Map<String,Object> taskInfo = new HashMap<String,Object>();
+        	taskInfo.put("taskKey", taskDefinition.getKey());
+        	taskInfo.put("taskName", taskDefinition.getNameExpression().getExpressionText());
+        	if(taskDefinition.getAssigneeExpression()!=null){
+        		taskInfo.put("assignee", taskDefinition.getAssigneeExpression().getExpressionText());
+        	}
+			Set<Expression> candidateUserIdExpressions = taskDefinition.getCandidateUserIdExpressions();
+			Set<Expression> candidateGroupIdExpressions = taskDefinition.getCandidateGroupIdExpressions();
+			
+			Map<String,Object> cadidateUsers = new HashMap<String,Object>();
+			for (Expression expression : candidateUserIdExpressions) {
+				cadidateUsers.put("userName", expression.getExpressionText());
+			}
+			taskInfo.put("cadidateUsers", cadidateUsers);
+			
+			Map<String,Object> cadidateGroups = new HashMap<String,Object>();
+			for (Expression expression : candidateGroupIdExpressions) {
+				cadidateGroups.put("groupName", expression.getExpressionText());
+			}
+			taskInfo.put("cadidateGroups", cadidateGroups);
+			taskInfos.add(taskInfo);
+		}	
+		return taskInfos;
 	}
 
 }

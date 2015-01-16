@@ -8,6 +8,8 @@
 package com.lzy.block.core.service.activiti;
 
 import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: IActivitiService
@@ -30,4 +32,23 @@ public interface IActivitiService {
 	 * @throws
 	 */
 	public void addDeploy(InputStream fileInputStream,String fileName,String exportDir)throws Exception;
+	
+	/**
+	 * 
+	 * @Title: getUserGroupJsonTree
+	 * @Description: 获取任务分配人信息
+	 * @return: String
+	 * @throws
+	 */
+	public String getUserGroupJsonTree() throws Exception;
+
+	/**
+	 * 
+	 * @Title: traceTaskDefinations
+	 * @Description: 获取流程任务信息
+	 * @param processDefinitionId  流程id
+	 * @return: List<Map<String,Object>>
+	 * @throws
+	 */
+	List<Map<String, Object>> traceTaskDefinations(String processDefinitionId);
 }

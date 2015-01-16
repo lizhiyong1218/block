@@ -1,0 +1,32 @@
+[{    
+    "id":1,    
+    "text":"人事部",    
+    "iconCls":"icon-save",    
+    "children":[{    
+        "text":"张三",    
+        "checked":true   
+    },{    
+        "text":"分部",    
+        "state":"closed",    
+        "attributes":{    
+            "url":"/demo/book/abc",    
+            "price":100    
+        },    
+        "children":[{    
+            "text":"PhotoShop",    
+            "checked":true   
+        },{    
+            "id": 8,    
+            "text":"Sub Bookds",    
+            "state":"closed"   
+        }]    
+    }]    
+},{    
+    "text":"信息部",    
+    "state":"closed",    
+    "children":[{    
+        "text":"李四"   
+    },{    
+        "text":"王五"   
+    }]    
+}]  

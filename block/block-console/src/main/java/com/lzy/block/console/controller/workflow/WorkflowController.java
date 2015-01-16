@@ -28,12 +28,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.lzy.block.api.common.Pagination;
 import com.lzy.block.api.common.StrUtil;
 import com.lzy.block.api.constant.common.ResultStatus;
 import com.lzy.block.api.vo.ResultVo;
-import com.lzy.block.api.vo.workflow.ProcessDefInfo;
+import com.lzy.block.api.vo.activiti.ProcessDefInfo;
 import com.lzy.block.console.common.ProcessDefinitionCache;
 import com.lzy.block.core.service.activiti.IActivitiService;
 
@@ -194,6 +195,56 @@ public class WorkflowController {
 		}
         return res;
     }
+    
+	/**
+	 * 
+	 * @Title: taskAssigneeConfigPage
+	 * @Description: 跳转到配置页面
+	 * @param processDefinitionId
+	 * @return: ModelAndView
+	 * @throws
+	 */
+	@RequestMapping(value="/taskAssigneeConfigPage")
+	public ModelAndView taskAssigneeConfigPage(String processDefinitionId){
+		ModelMap modelMap=new ModelMap();
+		logger.info("processDefinitionId:"+processDefinitionId);
+		modelMap.addAttribute("processDefinitionId", processDefinitionId);
+		return new ModelAndView("/activiti/taskAssigneeConfig",modelMap);
+	}
+    
+    @ResponseBody
+    @RequestMapping("/selectUser")
+	public ResultVo selectUser() {
+    	ResultVo res=new ResultVo();
+		try {
+			 res.setMessage(activitiService.getUserGroupJsonTree());
+			 res.setStatus(ResultStatus.SUCCESS.value());
+		} catch (Exception e) {
+			logger.error("获取组织结构失败！"+ e.getMessage());
+			res.setMessage("取组织结构失败!"+e.getMessage());
+			res.setStatus(ResultStatus.FAILURE.value());
+		}
+		return res;
+	}  
+    
+    
+    /**
+	 * 输出跟踪流程用户任务信息
+	 * 
+	 * @param processInstanceId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/process/traceTaskDefinations")
+	@ResponseBody
+	public Map<String, Object> traceTaskDefinations(
+			@RequestParam("processDefinitionId") String processDefinitionId) throws Exception {
+		List<Map<String, Object>> taskDefinations = activitiService
+				.traceTaskDefinations(processDefinitionId);
+		ModelMap map=new ModelMap();
+		map.put("taskDefinations", taskDefinations);  
+		return map;
+	}
     
     
     /**
