@@ -37,6 +37,7 @@ import com.lzy.block.api.vo.ResultVo;
 import com.lzy.block.api.vo.activiti.ProcessDefInfo;
 import com.lzy.block.console.common.ProcessDefinitionCache;
 import com.lzy.block.core.service.activiti.IActivitiService;
+import com.lzy.block.core.service.activiti.IActivitiTraceService;
 
 /**
  * @ClassName: WorkflowController
@@ -46,18 +47,18 @@ import com.lzy.block.core.service.activiti.IActivitiService;
  *
  */
 @Controller
-@RequestMapping(value = "/workflow")
+@RequestMapping(value = "/activiti")
 public class WorkflowController {
 	
 	private static Logger logger = Logger.getLogger(WorkflowController.class.getName());
 	
 	@Autowired
 	protected RepositoryService repositoryService;
-	/*@Autowired
-	private FormService formService;*/
+	 
 	@Resource
 	private IActivitiService activitiService;
-	
+	@Resource
+	private IActivitiTraceService activitiTraceService;
 	
 	/**
 	 * 
@@ -88,11 +89,9 @@ public class WorkflowController {
 			List<ProcessDefInfo> ProcessDefInfos = new ArrayList<ProcessDefInfo>();
 			ProcessDefInfo defInfo=null;
 			for (ProcessDefinition processDefinition : processDefinitionList) {
-				/*String formKey = formService.getStartFormKey(processDefinition
-						.getId())*/;
 				defInfo = new ProcessDefInfo();
 				defInfo.setId(processDefinition.getId());
-//				defInfo.setStartFormKey(formKey);
+				defInfo.setProcessKey(processDefinition.getKey());
 				defInfo.setCategory(processDefinition.getCategory());
 				defInfo.setName(processDefinition.getName());
 				defInfo.setVersion(processDefinition.getVersion());
@@ -145,6 +144,19 @@ public class WorkflowController {
 			response.getOutputStream().write(b, 0, len);
 		}
 	}
+	
+	
+	@RequestMapping(value = "/process/allTrace")
+	@ResponseBody
+	public Map<String, Object> traceAllProcess(
+			@RequestParam("processInstanceId") String processInstanceId) throws Exception {
+		List<Map<String, Object>> activityInfos = activitiTraceService
+				.traceProcess(processInstanceId);
+		ModelMap map=new ModelMap();
+		map.put("infos", activityInfos);  
+		return map;
+	}
+	
 	
 	/**
 	 * 

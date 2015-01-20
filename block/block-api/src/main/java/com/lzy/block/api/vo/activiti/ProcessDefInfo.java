@@ -35,7 +35,19 @@ public class ProcessDefInfo implements Serializable {
 	/*部署id*/
 	private String deploymentId;
 	/*流程key*/
-	private String startFormKey;
+	private String processKey;
+	
+	/*流程发起人*/
+	private String startUser;
+	/*开始时间*/
+	private Date startTime;
+	/*结束时间*/
+	private Date endTime;
+	/*当前节点名称*/
+	private String currentNode;
+	/*当前节点id*/
+	private String activitiId;
+	
 	
 	public String getId() {
 		return id;
@@ -95,12 +107,12 @@ public class ProcessDefInfo implements Serializable {
 		this.deployTime = deployTime;
 	}
 
-	public String getStartFormKey() {
-		return startFormKey;
+	public String getProcessKey() {
+		return processKey;
 	}
 
-	public void setStartFormKey(String startFormKey) {
-		this.startFormKey = startFormKey;
+	public void setProcessKey(String processKey) {
+		this.processKey = processKey;
 	}
 
 	public String getDeploymentId() {
@@ -110,15 +122,57 @@ public class ProcessDefInfo implements Serializable {
 	public void setDeploymentId(String deploymentId) {
 		this.deploymentId = deploymentId;
 	}
+	
+	public String getStartUser() {
+		return startUser;
+	}
+
+	public void setStartUser(String startUser) {
+		this.startUser = startUser;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getCurrentNode() {
+		return currentNode;
+	}
+
+	public void setCurrentNode(String currentNode) {
+		this.currentNode = currentNode;
+	}
+
+	public String getActivitiId() {
+		return activitiId;
+	}
+
+	public void setActivitiId(String activitiId) {
+		this.activitiId = activitiId;
+	}
 
 	@Override
 	public String toString() {
 		return "ProcessDefInfo [id=" + id + ", name=" + name + ", category="
 				+ category + ", version=" + version + ", resourceName="
 				+ resourceName + ", diagramResourceName=" + diagramResourceName
-				+ ", deployTime=" + deployTime + ", deploymentId=" + deploymentId
-				+ ", startFormKey=" + startFormKey + "]";
+				+ ", deployTime=" + deployTime + ", deploymentId="
+				+ deploymentId + ", processKey=" + processKey + ", startUser="
+				+ startUser + ", startTime=" + startTime + ", endTime="
+				+ endTime + ", currentNode=" + currentNode + ", activitiId="
+				+ activitiId + "]";
 	}
-
 	
 }

@@ -7,9 +7,7 @@
 */ 
 package com.lzy.block.core.service.activiti.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +19,10 @@ import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.impl.task.TaskDefinition;
 import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.task.DelegationState;
 import org.activiti.engine.task.Task;
+import org.springframework.stereotype.Service;
 
+import com.lzy.block.api.common.PageModel;
 import com.lzy.block.api.common.Pagination;
 import com.lzy.block.api.constant.activiti.ActivitiTaskTypeStatus;
 import com.lzy.block.api.vo.activiti.ProcessTaskVo;
@@ -31,11 +30,12 @@ import com.lzy.block.core.service.activiti.IActivitiTaskService;
 
 /**
  * @ClassName: ActivitiTaskServiceImpl
- * @Description: TODO 
+ * @Description: 任务 
  * @author 李志勇
  * @date 2015年1月16日 下午1:36:09
  *
  */
+@Service
 public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 	
 	@Resource
@@ -53,13 +53,37 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#getTodoTask(java.lang.String)
 	 */
 	@Override
-	public Pagination<ProcessTaskVo> getTodoTask(String userId,int firstResult,int maxResults) {
-		
+	public Pagination<ProcessTaskVo> getTodoTask(String userId,PageModel pageModel) {
 		Pagination<ProcessTaskVo> pagination=new Pagination<ProcessTaskVo>();
+		
+		List<ProcessTaskVo> taskList= getTodoTask(userId);
+		List<ProcessTaskVo> list=new ArrayList<ProcessTaskVo>();
+		
+		int startIndex=(pageModel.getPage()-1)*pageModel.getRows();
+		int endIndex=startIndex+pageModel.getRows()-1;
+		
+		if(startIndex>taskList.size()){
+			startIndex=taskList.size();
+		}
+		
+		if(endIndex>taskList.size()){
+			endIndex=taskList.size()-1;
+		}
+		
+		for(int i=startIndex;i<=endIndex;i++){
+			list.add(taskList.get(i));
+		}
+        pagination.setRecordList(taskList);
+        pagination.setRecordCount(taskList.size());
+		return pagination;
+	}
+	
+	@Override
+	public List<ProcessTaskVo> getTodoTask(String userId) {
+		
 		List<ProcessTaskVo> taskList=new ArrayList<ProcessTaskVo>();
-
         // 已经签收的任务
-        List<Task> todoList = taskService.createTaskQuery().taskAssignee(userId).active().listPage(firstResult, maxResults);
+        List<Task> todoList = taskService.createTaskQuery().taskAssignee(userId).active().list() ;
         String processDefinitionId=null;//流程id
         ProcessDefinition processDefinition=null;//流程对象
         ProcessTaskVo processTaskVo=null;//任务和流程信息
@@ -72,7 +96,7 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
         }
          
         // 等待签收的任务
-        List<Task> toClaimList = taskService.createTaskQuery().taskCandidateUser(userId).active().listPage(firstResult, maxResults);
+        List<Task> toClaimList = taskService.createTaskQuery().taskCandidateUser(userId).active().list();
         for (Task task : toClaimList) {
             processDefinitionId = task.getProcessDefinitionId();
             processDefinition = getProcessDefinition(processDefinitionId);
@@ -82,19 +106,18 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
         }
 
         // 查询被委派的任务
-        List<Task> delegationList = taskService.createTaskQuery().taskAssignee("henryyan").taskDelegationState(DelegationState.PENDING).active().listPage(firstResult, maxResults);
+        /*List<Task> delegationList = taskService.createTaskQuery().taskAssignee(userId).taskDelegationState(DelegationState.PENDING).active().list();
         for (Task task : delegationList) {
             processDefinitionId = task.getProcessDefinitionId();
             processDefinition = getProcessDefinition(processDefinitionId);
             processTaskVo=packageTaskInfo(task, processDefinition);
             processTaskVo.setTaskType(ActivitiTaskTypeStatus.DELEGATION.value());
             taskList.add(processTaskVo);
-        }
-        pagination.setRecordList(taskList);
-         
+        }*/
         
-		return null;
+		return taskList;
 	}
+	
 
 	/**
 	 * 
@@ -124,7 +147,7 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 	 * @return: Map<String,Object>
 	 * @throws
 	 */
-	 private Map<String, Object> packageTaskInfo(SimpleDateFormat sdf, Task task, ProcessDefinition processDefinition) {
+	/* private Map<String, Object> packageTaskInfo(SimpleDateFormat sdf, Task task, ProcessDefinition processDefinition) {
 	        Map<String, Object> singleTask = new HashMap<String, Object>();
 	        singleTask.put("id", task.getId());
 	        singleTask.put("name", task.getName());
@@ -133,7 +156,7 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 	        singleTask.put("pdversion", processDefinition.getVersion());
 	        singleTask.put("pid", task.getProcessInstanceId());
 	        return singleTask;
-	  }
+	  }*/
 	 	
 	/**
 	 * 
@@ -149,9 +172,15 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 		processTaskVo.setTaskId(task.getId());
 		processTaskVo.setTaskName(task.getName());
 		processTaskVo.setCreateTime(task.getCreateTime());
+		processTaskVo.setDueDate(task.getDueDate());
+		processTaskVo.setTaskOwner(task.getOwner());
+		processTaskVo.setTaskAssignee(task.getAssignee());
+		processTaskVo.setTaskDesc(task.getDescription());
+		processTaskVo.setProcessDefId(processDefinition.getId());
 		processTaskVo.setProcessName(processDefinition.getName());
 		processTaskVo.setProcessVersion(processDefinition.getVersion());
 		processTaskVo.setProcessInstanceId(task.getProcessInstanceId());
+		processTaskVo.setDiagramResourceName(processDefinition.getDiagramResourceName());
 		return processTaskVo;
 	}
 	

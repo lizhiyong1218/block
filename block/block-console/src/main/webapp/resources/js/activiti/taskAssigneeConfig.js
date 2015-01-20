@@ -21,9 +21,8 @@ $(document).ready(function() {
 	$.ajax({
 		type : "POST",
 		async: false, 
-		url : basePath+'/workflow/process/traceTaskDefinations.do?processDefinitionId=' + processDefinitionId,
+		url : basePath+'/activiti/process/traceTaskDefinations.do?processDefinitionId=' + processDefinitionId,
 		success : function(returnValue) {
-			debugger;
 			console.log(returnValue);
 //			var res = eval('(' + returnValue +')');
 //			console.log(res);

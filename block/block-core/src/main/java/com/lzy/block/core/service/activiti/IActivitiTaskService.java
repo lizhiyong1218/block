@@ -14,8 +14,8 @@ import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.impl.task.TaskDefinition;
 import org.activiti.engine.task.Task;
-import org.activiti.engine.task.TaskQuery;
 
+import com.lzy.block.api.common.PageModel;
 import com.lzy.block.api.common.Pagination;
 import com.lzy.block.api.vo.activiti.ProcessTaskVo;
 
@@ -29,7 +29,9 @@ import com.lzy.block.api.vo.activiti.ProcessTaskVo;
  */
 public interface IActivitiTaskService {
 	
-	public Pagination<ProcessTaskVo> getTodoTask(String userId,int firstResult,int maxResults);
+	public List<ProcessTaskVo> getTodoTask(String userId) ;
+	
+	public Pagination<ProcessTaskVo> getTodoTask(String userId,PageModel pageModel);
 	
 	
 	/**

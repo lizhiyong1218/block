@@ -18,7 +18,7 @@ import java.util.TreeMap;
  *
  */
 public enum ActivitiTaskTypeStatus {
-	ASSIGNEE("已签收", "101"), CANDIDATE("等待签收", "102"),DELEGATION("被委托", "101");
+	ASSIGNEE("已签收", "101"), CANDIDATE("等待签收", "102");
 
 	private String text;
 	private String value;

@@ -4,7 +4,7 @@
 
 	function initWorkFlowList() {
 		$('#workflowList').datagrid({
-			 url: basePath+'workflow/process/list.do',
+			 url: basePath+'activiti/process/list.do',
 			 width :'auto',  
 			 height:'auto',
 			 fitColumns : true,
@@ -109,7 +109,7 @@
                         scrollable:true,
                         href: url,
                    });*/
-	                var path = basePath + 'workflow/taskAssigneeConfigPage.do?processDefinitionId='+processId;
+	                var path = basePath + 'activiti/taskAssigneeConfigPage.do?processDefinitionId='+processId;
 	        		var mydialog = openMyDialog(path, '配置任务审核人和分组');
 	        		mydialog.dialog({
 	        			width : 1000,
@@ -165,7 +165,7 @@
 	 * 流程图展示
 	 */
 	function drawWorkflowGraph(processId){
-		 var imageUrl = basePath+'/workflow/resource/read.do?processDefinitionId='+processId+'&resourceType=image';
+		 var imageUrl = basePath+'/activiti/resource/read.do?processDefinitionId='+processId+'&resourceType=image';
          if ($('#workflowTraceDialog').length == 0) {
          	$('<div/>', {
 	                    id: 'workflowTraceDialog',
@@ -204,7 +204,7 @@
 	 */
 	function showXmlFile(value, rec, index){
 		var processId = rec.id;
-        var xmlUrl = basePath+'workflow/resource/read.do?processDefinitionId='+processId+'&resourceType=xml';
+        var xmlUrl = basePath+'activiti/resource/read.do?processDefinitionId='+processId+'&resourceType=xml';
         var str = '<a title="流程XML详情" target="_blank" href="'+xmlUrl+'">流程XML详情</a>';
         return str;
 	}
@@ -238,7 +238,7 @@
 //		$("#myExcelDialog").mask("Waiting...");//loadmask插件
 		$.ajaxFileUpload(  
 	        {  
-			     url:basePath + 'workflow/process/deploy.do',            //需要链接到服务器地址
+			     url:basePath + 'activiti/process/deploy.do',            //需要链接到服务器地址
 			     type:"post",//请求方法
 			     secureuri:false,  
 			     fileElementId:'houseMaps',                        //文件选择框的id属性  

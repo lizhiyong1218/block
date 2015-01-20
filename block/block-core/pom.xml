@@ -155,6 +155,13 @@
 			<version>2.4</version> 
 		</dependency>
 		
+		<!-- commons-beanutils -->
+		<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		
+		
 		<!-- 多线程测试 -->
 		<dependency> 
 	      <groupId>com.lzy.test</groupId>
@@ -174,6 +181,8 @@
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+	
 
 	</dependencies>
 

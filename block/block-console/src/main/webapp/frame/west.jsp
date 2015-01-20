@@ -45,6 +45,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 
 			<div title="工作流管理" data-options="selected:true,iconCls:'icon-taskmanage'" style="padding:10px">
 				<input type="button" value="流程管理" onclick="tab_add('centertabs','流程管理','common/toListPage.do?pagePath=/activiti/activitiList')"/>
+				<br/>
+				<input type="button" value="我的待办" onclick="tab_add('centertabs','我的代办','common/toListPage.do?pagePath=/activiti/todoTaskList')"/>
 			</div>
 			
 		</div>

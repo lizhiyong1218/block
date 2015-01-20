@@ -3,8 +3,8 @@
 <script
 	src="${basePath}/resources/js/activiti/activitiList.js?jsVersion=${jsVersion}"></script>
 <%-- 
-<link href="${basePath}/resources/loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${basePath}/resources/loadmask/jquery.loadmask.min.js"></script>
+<link href="${basePath}/resources/assets/loadmask/jquery.loadmask.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${basePath}/resources/assets/loadmask/jquery.loadmask.min.js"></script>
  --%>
 
 <div class="easyui-layout" data-options="fit:true">
