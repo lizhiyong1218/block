@@ -43,7 +43,7 @@ public class ActivitiProcessController {
 	public  Map<String, Object>  myStartProcess(String processName,PageModel pageModel) {
 		Pagination<ProcessDefInfo> pm = new Pagination<ProcessDefInfo>();
 		try {				
-			pm = activitiProcessService.getMyStartProcess("", pageModel);
+			pm = activitiProcessService.getMyStartProcess("kafeitu", pageModel);
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
 		}

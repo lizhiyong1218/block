@@ -5,7 +5,7 @@
 	
 	//我启动的流程
 	function initMyStartList(){
-		 $('#todoTaskList').datagrid({
+		 $('#processList').datagrid({
 		 url: basePath+'/activitiProcess/myStartProcess.do',
 		 width :'auto',  
 		 height:'auto',
@@ -21,20 +21,14 @@
 		 frozenColumns: [
            [
                {
-                   title:'taskId',
-                   field:'taskId',
+                   title:'id',
+                   field:'id',
                    checkbox: true
                }
            ]
        ],
 		 columns: [
 		     [
-				{
-					    title: '流程名称',
-					    field: 'deploymentId',
-					    width: 100,
-					    hidden:true
-					},
 			        {
 	                    title: '流程名称',
 	                    field: 'name',
@@ -58,37 +52,7 @@
 	                    	var str = '<a style="color:blue" data-id=' + rec.id + ' href="javascript:;" class="photoContent">'+rec.diagramResourceName+'</a>';
 	                        return str;
 	                    }
-	                },
-	                {
-	                    title: 'XML文件',
-	                    field: 'opt',
-	                    width: 100,
-	                    formatter: function (value, rec, index) {
-	                    	/*var processId = rec.id;
-	                        var xmlUrl = basePath+'/workflow/resource/read.do?processDefinitionId='+processId+'&resourceType=xml';
-	                        var str = '<a title="流程XML详情" target="_blank" href="'+xmlUrl+'">流程XML详情</a>';*/
-	                    	var str=showXmlFile(value, rec, index);
-	                        return str;
-	                    }
-	                },
-	                {
-	                    title: '配置审核人和分组',
-	                    field: 'assignTask',
-	                    width: 100,
-	                    formatter: function (value, rec, index) {
-	                        var str = '<a style="color:blue" data-id=' + rec.id + ' href="javascript:;" class="taskAssigneeConfig">'+"配置审核人和分组"+'</a>';
-	                        return str;
-	                    }
-	                },
-	                {
-	                    title: '配置邮件模板',
-	                    field: 'mailConfig',
-	                    width: 100,
-	                    formatter: function (value, rec, index) {
-	                        var str = '<a style="color:blue" data-id=' + rec.id + ' href="javascript:;" class="mailConfig">'+"配置邮件模板"+'</a>';
-	                        return str;
-	                    }
-	                }
+	                } 
 		     ]
 		 ],
 	 	 onLoadSuccess: function () {
@@ -103,5 +67,5 @@
 		 }
 		});
 		
-		initPager("#todoTaskList");
+		initPager("#processList");
 	}
