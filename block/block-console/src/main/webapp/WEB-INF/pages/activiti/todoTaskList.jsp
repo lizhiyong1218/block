@@ -4,6 +4,7 @@
 <script src="${basePath}/resources/assets/qtip/jquery.qtip.pack.js?jsVersion=${jsVersion}" type="text/javascript"></script>
 <script	src="${basePath}/resources/js/activiti/todoTaskList.js?jsVersion=${jsVersion}"></script>
 <script	src="${basePath}/resources/js/activiti/drawGraph.js?jsVersion=${jsVersion}"></script>
+<script	src="${basePath}/resources/js/activiti/workflow.js?jsVersion=${jsVersion}"></script>
 	
 	
 

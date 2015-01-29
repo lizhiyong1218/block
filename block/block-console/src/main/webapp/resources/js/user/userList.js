@@ -183,7 +183,6 @@
 		}
    
    function initCRmaList(){
-  	 console.log(1);
        $('#allfiletable').datagrid({
        url: basePath+'user/getList.do',
        striped:true,

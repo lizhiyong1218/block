@@ -17,9 +17,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
+import org.activiti.spring.ProcessEngineFactoryBean;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,6 +62,12 @@ public class WorkflowController {
 	private IActivitiService activitiService;
 	@Resource
 	private IActivitiTraceService activitiTraceService;
+	@Resource
+	private RuntimeService runtimeService;
+	@Autowired
+	private ProcessEngineConfiguration processEngineConfiguration;
+	@Autowired
+	private ProcessEngineFactoryBean processEngine;
 	
 	/**
 	 * 
@@ -257,6 +266,35 @@ public class WorkflowController {
 		map.put("taskDefinations", taskDefinations);  
 		return map;
 	}
+	
+	
+	 /**
+     * 读取带跟踪的图片
+     */
+   /* @RequestMapping(value = "/process/trace/auto/{executionId}")
+    public void readResource(@PathVariable("executionId") String executionId, HttpServletResponse response)
+            throws Exception {
+    	 ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(executionId).singleResult();
+         BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
+         List<String> activeActivityIds = runtimeService.getActiveActivityIds(executionId);
+         // 不使用spring请使用下面的两行代码
+//     ProcessEngineImpl defaultProcessEngine = (ProcessEngineImpl) ProcessEngines.getDefaultProcessEngine();
+//     Context.setProcessEngineConfiguration(defaultProcessEngine.getProcessEngineConfiguration());
+
+         // 使用spring注入引擎请使用下面的这行代码
+         processEngineConfiguration = processEngine.getProcessEngineConfiguration();
+         Context.setProcessEngineConfiguration((ProcessEngineConfigurationImpl) processEngineConfiguration);
+
+         ProcessDiagramGenerator diagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
+         InputStream imageStream = diagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIds);
+
+         // 输出资源内容到相应对象
+         byte[] b = new byte[1024];
+         int len;
+         while ((len = imageStream.read(b, 0, 1024)) != -1) {
+             response.getOutputStream().write(b, 0, len);
+         }
+    }*/
     
     
     /**

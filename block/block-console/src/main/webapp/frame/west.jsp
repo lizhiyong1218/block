@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <body>
      <div class="easyui-accordion" data-options="fit:true,border:false"  style="width:700px;height:300px;" >
+     		<!-- 
      		<div title="个人信息"  data-options="iconCls:'icon-personal'"  style="padding:10px;">
 				<input type="button" value=" 个人信息" onclick="tab_add('centertabs','个人信息','user/userList.do')"/>
 			</div>
@@ -42,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="button" value="文章管理" onclick="tab_add('centertabs','文章管理','common/toListPage.do?pagePath=/article/articleList')"/>
 				<input type="button" value="任务管理" onclick="tab_add('centertabs','让我管理','common/toListPage.do?pagePath=/quartz/quartzList')"/>
 			</div>
-			 
+			  -->
 			<div title="工作流管理" data-options="selected:true,iconCls:'icon-taskmanage'" style="padding:10px">
 				<input type="button" value="流程管理" onclick="tab_add('centertabs','流程管理','common/toListPage.do?pagePath=/activiti/activitiList')"/>
 				<br/>

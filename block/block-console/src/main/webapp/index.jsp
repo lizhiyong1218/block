@@ -26,9 +26,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body  class="easyui-layout" >
+	    <!-- 
 	    <div data-options="region:'north',title:'North Title',split:true,href:'frame/north.jsp'" style="height:100px;"></div>
 	    <div data-options="region:'south',title:'South Title',split:true,href:'frame/south.jsp'" style="height:100px;"></div>
 	    <div data-options="region:'east',title:'East',split:true,href:'frame/east.jsp'" style="width:100px;"></div>
+	     -->
 	    <div data-options="region:'west', title:'功能菜单',split:true,href:'frame/west.jsp'" style="width:150px;"></div>
 	    <div data-options="region:'center', split:true,href:'frame/center.jsp'"  style="padding:5px;background:#eee;" >
 	    </div>

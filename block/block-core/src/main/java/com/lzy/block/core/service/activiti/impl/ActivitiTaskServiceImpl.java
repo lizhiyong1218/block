@@ -14,11 +14,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
-import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.impl.task.TaskDefinition;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.task.Task;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +42,8 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 	
 	@Resource
 	private RepositoryService repositoryService;
+	@Resource
+	private RuntimeService runtimeService;
 	
 
 	/* (非 Javadoc)
@@ -186,45 +187,6 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 	
 	
 	/* (非 Javadoc)
-	 * <p>Title: findTaskById</p>
-	 * <p>Description: </p>
-	 * @param taskId
-	 * @return
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#findTaskById(java.lang.String)
-	 */
-	@Override
-	public Task findTaskById(String taskId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (非 Javadoc)
-	 * <p>Title: findHistoryTaskById</p>
-	 * <p>Description: </p>
-	 * @param id
-	 * @return
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#findHistoryTaskById(java.lang.String)
-	 */
-	@Override
-	public HistoricTaskInstance findHistoryTaskById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (非 Javadoc)
-	 * <p>Title: findActivitiByTaskId</p>
-	 * <p>Description: </p>
-	 * @param taskId
-	 * @return
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#findActivitiByTaskId(java.lang.String)
-	 */
-	@Override
-	public ActivityImpl findActivitiByTaskId(String taskId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (非 Javadoc)
 	 * <p>Title: getTaskByBusinessKeyAndProcessDefinitionKey</p>
 	 * <p>Description: </p>
 	 * @param businessKey
@@ -233,120 +195,32 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#getTaskByBusinessKeyAndProcessDefinitionKey(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Task getTaskByBusinessKeyAndProcessDefinitionKey(String businessKey,
+	public Task getCurrentTaskByBusKeyAndProDefKey(String businessKey,
 			String processDefinitionKey) {
-		// TODO Auto-generated method stub
-		return null;
+		Execution execution = runtimeService.createExecutionQuery()
+				.processDefinitionKey(processDefinitionKey)
+				.processInstanceBusinessKey(businessKey).singleResult();
+		if (execution == null) {
+			return null;
+		}
+		Task task = taskService.createTaskQuery()
+				.executionId(execution.getId()).singleResult();
+		return task;
 	}
-
-	/* (非 Javadoc)
-	 * <p>Title: findTaskDefinitionByTaskId</p>
-	 * <p>Description: </p>
-	 * @param taskId
-	 * @return
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#findTaskDefinitionByTaskId(java.lang.String)
-	 */
+	
 	@Override
-	public TaskDefinition findTaskDefinitionByTaskId(String taskId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void claim(String taskId, String userId) {
+		 taskService.claim(taskId, userId);
 	}
-
-	/* (非 Javadoc)
-	 * <p>Title: delegateTask</p>
-	 * <p>Description: </p>
-	 * @param taskId
-	 * @param userId
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#delegateTask(java.lang.String, java.lang.String)
-	 */
+	
 	@Override
-	public void delegateTask(String taskId, String userId) {
-		// TODO Auto-generated method stub
-
+	public void completeTask(String taskId, Map<String, Object> variables) {
+		taskService.complete(taskId, variables);
 	}
+	
+	 
 
-	/* (非 Javadoc)
-	 * <p>Title: resolveTask</p>
-	 * <p>Description: </p>
-	 * @param taskId
-	 * @param variables
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#resolveTask(java.lang.String, java.util.Map)
-	 */
-	@Override
-	public void resolveTask(String taskId, Map<String, Object> variables) {
-		// TODO Auto-generated method stub
 
-	}
-
-	/* (非 Javadoc)
-	 * <p>Title: setOwnerAndAssignTask</p>
-	 * <p>Description: </p>
-	 * @param taskId
-	 * @param userId
-	 * @param delegateUserId
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#setOwnerAndAssignTask(java.lang.String, java.lang.String, java.lang.String)
-	 */
-	@Override
-	public void setOwnerAndAssignTask(String taskId, String userId,
-			String delegateUserId) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (非 Javadoc)
-	 * <p>Title: nextTaskDefinition</p>
-	 * <p>Description: </p>
-	 * @param procInstId
-	 * @param conditionExpression
-	 * @return
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#nextTaskDefinition(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public TaskDefinition nextTaskDefinition(String procInstId,
-			String conditionExpression) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (非 Javadoc)
-	 * <p>Title: findHistoryTasksByProcessInstanceId</p>
-	 * <p>Description: </p>
-	 * @param processInstanceId
-	 * @return
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#findHistoryTasksByProcessInstanceId(java.lang.String)
-	 */
-	@Override
-	public List<HistoricTaskInstance> findHistoryTasksByProcessInstanceId(
-			String processInstanceId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (非 Javadoc)
-	 * <p>Title: getVariables</p>
-	 * <p>Description: </p>
-	 * @param taskId
-	 * @return
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#getVariables(java.lang.String)
-	 */
-	@Override
-	public Map<String, Object> getVariables(String taskId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (非 Javadoc)
-	 * <p>Title: hasVerifyPermission</p>
-	 * <p>Description: </p>
-	 * @param taskId
-	 * @param userId
-	 * @return
-	 * @see com.lzy.block.core.service.activiti.IActivitiTaskService#hasVerifyPermission(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public boolean hasVerifyPermission(String taskId, String userId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }

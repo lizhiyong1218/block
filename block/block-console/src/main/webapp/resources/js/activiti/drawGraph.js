@@ -25,7 +25,7 @@ function graphTrace(activiti,options) {
         $.getJSON(basePath+'/activiti/process/allTrace.do?processInstanceId=' + opts.processInstanceId, function(res) {
         	
         	var infos=res.infos;
-        	console.log(infos);
+//        	console.log(infos);
         var positionHtml = "";
 
         // 生成图片

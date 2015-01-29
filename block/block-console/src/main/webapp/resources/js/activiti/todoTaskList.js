@@ -85,13 +85,20 @@
 	                    field: 'opt',
 	                    width: 100,
 	                    formatter: function (value, rec, index) {
-	                    	console.log(rec);
 	                    	var str='';
-	                    	str = '<a processInstanceId=' + rec.processInstanceId +' processDefId='+rec.processDefId+ ' href="#" class="activity">'+11+'</a>';
-	                    	/*if(rec.activityId!=null){
-	                    		str = '<a processId=' + rec.id +' processDefId='+rec.processDefId+ ' href="#" class="activity" onClick=graphTrace("1,2")>'+11+'</a>';
-	                    	}*/
+	                    	 if(rec.taskName!=null){
+	                    		 str = '<a processInstanceId=' + rec.processInstanceId +' processDefId='+rec.processDefId+ ' href="#" class="activity">'+rec.taskName+'</a>';
+	                    	} 
 	                        return str;
+	                    }
+		         },
+		         {
+	                    title: '执行',
+	                    field: 'deal',
+	                    width: 100,
+	                    formatter: function (value, rec, index) {
+	                    	
+	                    	return '<a  href="#" onClick=openWorkflowVerifyPage('+rec.taskId+',"returnGoods",1000,6000,true)  >执行</a>';
 	                    }
 		         }
 		     ]
@@ -102,10 +109,7 @@
                 graphTrace( $(this));
                 return false;
             }); 
-         },
-		 onClickRow: function(rowIndex, rowData){
-			  
-		 }
+         } 
 		});
 		
 		initPager("#todoTaskList");

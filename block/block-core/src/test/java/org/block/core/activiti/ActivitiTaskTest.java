@@ -62,4 +62,11 @@ public class ActivitiTaskTest extends BaseTest {
 		System.out.println("=============================");
 	}
 	
+	@Test
+	public void testClaim(){ 
+		String taskId="11917";
+		String userId="kafeitu";
+		activitiTaskService.claim(taskId, userId);
+	}
+	
 }

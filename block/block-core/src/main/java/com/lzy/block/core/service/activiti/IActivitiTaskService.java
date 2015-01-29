@@ -10,9 +10,6 @@ package com.lzy.block.core.service.activiti;
 import java.util.List;
 import java.util.Map;
 
-import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.impl.task.TaskDefinition;
 import org.activiti.engine.task.Task;
 
 import com.lzy.block.api.common.PageModel;
@@ -29,9 +26,58 @@ import com.lzy.block.api.vo.activiti.ProcessTaskVo;
  */
 public interface IActivitiTaskService {
 	
+	/**
+	 * 
+	 * @Title: getTodoTask
+	 * @Description: 获取用户代办任务
+	 * @param userId
+	 * @return: List<ProcessTaskVo>
+	 * @throws
+	 */
 	public List<ProcessTaskVo> getTodoTask(String userId) ;
 	
+	/**
+	 * 
+	 * @Title: getTodoTask
+	 * @Description: 获取用户代办任务
+	 * @param userId
+	 * @param pageModel
+	 * @return: Pagination<ProcessTaskVo>
+	 * @throws
+	 */
 	public Pagination<ProcessTaskVo> getTodoTask(String userId,PageModel pageModel);
+	
+	/**
+	 * 根据业务ID和流程定义关键字查找当前任务
+	 * @param businessKey
+	 * @param processDefinitionKey
+	 * @return
+	 */
+	Task getCurrentTaskByBusKeyAndProDefKey(String businessKey,String processDefinitionKey);
+	
+	/**
+	 * 
+	 * @Title: claim
+	 * @Description: 任务签收
+	 * @param taskId
+	 * @param userId
+	 *            : void
+	 * @throws
+	 */
+	public void claim(String taskId,String userId);
+	
+	/**
+	 * 
+	 * @Title: completeTask
+	 * @Description: 执行任务
+	 * @param taskId
+	 * @param variables
+	 *            : void
+	 * @throws
+	 */
+	public void completeTask(String taskId ,Map<String, Object> variables);
+	
+	/*****************************/
 	
 	
 	/**
@@ -39,51 +85,44 @@ public interface IActivitiTaskService {
 	 * @param taskId
 	 * @return
 	 * @throws Exception
-	 */
+	 *//*
 	Task findTaskById(String taskId) ;
 	
-	/**
+	*//**
 	 * 根据任务ID查找已经审核过的任务
 	 * @param taskId
 	 * @return
 	 * @throws Exception
-	 */
+	 *//*
 	HistoricTaskInstance findHistoryTaskById(String id);
 
-	/**
+	*//**
 	 * 根据任务ID查找活动节点
 	 * @param taskId
 	 * @return
-	 */
+	 *//*
 	ActivityImpl findActivitiByTaskId(String taskId); 
 	
-	/**
-	 * 根据业务ID和流程定义关键字查找任务
-	 * @param businessKey
-	 * @param processDefinitionKey
-	 * @return
-	 */
-	Task getTaskByBusinessKeyAndProcessDefinitionKey(String businessKey,String processDefinitionKey);
 	
-	/**
+	*//**
 	 * 填充任务信息
 	 * @param taskInfos
 	 * @param taskVerifyInfos
 	 * @param processInstanceId
-	 */
+	 *//*
 //	void fillTaskInfo(List<TaskInfo> taskInfos,List<HistoricTaskInstance> taskVerifyInfos,String processInstanceId);
 	
-	/**
+	*//**
 	 * 根据任务ID查找Task定义节点
 	 * @param taskId
 	 * @return
-	 */
+	 *//*
 	TaskDefinition findTaskDefinitionByTaskId(String taskId);
 	
-	/**
+	*//**
 	 * 动态分配任务
 	 * @param taskAssignVariables
-	 */
+	 *//*
 //	void assignTask(TaskAssignVariables taskAssignVariables)throws Exception;
 //	
 //	PageModel<Task> findTodoTasks(String userId, int fristResult, int maxResult,WorkflowSearchVo workflowSearchVo);
@@ -102,57 +141,57 @@ public interface IActivitiTaskService {
 //	<T extends BusinessObject> List<T> findTodoTasksByQuery(TaskQuery query,
 //			BusinessObjectGetter<T> bussinessObjectGetter);
 
-	/**
+	*//**
 	 * 委派任务(签收了的任务)
 	 * 
 	 * @param taskId
 	 * @param userId
-	 */
+	 *//*
 	void delegateTask(String taskId, String userId);
 
-	/**
+	*//**
 	 * 委派的任务已经完成，可以送回到任务的所有者
 	 * 
 	 * @param taskId
 	 * @param variables
-	 */
+	 *//*
 	void resolveTask(String taskId, Map<String, Object> variables);
 
-	/**
+	*//**
 	 * 用户有任务无法完成，将任务委托给其他人（userId代表的用户仍然是任务的所有者）
 	 * 
 	 * @param taskId
 	 * @param variables
-	 */
+	 *//*
 	void setOwnerAndAssignTask(String taskId, String userId,
 			String delegateUserId);
 	
-	/**
+	*//**
 	 * 根据实例编号查找下一个任务节点(如果是网关需要提供条件)
 	 * @param String procInstId ：实例编号
 	 * @return
-	 */
+	 *//*
 	TaskDefinition nextTaskDefinition(String procInstId,String conditionExpression);
 
-	/**
+	*//**
 	 * 查找一个流程下的所有被审批的任务
 	 * @param processInstanceId
 	 * @return
-	 */
+	 *//*
 	List<HistoricTaskInstance> findHistoryTasksByProcessInstanceId(
 			String processInstanceId);
 
-	/**
+	*//**
 	 * 获取任务参数
 	 * @param taskId
 	 * @return
-	 */
+	 *//*
 	Map<String, Object> getVariables(String taskId);
 	
-    /**
+    *//**
      * 判断某个人是否有审核任务的权限
      * @param userId
      * @return
-     */
-	boolean hasVerifyPermission(String taskId,String userId);
+     *//*
+	boolean hasVerifyPermission(String taskId,String userId);*/
 }

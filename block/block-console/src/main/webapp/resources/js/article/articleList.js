@@ -106,7 +106,6 @@
 	}
 	
 	function imgformatter(value,row,index){
-		console.log(value);
 		if(value!=null&&value.length>0){
 			return "<img src='"+value+"' style='width:60px;height:60px'/>";
 		}

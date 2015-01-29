@@ -23,12 +23,12 @@ $(document).ready(function() {
 		async: false, 
 		url : basePath+'/activiti/process/traceTaskDefinations.do?processDefinitionId=' + processDefinitionId,
 		success : function(returnValue) {
-			console.log(returnValue);
+//			console.log(returnValue);
 //			var res = eval('(' + returnValue +')');
 //			console.log(res);
 //			var obj = eval('(' + returnValue +')');
 			var obj = returnValue.taskDefinations;
-			console.log(obj);
+//			console.log(obj);
 			$.each(obj, function(i, taskInfo) {
 				  var task = $('#assignExample').clone(true);
 				  task.attr('id',taskInfo.taskKey);
