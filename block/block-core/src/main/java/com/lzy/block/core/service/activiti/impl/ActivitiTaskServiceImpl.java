@@ -119,6 +119,7 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 		return taskList;
 	}
 	
+	
 
 	/**
 	 * 
@@ -216,6 +217,11 @@ public class ActivitiTaskServiceImpl implements IActivitiTaskService {
 	@Override
 	public void completeTask(String taskId, Map<String, Object> variables) {
 		taskService.complete(taskId, variables);
+	}
+
+	@Override
+	public Task getTaskById(String taskId) {
+		return taskService.createTaskQuery().taskId(taskId).singleResult();
 	}
 	
 	 

@@ -11,8 +11,6 @@
 				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 	
-	<!-- 开启注解支持 -->
-	<mvc:annotation-driven />
 	 
 	<!-- #################################################################### -->
 	<!-- # 1、自动扫描指定包下所有 @Controller -->
@@ -51,6 +49,19 @@
 	<!-- # 4.1、向 SpringMVC 上下文注册 RequestMappingHandlerMapping 实例 -->
 	<!-- # 4.2、向 SpringMVC 上下文注册 RequestMappingHandlerAdapter 实例 -->
 	<!-- #################################################################### -->
+	<mvc:annotation-driven>
+    	<mvc:message-converters>
+    		<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+    			<property name="objectMapper">
+    				<!-- json时间格式化 -->
+    				<bean class="com.lzy.block.console.common.CustomObjectMapper" />			
+    			</property>
+    		</bean>
+    	</mvc:message-converters>
+    </mvc:annotation-driven>
+	
+	
+	
 <!-- 	<mvc:annotation-driven>
 		<mvc:message-converters>
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -114,7 +125,6 @@
 	<!-- #################################################################### -->
 	<!-- # 6、定义 Jsp 视图解析器 -->
 	<!-- #################################################################### -->
-	
 	<bean id="JSPViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/pages/" />
@@ -187,28 +197,16 @@
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
     -->  
     <!-- <bean  class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />  -->
-	
-	<!-- 采用SpringMVC自带的JSON转换工具，支持@ResponseBody注解 -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
-			</list>
-		</property>
-	</bean>
-	
+	 
 	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
-	<bean id="mappingJacksonHttpMessageConverter"
+	<!-- <bean id="mappingJacksonHttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/html;charset=UTF-8</value>
 			</list>
 		</property>
-	</bean>
-	
-
-	
+	</bean> -->
 
 <!-- 	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 	 	<property name="mappings">

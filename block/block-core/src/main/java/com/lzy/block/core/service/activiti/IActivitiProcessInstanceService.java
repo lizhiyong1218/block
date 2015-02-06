@@ -35,4 +35,16 @@ public interface IActivitiProcessInstanceService {
 	public ProcessInstance startWorkFlow(String processDefinitionKey, String busnessKey,
 			String userId, Map<String, Object> variables)throws Exception;
 	
+	/**
+	 * 
+	* @Title: getProcessInstanceById
+	* @Description: 通过id获取流程实例
+	* @param processInstanceId
+	* @return:     
+	* ProcessInstance    
+	* @throws
+	 */
+	public ProcessInstance getProcessInstanceById(String processInstanceId);
+	
+	
 }

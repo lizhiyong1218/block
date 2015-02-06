@@ -66,7 +66,7 @@ public class ActivitiProcessTest extends BaseTest{
 	@Test
 	public void testGetProcessById(){
 		try {
-			ProcessDefinition process= activitiProcessService.getProcessById("returnGoods:2:11715");
+			ProcessDefinition process= activitiProcessService.getProcessDefById("returnGoods:2:11715");
 			System.out.println(process+"===============");
 		} catch (Exception e) {
 			e.printStackTrace();

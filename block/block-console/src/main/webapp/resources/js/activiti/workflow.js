@@ -101,9 +101,9 @@ var Workflow={
 	    	    fillProcessVariables(taskId);
 	    	    
 	    		//初始化工具栏
-	    		$('#workflowButtonToolbar').toolbar({
+	    		/*$('#workflowButtonToolbar').toolbar({
 	    			items: initButtons
-	    		});
+	    		});*/
 	       };
 	       
 	       //关闭窗口
@@ -113,7 +113,7 @@ var Workflow={
 	       
 	       //填充流程信息
 	       function fillProcessVariables(taskId){
-	       	$.ajax({
+	       /*	$.ajax({
 	       		type : "POST",
 	       		async:false,
 	       		url :  basePath+'/activiti/processInstanceDetail.do?taskId=' + taskId,
@@ -130,7 +130,7 @@ var Workflow={
 	       	             return false;
 	       			});
 	       		}
-	           });	             
+	           });	*/             
 	       }
 	       
 	       //通过
@@ -262,37 +262,45 @@ var Workflow={
 
 /**
  * 打开开始页面
- * @param processInsId  流程实例id
- * @param processDefinitionKey  发动流程的键值
+ * @param taskId  任务id
  * @param parameterMap 传过来的参数
  * @param width        宽度
  * @param height       高度
  */
-function openWorkflowVerifyPage(processInsId,processDefinitionKey,width,height,includeBusiness,parameterMap){ 
-	var path = basePath;
-	   var activitiWorkflowDialogResult;
+/*function openWorkflowVerifyPage(taskId,width,height,includeBusiness,parameterMap){ 
 	   $.ajax({
 		type : "GET",
-		async:false,
-		url : path + '/activitiTask/taskDetail.do?processInsId='+processInsId+"&processDefinitionKey="+processDefinitionKey,
+//		async:false,
+		url : basePath + '/activitiTask/taskDetail.do?taskId='+taskId,
 		success : function(taskDetail) {
-			var obj = eval('(' + taskDetail +')');
+			var path=basePath + "common/toListPage.do?pagePath=/activiti/layout/simpleTaskDetail";
+	  	   	var mydialog= openMyDialog(path,'查看详情');
+	  	   	mydialog.dialog({
+	  		   width:1000,
+	  		   height:600
+	  		   }); 
+			
+			
+//			var obj = eval('(' + taskDetail +')');
 			var taskMessage = obj.responseMsg; 
 			if(obj.responseCode=='NOT_EXIST'||obj.responseCode=='PERMISSION_DENIED'){
 				$.messager.alert('提示',taskMessage);   
 			}
-			else if(obj.responseCode=='FAIL'||includeBusiness==false){
+			
+			 if(includeBusiness==true){
 				$('<div>').dialog({
 			        width: width,
 			        height: height,
 			        title: '查看审核详情',
 			        
-			        href: path + "/activiti/redirect.do?redirect=layout/layoutVerified"+
-			                     "&taskId="+taskMessage.taskId+
+			        href: basePath + "common/toListPage.do?pagePath=/activiti/layout/simpleTaskDetail",
+			                    
+			        			 "&taskId="+taskMessage.taskId+
 			                     "&bussinessId="+taskMessage.bussinessId+
 			                     "&taskKey="+taskMessage.taskKey+
 			                     "&taskName="+taskMessage.taskName+
 			                     "&processInstanceId="+taskMessage.processInstanceId,
+			                     
 			        scrollable:true,
 			        
 			        onOpen:function(){
@@ -312,6 +320,7 @@ function openWorkflowVerifyPage(processInsId,processDefinitionKey,width,height,i
 				    }]
 			    });
 			}else{
+				
 				var url = taskMessage.verifyUrl;
 				if(parameterMap!=null){
 					$.each(parameterMap,function(name,value) {
@@ -322,7 +331,7 @@ function openWorkflowVerifyPage(processInsId,processDefinitionKey,width,height,i
 			    $('<div>').dialog({
 				    width: width,
 				    height: height,
-				    title: '流程办理['+taskMessage.taskName+']',
+				    title: '流程办理['+taskDetail.taskName+']',
 				    href: path+url,
 				    scrollable:true,
 				    
@@ -345,9 +354,10 @@ function openWorkflowVerifyPage(processInsId,processDefinitionKey,width,height,i
 				});
 
 			}
+			 
 		}
     });	    
-	activitiWorkflowDialog = activitiWorkflowDialogResult;
+//	activitiWorkflowDialog = activitiWorkflowDialogResult;
 };
-
-var activitiWorkflowDialog;
+*/
+//var activitiWorkflowDialog;

@@ -62,6 +62,45 @@
 	 * @param title 标题
 	 * @returns
 	 */
+	function openCmDialog(url, title,width,height) {
+	    var dialog= $('<div/>').dialog({
+	        href: url,
+	        width: width,
+	        height: height,
+	        modal: true,
+			collapsible : false,
+			minimizable : false,
+			maximizable : false,
+	        title: title,
+			buttons : [ 
+			
+			/*{
+				text : '提交',
+				iconCls : 'icon-ok',
+				handler : function() {
+					alert("ok");
+				}
+			}, {
+				text : '取消',
+				handler : function() {
+					alert("cancel");
+				}
+			},*/
+			{
+				text : '关闭',
+				handler : function() {
+					 var d = $(this).closest('.window-body');
+		             d.dialog('destroy');
+				}
+			}],
+	        onClose: function () {
+	            $(this).dialog('destroy');
+	        }
+	    });
+	    
+	    return dialog;
+	}
+	
 	function openMyDialog(url, title) {
 	    var dialog= $('<div/>').dialog({
 	        href: url,

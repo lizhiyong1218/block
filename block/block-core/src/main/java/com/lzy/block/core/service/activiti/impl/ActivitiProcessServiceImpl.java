@@ -28,6 +28,7 @@ import org.springframework.stereotype.Service;
 import com.lzy.block.api.common.PageModel;
 import com.lzy.block.api.common.Pagination;
 import com.lzy.block.api.vo.activiti.ProcessDefInfo;
+import com.lzy.block.core.service.activiti.IActivitiProcessInstanceService;
 import com.lzy.block.core.service.activiti.IActivitiProcessService;
 
 /**
@@ -50,6 +51,8 @@ public class ActivitiProcessServiceImpl implements IActivitiProcessService {
 	
 	@Resource
 	private RuntimeService runtimeService;
+	@Resource
+	private IActivitiProcessInstanceService activitiProcessInstanceService;
 	
 	
 	/* (非 Javadoc)
@@ -167,7 +170,7 @@ public class ActivitiProcessServiceImpl implements IActivitiProcessService {
 	private ProcessDefInfo packageProcessInfo(ProcessDefinition processDef,HistoricProcessInstance historicProcessInstance){
 		ProcessDefInfo processDefInfo = new ProcessDefInfo();
 		//通过流程id获取流程对象
-		processDef = getProcessById(historicProcessInstance.getProcessDefinitionId());
+		processDef = getProcessDefById(historicProcessInstance.getProcessDefinitionId());
 		processDefInfo.setId(historicProcessInstance.getProcessDefinitionId());
 		processDefInfo.setName(processDef.getName());
 		processDefInfo.setCategory(processDef.getCategory());
@@ -184,7 +187,7 @@ public class ActivitiProcessServiceImpl implements IActivitiProcessService {
 		
 		try {
 			//通过流程历史id获取流程实例对象
-			ProcessInstance	processInstance = getProcessInstanceById(historicProcessInstance.getId());
+			ProcessInstance	processInstance = activitiProcessInstanceService.getProcessInstanceById(historicProcessInstance.getId());
 			processDefInfo.setActivitiId(processInstance.getActivityId());
 			if (processInstance != null) {
 				ActivityImpl currentActiviti = getCurrentActiviti(processDef.getId(), processInstance.getActivityId());
@@ -221,17 +224,12 @@ public class ActivitiProcessServiceImpl implements IActivitiProcessService {
 	
 	
 	@Override
-	public ProcessDefinition getProcessById(String processDefinitionId) {
+	public ProcessDefinition getProcessDefById(String processDefinitionId) {
 		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
 		return processDefinition;
 	}
 
-	@Override
-	public ProcessInstance getProcessInstanceById(String processInstanceId)
-			throws Exception {
-		ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
-		return processInstance;
-	}
+	 
 
 	
 

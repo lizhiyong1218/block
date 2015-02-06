@@ -32,7 +32,7 @@
 				{
 				    title: 'processInstanceId',
 				    field: 'processInstanceId',
-				    width: 120
+				    width: 50
 				},
 		         {
 		             title: '任务名称',
@@ -47,17 +47,17 @@
 		         {
 		             title: '优先级',
 		             field: 'taskPriority',
-		             width: 100
+		             width: 50
 		         },
 		         {
 		             title: '创建时间',
 		             field: 'createTime',
-		             width: 100
+		             width: 150
 		         },
 		         {
 		             title: '过期时间',
 		             field: 'dueDate',
-		             width: 100
+		             width: 150
 		         },
 		         {
 		             title: '所属人',
@@ -72,7 +72,7 @@
 		         {
 		             title: '任务类型',
 		             field: 'taskType',
-		             width: 100,
+		             width: 50,
 		             hidden:true
 		         },
 		         {
@@ -93,12 +93,11 @@
 	                    }
 		         },
 		         {
-	                    title: '执行',
+	                    title: '审核',
 	                    field: 'deal',
 	                    width: 100,
 	                    formatter: function (value, rec, index) {
-	                    	
-	                    	return '<a  href="#" onClick=openWorkflowVerifyPage('+rec.taskId+',"returnGoods",1000,6000,true)  >执行</a>';
+	                    	return '<a style="cursor:pointer;color:#03f" href="#" onClick=openTaskDetailPage('+rec.taskId+',300,600)>处理</a>';
 	                    }
 		         }
 		     ]

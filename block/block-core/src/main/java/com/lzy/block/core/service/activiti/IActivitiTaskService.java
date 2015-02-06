@@ -85,10 +85,10 @@ public interface IActivitiTaskService {
 	 * @param taskId
 	 * @return
 	 * @throws Exception
-	 *//*
-	Task findTaskById(String taskId) ;
+	 */
+	Task getTaskById(String taskId) ;
 	
-	*//**
+	/*//**
 	 * 根据任务ID查找已经审核过的任务
 	 * @param taskId
 	 * @return

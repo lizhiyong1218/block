@@ -9,7 +9,6 @@ package com.lzy.block.core.service.activiti;
 
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.ProcessDefinition;
-import org.activiti.engine.runtime.ProcessInstance;
 
 import com.lzy.block.api.common.PageModel;
 import com.lzy.block.api.common.Pagination;
@@ -70,19 +69,8 @@ public interface IActivitiProcessService {
 	 * @return: ProcessDefinition
 	 * @throws
 	 */
-	public ProcessDefinition getProcessById(String processDefinitionId)throws Exception;
+	public ProcessDefinition getProcessDefById(String processDefinitionId)throws Exception;
 	
-	/**
-	 * 
-	 * @Title: getProcessInstanceById
-	 * @Description: 根据流程实例Id获取流程实例对象
-	 * @param processInstanceId
-	 * @return
-	 * @throws Exception
-	 *             : ProcessInstance
-	 * @throws
-	 */
-	public ProcessInstance getProcessInstanceById(String processInstanceId)throws Exception;
 
 	/**
 	 * 

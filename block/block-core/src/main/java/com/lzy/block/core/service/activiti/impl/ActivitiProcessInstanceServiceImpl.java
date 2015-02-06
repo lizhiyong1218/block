@@ -47,22 +47,16 @@ public class ActivitiProcessInstanceServiceImpl implements
 	@Autowired
 	private TaskService taskService;
 
-	/* (非 Javadoc)
-	 * <p>Title: startWorkFlow</p>
-	 * <p>Description: </p>
-	 * @param processDefinitionKey
-	 * @param busnessKey
-	 * @param userId
-	 * @param variables
-	 * @throws Exception
-	 * @see com.lzy.block.core.service.activiti.IActivitiProcessInstanceService#startWorkFlow(java.lang.String, java.lang.String, java.lang.String, java.util.Map)
+	/**
+	 * 启动工作流
+	 * variables 保存自定义一些属性，如流程发起人，业务编号等
 	 */
 	@Override
 	public ProcessInstance startWorkFlow(String processDefinitionKey, String busnessKey,
 			String userId, Map<String, Object> variables) throws Exception {
 		ProcessInstance processInstance = null;
 		try {
-			identityService.setAuthenticatedUserId(userId);//在localthread对象中设置了用户，启动进程时从localthread取用户
+			identityService.setAuthenticatedUserId(userId);//在localthread对象中设置了用户
 			processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey,
 					busnessKey, variables);
 			Task nextTask = activitiTaskService.getCurrentTaskByBusKeyAndProDefKey(processInstance.getBusinessKey(),processDefinitionKey);
@@ -100,6 +94,12 @@ public class ActivitiProcessInstanceServiceImpl implements
 		String userId="kafeitu";
 		/*设置为候选*/
 		taskService.addUserIdentityLink(taskId, userId, IdentityLinkType.CANDIDATE);
+	}
+
+
+	@Override
+	public ProcessInstance getProcessInstanceById(String processInstanceId) {
+		return runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
 	}
 
 }
