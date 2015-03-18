@@ -68,7 +68,7 @@
 		<commons.io.version>2.4</commons.io.version>
 		<!--commons.beanutils  -->
 		<commons.beanutils.version>1.8.3</commons.beanutils.version>
-		
+		<shiro.version>1.2.3</shiro.version>
 		
 		<nexus.content>http://10.1.100.61:8044/content</nexus.content>
 	</properties>
@@ -529,6 +529,13 @@
 				<artifactId>commons-beanutils</artifactId>
 				<version>${commons.beanutils.version}</version>
 			</dependency>
+
+		<!-- shiro -->
+		<dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
 
 		</dependencies>
 	</dependencyManagement>
