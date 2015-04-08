@@ -1,14 +1,11 @@
 package com.lzy.block.core.dao.article;
 
-import java.util.List;
-
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.lzy.block.api.model.article.Article;
+import com.lzy.block.core.dao.base.BaseMapper;
 
 
-public interface ArticleMapper {
-    int deleteByPrimaryKey(Integer blogId);
+public interface ArticleMapper extends BaseMapper<Article> {
+    /*int deleteByPrimaryKey(Integer blogId);
 
     int insert(Article record);
 
@@ -22,7 +19,7 @@ public interface ArticleMapper {
 
     int updateByPrimaryKey(Article record);
     
-    /**
+    *//**
      * 
     * @Title: selectModel
     * @Description: 查询单个对象
@@ -30,10 +27,10 @@ public interface ArticleMapper {
     * @return:     
     * DictionaryModel    
     * @throws
-     */
+     *//*
     public Article selectModel(Article para);
     
-    /**
+    *//**
      * 
     * @Title: getAll
     * @Description: 查询所有对象
@@ -41,10 +38,10 @@ public interface ArticleMapper {
     * @return:     
     * List<DictionaryModel>    
     * @throws
-     */
+     *//*
     public List<Article> getAll(Article o) ;
     
-    /**
+    *//**
      * 
     * @Title: getAll
     * @Description: 查询分页集合
@@ -53,11 +50,11 @@ public interface ArticleMapper {
     * @return:     
     * PageList<DictionaryModel>    
     * @throws
-     */
+     *//*
     public PageList<Article> getAll(Article o,
 			PageBounds pageBounds);
     
-    /**
+    *//**
      * 
     * @Title: getCount
     * @Description: 查询总数
@@ -65,6 +62,6 @@ public interface ArticleMapper {
     * @return:     
     * long    
     * @throws
-     */
-    public long getCount(Article record);
+     *//*
+    public long getCount(Article record);*/
 }

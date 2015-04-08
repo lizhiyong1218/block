@@ -23,7 +23,7 @@ public class DictionaryDaoTest extends BaseTest   {
 	public void testSave() {
 		DictionaryModel dictionaryModel=new DictionaryModel();
 		dictionaryModel.setDictionaryValue("zzzddd");
-		dictionaryMapper.insert(dictionaryModel);
+		dictionaryMapper.insertSelective(dictionaryModel);
 	}
 	
 	@Test

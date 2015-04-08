@@ -14,7 +14,8 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 /**
  * 
  * @ClassName: RetryLimitHashedCredentialsMatcher
- * @Description: 登录次数限制，使用了ehcache缓存
+ * @Description: 凭证匹配器 
+ *  登录次数限制，使用了ehcache缓存
  * @author 李志勇
  * @date 2015年3月18日 下午2:01:47
  * 

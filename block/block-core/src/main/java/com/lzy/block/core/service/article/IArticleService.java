@@ -8,7 +8,7 @@
 package com.lzy.block.core.service.article;
 
 import com.lzy.block.api.model.article.Article;
-import com.lzy.block.core.service.IBaseService;
+import com.lzy.block.core.service.base.IBaseService;
 
 /**
  * @ClassName: IArticleService

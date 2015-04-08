@@ -1,14 +1,11 @@
 package com.lzy.block.core.dao.dictionary;
 
-import java.util.List;
-
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.lzy.block.api.model.dictionary.DictionaryItemModel;
+import com.lzy.block.core.dao.base.BaseMapper;
 
 
-public interface DictionaryItemMapper {
-    int deleteByPrimaryKey(Integer itemId);
+public interface DictionaryItemMapper extends BaseMapper<DictionaryItemModel>{
+    /*int deleteByPrimaryKey(Integer itemId);
 
     int insert(DictionaryItemModel record);
 
@@ -28,6 +25,6 @@ public interface DictionaryItemMapper {
 			PageBounds pageBounds);
     
     public long getCount(DictionaryItemModel record);
-    
+    */
     public void deleteByDictionaryValue(String dictionaryValue);
 }

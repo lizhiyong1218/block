@@ -9,7 +9,7 @@ package com.lzy.block.core.redis.dao.user;
 
 import java.util.List;
 
-import com.lzy.block.api.model.User;
+import com.lzy.block.api.model.user.User;
 
 /**
  * @ClassName: IUserDao

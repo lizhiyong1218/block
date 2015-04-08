@@ -14,7 +14,7 @@ package com.lzy.block.api.common;
  * @date 2015年1月19日 上午10:57:47
  *
  */
-public class PageModel {
+public class PageModel { 
 	
 	/** 页号 */
     private int page=1;

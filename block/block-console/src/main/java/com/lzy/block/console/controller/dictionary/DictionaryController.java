@@ -158,7 +158,7 @@ public class DictionaryController  {
 	public ModelAndView dictionaryEditPage(int dictionaryId){
 		DictionaryModel model=new DictionaryModel();
 		try {
-			model= dictionaryService.selectByPrimaryKey(dictionaryId);
+			model= dictionaryService.getOneById(dictionaryId);
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
 		}
@@ -186,7 +186,7 @@ public class DictionaryController  {
 		try {
 			dictionaryModel.setModifiBy(ProjectUtil.getOpUser());
 			dictionaryModel.setModifiTime(new Date());
-			dictionaryService.updateByPrimaryKeySelective(dictionaryModel);
+			dictionaryService.update(dictionaryModel);
 			res.setStatus(ResultStatus.SUCCESS.value());
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
@@ -210,7 +210,7 @@ public class DictionaryController  {
 	@RequestMapping(value="/getDictionary")
 	public DictionaryModel getDictionary(DictionaryModel dictionaryModel) {
 		logger.info("getDictionary in!!!");
-		DictionaryModel model=dictionaryService.selectModel(dictionaryModel); 
+		DictionaryModel model=dictionaryService.getOneByModel(dictionaryModel); 
 	    return model;
 	}
 	
@@ -227,7 +227,7 @@ public class DictionaryController  {
 	@ResponseBody
 	@RequestMapping(value="/existDictionary")
 	public boolean existDictionary(DictionaryModel dictionaryModel) {
-		DictionaryModel model=dictionaryService.selectModel(dictionaryModel);
+		DictionaryModel model=dictionaryService.getOneByModel(dictionaryModel);
 		if(model!=null){
 			return true;
 		}
@@ -296,7 +296,7 @@ public class DictionaryController  {
 		logger.info("editItemPage in:"+itemId);
 		DictionaryItemModel model=new DictionaryItemModel();
 		try {
-			model= dictionaryItemService.selectByPrimaryKey(itemId);
+			model= dictionaryItemService.getOneById(itemId);
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
 		}
@@ -340,7 +340,7 @@ public class DictionaryController  {
 			dictionaryItemModel.setModifyBy(ProjectUtil.getOpUser());;
 			dictionaryItemModel.setModifyTime(new Date());
 			logger.info(dictionaryItemModel);
-			dictionaryItemService.updateByPrimaryKeySelective(dictionaryItemModel);
+			dictionaryItemService.update(dictionaryItemModel);
 			res.setStatus(ResultStatus.SUCCESS.value());
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
@@ -395,7 +395,7 @@ public class DictionaryController  {
 		logger.info("删除数据字典项:"+itemId);
 		ResultVo resultVo=new ResultVo();
 		try {
-			dictionaryItemService.deleteByPrimaryKey(itemId);
+			dictionaryItemService.deleteById(itemId);
 			resultVo.setStatus(ResultStatus.SUCCESS.value());
 		} catch (Exception e) {
 			resultVo.setStatus(ResultStatus.FAILURE.value());

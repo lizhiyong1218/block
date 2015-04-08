@@ -9,7 +9,6 @@
 
 package com.lzy.block.core.service.dictionary.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,19 +17,17 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.lzy.block.api.common.Pagination;
-import com.lzy.block.api.constant.common.AvaliableEnum;
-import com.lzy.block.api.model.dictionary.DictionaryItemModel;
 import com.lzy.block.api.model.dictionary.DictionaryModel;
+import com.lzy.block.core.dao.base.BaseMapper;
 import com.lzy.block.core.dao.dictionary.DictionaryItemMapper;
 import com.lzy.block.core.dao.dictionary.DictionaryMapper;
 import com.lzy.block.core.db.DataSource;
+import com.lzy.block.core.service.base.impl.BaseServiceImpl;
 import com.lzy.block.core.service.dictionary.IDictionaryService;
 
  
 @Service
-public class DictionaryServiceImpl implements IDictionaryService{
+public class DictionaryServiceImpl extends BaseServiceImpl<DictionaryModel> implements IDictionaryService{
 	@Resource
 	private DictionaryMapper dictionaryMapper;
 	@Resource
@@ -38,56 +35,21 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	
 	private Logger logger=Logger.getLogger(DictionaryServiceImpl.class.getName());
 	 
+
 	@Override
 	@DataSource("master")
-	public int insert(DictionaryModel o) throws Exception {
-		List<DictionaryItemModel> items=o.getItems();
-		for (DictionaryItemModel dictionaryItemModel : items) {
-			dictionaryItemModel.setDictionaryValue(o.getDictionaryValue());
-			dictionaryItemModel.setIsavailable(AvaliableEnum.AVAILABLE.value());
-			dictionaryItemModel.setCreateBy(o.getCreateBy());
-			dictionaryItemModel.setCreateTime(o.getCreateTime());
-			dictionaryItemMapper.insert(dictionaryItemModel);
-//			throw new Exception("============");
-		}
-		return dictionaryMapper.insert(o);
-	}
-
-	@Override
-	public int updateByPrimaryKeySelective(DictionaryModel o) throws Exception {
-		return  dictionaryMapper.updateByPrimaryKeySelective(o);
-	}
-
-	@Override
-	public void deleteByPrimaryKey(Integer id) throws Exception {
-		dictionaryMapper.deleteByPrimaryKey(id);
-	}
-
-	@Override
-	public DictionaryModel selectByPrimaryKey(Integer id) throws Exception {
-		return  dictionaryMapper.selectByPrimaryKey(id);
-	}
-
-	@Override
-	public List<DictionaryModel> getAll(DictionaryModel o) throws Exception {
-		return  dictionaryMapper.getAll(o);
-	}
-
-	 
-	
-	@Override
 	public void insertDictionarys(List<?> datas){
 		DictionaryModel dictionary=null;
 		DictionaryModel existModel=null;//用来查询数据字典是否存在
 		for (Object object : datas) {
 			dictionary=(DictionaryModel) object;
-			existModel= dictionaryMapper.selectModel(dictionary);
+			existModel= getOneByModel(dictionary);
 			if(existModel==null){
 				try {
 					dictionary.setIsavailable("1");
 					dictionary.setCreateBy("test");
 					dictionary.setCreateTime(new Date());
-					dictionaryMapper.insert(dictionary);
+					dictionaryMapper.insertSelective(dictionary);
 				} catch (Exception e) {
 					logger.error("批量导入数据字典错误:"+dictionary.toString());
 				}
@@ -98,28 +60,15 @@ public class DictionaryServiceImpl implements IDictionaryService{
 	}
 
 	@Override
-	public DictionaryModel selectModel(DictionaryModel o) {
-		return dictionaryMapper.selectModel(o);
-	}
-
-	@DataSource("slave")
-	@Override
-	public Pagination<DictionaryModel> getPagination(DictionaryModel o,
-			PageBounds pageBounds) {
-		long recordCount=dictionaryMapper.getCount(o);
-		List<DictionaryModel> recordList=new ArrayList<DictionaryModel>();
-		if(recordCount>0){
-			recordList= dictionaryMapper.getAll(o, pageBounds);
-		}
-		Pagination<DictionaryModel> pagination=new Pagination<DictionaryModel>(pageBounds.getPage(),pageBounds.getLimit(),recordCount,recordList);
-		return pagination;
-	}
-
-	@Override
 	public void deleteDictionary(Integer dictionaryId, String dictionaryValue) {
 		dictionaryMapper.deleteByPrimaryKey(dictionaryId);
 		dictionaryItemMapper.deleteByDictionaryValue(dictionaryValue);
-		
+	}
+
+
+	@Override
+	protected BaseMapper<DictionaryModel> getMapper() {
+		return dictionaryMapper;
 	} 
 
 }

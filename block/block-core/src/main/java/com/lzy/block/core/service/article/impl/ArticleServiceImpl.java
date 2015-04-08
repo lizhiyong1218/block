@@ -7,18 +7,15 @@
 */ 
 package com.lzy.block.core.service.article.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.lzy.block.api.common.Pagination;
 import com.lzy.block.api.model.article.Article;
 import com.lzy.block.core.dao.article.ArticleMapper;
+import com.lzy.block.core.dao.base.BaseMapper;
 import com.lzy.block.core.service.article.IArticleService;
+import com.lzy.block.core.service.base.impl.BaseServiceImpl;
 
 /**
  * @ClassName: ArticleServiceImpl
@@ -28,11 +25,11 @@ import com.lzy.block.core.service.article.IArticleService;
  *
  */
 @Service
-public class ArticleServiceImpl implements IArticleService{
+public class ArticleServiceImpl extends BaseServiceImpl<Article> implements IArticleService{
 	@Resource
 	private ArticleMapper articleMapper;
 	
-	@Override
+	/*@Override
 	public int insert(Article o) throws Exception {
 		return articleMapper.insert(o);
 	}
@@ -71,6 +68,11 @@ public class ArticleServiceImpl implements IArticleService{
 		}
 		Pagination<Article> pagination=new Pagination<Article>(pageBounds.getPage(),pageBounds.getLimit(),recordCount,recordList);
 		return pagination;
+	}*/
+
+	@Override
+	protected BaseMapper<Article> getMapper() {
+		return articleMapper;
 	}
 
 }

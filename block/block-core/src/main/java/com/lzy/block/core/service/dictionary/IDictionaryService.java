@@ -6,7 +6,7 @@ package com.lzy.block.core.service.dictionary;
 import java.util.List;
 
 import com.lzy.block.api.model.dictionary.DictionaryModel;
-import com.lzy.block.core.service.IBaseService;
+import com.lzy.block.core.service.base.IBaseService;
  
 
 public interface IDictionaryService extends IBaseService<DictionaryModel>  {

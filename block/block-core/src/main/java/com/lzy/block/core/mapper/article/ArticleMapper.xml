@@ -75,22 +75,7 @@
     delete from t_blog_article
     where blog_id = #{blogId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="article" >
-    insert into t_blog_article (blog_id, blog_title, blog_type, 
-      author_name, author_id, blog_keyword, 
-      blog_status, blog_desc, cover, 
-      isHot, isRecommend, pub_time, 
-      create_by, create_time, update_by, 
-      update_time, isAvailable, blog_content
-      )
-    values (#{blogId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, #{blogType,jdbcType=INTEGER}, 
-      #{authorName,jdbcType=VARCHAR}, #{authorId,jdbcType=INTEGER}, #{blogKeyword,jdbcType=VARCHAR}, 
-      #{blogStatus,jdbcType=VARCHAR}, #{blogDesc,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
-      #{ishot,jdbcType=CHAR}, #{isrecommend,jdbcType=CHAR}, #{pubTime,jdbcType=DATE}, 
-      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateBy,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=DATE}, #{isavailable,jdbcType=CHAR}, #{blogContent,jdbcType=LONGVARCHAR}
-      )
-  </insert>
+   
   <insert id="insertSelective" parameterType="article" >
     insert into t_blog_article
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -263,45 +248,5 @@
     </set>
     where blog_id = #{blogId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="article" >
-    update t_blog_article
-    set blog_title = #{blogTitle,jdbcType=VARCHAR},
-      blog_type = #{blogType,jdbcType=INTEGER},
-      author_name = #{authorName,jdbcType=VARCHAR},
-      author_id = #{authorId,jdbcType=INTEGER},
-      blog_keyword = #{blogKeyword,jdbcType=VARCHAR},
-      blog_status = #{blogStatus,jdbcType=VARCHAR},
-      blog_desc = #{blogDesc,jdbcType=VARCHAR},
-      cover = #{cover,jdbcType=VARCHAR},
-      isHot = #{ishot,jdbcType=CHAR},
-      isRecommend = #{isrecommend,jdbcType=CHAR},
-      pub_time = #{pubTime,jdbcType=DATE},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=DATE},
-      isAvailable = #{isavailable,jdbcType=CHAR},
-      blog_content = #{blogContent,jdbcType=LONGVARCHAR}
-    where blog_id = #{blogId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="article" >
-    update t_blog_article
-    set blog_title = #{blogTitle,jdbcType=VARCHAR},
-      blog_type = #{blogType,jdbcType=INTEGER},
-      author_name = #{authorName,jdbcType=VARCHAR},
-      author_id = #{authorId,jdbcType=INTEGER},
-      blog_keyword = #{blogKeyword,jdbcType=VARCHAR},
-      blog_status = #{blogStatus,jdbcType=VARCHAR},
-      blog_desc = #{blogDesc,jdbcType=VARCHAR},
-      cover = #{cover,jdbcType=VARCHAR},
-      isHot = #{ishot,jdbcType=CHAR},
-      isRecommend = #{isrecommend,jdbcType=CHAR},
-      pub_time = #{pubTime,jdbcType=DATE},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=DATE},
-      isAvailable = #{isavailable,jdbcType=CHAR}
-    where blog_id = #{blogId,jdbcType=INTEGER}
-  </update>
+   
 </mapper>

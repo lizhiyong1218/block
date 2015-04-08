@@ -5,7 +5,7 @@ package com.lzy.block.core.service.dictionary;
 import java.util.List;
 
 import com.lzy.block.api.model.dictionary.DictionaryItemModel;
-import com.lzy.block.core.service.IBaseService;
+import com.lzy.block.core.service.base.IBaseService;
 
  
 /**

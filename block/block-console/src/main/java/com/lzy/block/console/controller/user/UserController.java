@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lzy.block.api.common.Pagination;
-import com.lzy.block.api.model.User;
+import com.lzy.block.api.model.user.User;
 
 /**
  * @ClassName: UserController

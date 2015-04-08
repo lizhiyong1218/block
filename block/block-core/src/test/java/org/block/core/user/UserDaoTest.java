@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.lzy.block.api.model.User;
-import com.lzy.block.core.dao.UserMapper;
+import com.lzy.block.api.model.user.User;
+import com.lzy.block.core.dao.user.UserMapper;
  
 public class UserDaoTest extends BaseTest {
 	@Autowired 
@@ -24,14 +24,14 @@ public class UserDaoTest extends BaseTest {
 		User user=new User();
 		user.setUserName("lzy");
 		user.setUserPwd("zzz");
-		userMapper.insert(user);
+		userMapper.insertSelective(user);
 		System.out.println(user.getUserId()+"=================");
 		System.out.println(1);
 	}
 	
 	@Test
 	public void testDelete() {
-		userMapper.delete(3); 
+		userMapper.deleteByPrimaryKey(3); 
 	}
 	
 	@Test
@@ -39,12 +39,12 @@ public class UserDaoTest extends BaseTest {
 		User user=new User();
 		user.setUserId(4);
 		user.setUserName("发大发");
-		userMapper.update(user); 
+		userMapper.updateByPrimaryKeySelective(user); 
 	}
 	
 	@Test
 	public void testGetOneByid() {
-		User user=userMapper.getOneById(14); 
+		User user=userMapper.selectByPrimaryKey(14); 
 		System.out.println(user);
 	}
 	
@@ -58,7 +58,7 @@ public class UserDaoTest extends BaseTest {
 	public void testFindAll(){
 		User user=new User();
 		user.setUserName("lzy");
-		List<User> list=userMapper.findAll(user);
+		List<User> list=userMapper.getAll(user);
 		for (User user2 : list) {
 			System.out.println(user2);
 		}
@@ -70,7 +70,7 @@ public class UserDaoTest extends BaseTest {
 		PageBounds page=new PageBounds();
 		page.setPage(4);
 		page.setLimit(2);
-		PageList<User> pl=userMapper.findAll(user,page);
+		PageList<User> pl=userMapper.getAll(user,page);
 		for (User user2 : pl) {
 			System.out.println(user2.toString()+"============");
 		}

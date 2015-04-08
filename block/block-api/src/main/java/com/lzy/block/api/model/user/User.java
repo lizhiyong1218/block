@@ -6,7 +6,7 @@
  * @date:2014年10月13日   
  */
 
-package com.lzy.block.api.model;
+package com.lzy.block.api.model.user;
 
 import java.io.Serializable;
 

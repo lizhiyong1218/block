@@ -8,7 +8,7 @@
 package com.lzy.block.core.service.channel;
 
 import com.lzy.block.api.model.channel.ChannelModel;
-import com.lzy.block.core.service.IBaseService;
+import com.lzy.block.core.service.base.IBaseService;
 
 /**
  * @ClassName: IChannelService

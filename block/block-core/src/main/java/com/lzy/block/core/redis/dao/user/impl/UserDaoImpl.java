@@ -17,7 +17,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert; 
 
-import com.lzy.block.api.model.User;
+import com.lzy.block.api.model.user.User;
 import com.lzy.block.core.redis.AbstractBaseRedisDao;
 import com.lzy.block.core.redis.dao.user.IUserDao;
 
