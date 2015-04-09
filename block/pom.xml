@@ -20,7 +20,8 @@
 		<!-- other -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.6</jdk.version>
-		
+		<nexus.content>http://localhost:8080/content</nexus.content>
+<!-- 		<nexus.content>http://10.1.100.61:8044/content</nexus.content> -->
 		
 		<spring.version>3.2.8.RELEASE</spring.version>
 		<aspectj.version>1.6.10</aspectj.version>
@@ -78,7 +79,7 @@
 		<!-- druid -->
 		<druid.version>0.2.23</druid.version>
 		
-		<nexus.content>http://10.1.100.61:8044/content</nexus.content>
+		
 	</properties>
  
 	<!-- #################################################################### -->
