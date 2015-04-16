@@ -13,9 +13,9 @@
 	<import resource="classpath:/applicationContext-common.xml"/>
 	<!-- mybatis配置 -->
 	<import resource="classpath:/applicationContext-mybatis.xml" />
-	<!-- 缓存配置
+	<!-- 缓存配置-->
 	<import resource="classpath:/applicationContext-cache.xml" />
-	 -->
+	 
 	 <!-- redis配置 -->
 	 <import resource="classpath:/applicationContext-redis.xml" />
 	  <!-- rabbitmq配置
@@ -28,8 +28,8 @@
 	 <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
 	 <!-- activiti配置 -->
 	 <import resource="classpath:/applicationContext-activiti.xml" />
-	 <!-- 引入shiro 
+	 <!-- 引入shiro -->
 	 <import resource="classpath:/applicationContext-shiro.xml" />
-	-->
+	 
 	  
 </beans>

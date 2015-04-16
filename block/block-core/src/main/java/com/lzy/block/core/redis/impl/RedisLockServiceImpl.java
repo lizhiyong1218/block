@@ -22,8 +22,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Service;
 
-import com.lzy.block.api.common.RedisConstants;
 import com.lzy.block.api.common.StrUtil;
+import com.lzy.block.api.constant.redis.RedisConstants;
 import com.lzy.block.api.vo.RedisLockModel;
 import com.lzy.block.core.redis.IRedisLockService;
 

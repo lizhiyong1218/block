@@ -57,7 +57,7 @@ public class MBGenerateUtil {
         System.out.println("生成Mybatis配置成功！");
     }
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		generateMbgConfiguration();
 //		String pathname="src/main/resources/log4j.properties";
 //		File file=new File(pathname);

@@ -9,6 +9,8 @@ package com.lzy.block.api.constant.shiro;
  * 
  */
 public class ShiroConstants {
-    public static final String CURRENT_USER = "user";
+	/*当前用户*/
+    public static final String CURRENT_USER = "currentUser";
+    /*强制退出*/
     public static final String SESSION_FORCE_LOGOUT_KEY = "session.force.logout";
 }

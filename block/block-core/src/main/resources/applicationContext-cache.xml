@@ -9,17 +9,17 @@
         http://www.springframework.org/schema/cache/spring-cache.xsd
 	 ">
 	
-	  <!--  缓存  属性-->  
-    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">    
-        <property name="configLocation"  value="classpath:ehcache.xml"/>   
-    </bean>   
-      
     <!-- 支持缓存注解 -->  
-    <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>  
+    <cache:annotation-driven cache-manager="springCacheManager" proxy-target-class="true"/>  
       
     <!-- 默认是cacheManager -->  
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">    
+    <bean id="springCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">    
         <property name="cacheManager"  ref="cacheManagerFactory"/>    
+    </bean> 
+    
+    <!--  ehcache-->  
+    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">    
+        <property name="configLocation"  value="classpath:ehcache.xml"/>   
     </bean> 
 	
 </beans>

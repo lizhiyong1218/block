@@ -5,7 +5,7 @@
 * @date 2014年12月26日 下午2:46:19
 * @version V1.0  
 */ 
-package com.lzy.block.api.common;
+package com.lzy.block.api.constant.ehcache;
 
 /**
  * 
@@ -15,12 +15,12 @@ package com.lzy.block.api.common;
 * @date 2014年12月26日 下午2:46:52
 *
  */
-public class RedisConstants {
+public class EhcacheConstants {
 
-	/*默认锁有效时间 s*/
-	public static final int DEFAULT_SINGLE_EXPIRE_TIME = 10;  
-	/*默认获取锁最高等待时间ms*/
-	public static final int DEFAULT_GET_LOCK_WATTIME = 100;  
+	/*用户名称key前缀*/
+	public static final String USERNAMEKEYPRE = "user-info-name-";  
+	/*用户id key前缀*/
+	public static final String USERIDKEYPRE = "user-info-id-";  
 	
 	
 }

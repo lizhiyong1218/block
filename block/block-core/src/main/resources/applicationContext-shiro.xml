@@ -8,11 +8,16 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!-- 权限缓存管理器 -->
+       <!-- 权限缓存管理器-->
     <bean id="shiroCacheManager" class="com.lzy.block.core.ehcache.SpringCacheManagerWrapper">
-        <property name="cacheManager" ref="cacheManagerFactory"/>
-    </bean>
-
+        <property name="cacheManager" ref="springCacheManager"/>
+    </bean> 
+     
+   <!--   可以单独创建个shiro-cache文件
+    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		 <property name="cacheManagerConfigFile" value="classpath:cache/ehcache-shiro.xml"/>
+	</bean>
+ -->
     <!-- 凭证匹配器 -->
     <bean id="credentialsMatcher" class="com.lzy.block.core.shiro.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="shiroCacheManager"/>
@@ -75,14 +80,14 @@
     <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
         <property name="interval" value="1800000"/><!-- 单位毫秒，默认就是1 小时； -->
         <property name="sessionManager" ref="sessionManager"/> 
-    </bean>
+    </bean> 
 
     <!-- 会话管理器 -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <property name="globalSessionTimeout" value="1800000"/>
         <property name="deleteInvalidSessions" value="true"/>
         <property name="sessionValidationSchedulerEnabled" value="true"/>
-        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>  
         <property name="sessionDAO" ref="sessionDAO"/>
         <property name="sessionIdCookieEnabled" value="true"/>
         <property name="sessionIdCookie" ref="sessionIdCookie"/>
@@ -92,7 +97,7 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="userRealm"/>
         <property name="sessionManager" ref="sessionManager"/>
-        <property name="cacheManager" ref="cacheManager"/>
+        <property name="cacheManager" ref="shiroCacheManager"/>
         <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
@@ -103,15 +108,32 @@
     </bean>
 
     <!-- 基于Form表单的身份验证过滤器 -->
-    <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+    <!-- <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="password"/>
         <property name="rememberMeParam" value="rememberMe"/>
         <property name="loginUrl" value="/login"/>
-    </bean>
+    </bean> -->
 	
-	<!-- 用户拦截 -->
-    <bean id="sysUserFilter" class="com.lzy.block.console.filters.shiro.SysUserFilter"/>
+	<!-- 用于根据当前登录用户身份获取User信息放入request；然后就可以通过request获取User。 -->
+    <bean id="sysUserFilter" class="com.lzy.block.console.filters.shiro.SysUserFilter">
+    	 <constructor-arg ref="shiroCacheManager"/>
+    </bean>
+    
+    <!-- 基于Form表单的身份验证过滤器 -->
+    <bean id="authcFilter" class="com.lzy.block.console.filters.shiro.MyFormAuthenticationFilter">
+        <property name="usernameParam" value="username"/>
+        <property name="passwordParam" value="password"/>
+        <property name="rememberMeParam" value="rememberMe"/>
+        <property name="failureKeyAttribute" value="shiroLoginFailure"/>
+    </bean>
+    
+    <!-- 验证码 -->
+    <bean id="jCaptchaValidateFilter" class="com.lzy.block.console.filters.shiro.jcaptcha.JCaptchaValidateFilter">
+        <property name="jcaptchaEbabled" value="true"/>
+        <property name="jcaptchaParam" value="jcaptchaCode"/>
+        <property name="failureKeyAttribute" value="shiroLoginFailure"/>
+    </bean>
     
     <!-- 强制退出拦截 -->
     <bean id="forceLogoutFilter" class="com.lzy.block.console.filters.shiro.ForceLogoutFilter"/>
@@ -122,22 +144,33 @@
         <property name="loginUrl" value="/login"/>
         <property name="filters">
             <util:map>
-                <entry key="authc" value-ref="formAuthenticationFilter"/>
-                <entry key="sysUser" value-ref="sysUserFilter"/>
+                <!-- <entry key="authc" value-ref="formAuthenticationFilter"/> -->
+                <entry key="authc" value-ref="authcFilter"/>
+                <entry key="sysUser" value-ref="sysUserFilter"/> 
+                <entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/>
                 <entry key="forceLogout" value-ref="forceLogoutFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
             <value>
-                /login = authc
-                /logout = logout
-                /authenticated = authc
-                /** = forceLogout,user,sysUser
+                /activiti/** = anon
+                /resources/** = anon
+                /frame/** = anon
+                /jcaptcha* = anon 
+                /login = jCaptchaValidate,authc  <!-- authc 里面保存了登录前要跳转的地址 -->
+                /logout = logout		 <!-- logout是shiro默认的拦截器,会将保持在浏览器端的rememberMe cookie删掉 -->
+                /authenticated = authc   <!-- authc拦截器表示需要身份认证通过后才能访问，记住我功能的用户，没有登录，因此没有通过身份验证 -->
+ 		        /** = forceLogout,user   <!-- user是shiro默认的一种拦截器，里面允许记住我用户，以及登录验证后的用户通过 --> 
             </value>
         </property>
     </bean>
 
     <!-- Shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+	<aop:config proxy-target-class="true"></aop:config>	
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 
 </beans>

@@ -1,6 +1,7 @@
 package com.lzy.block.core.ehcache;
 
 import net.sf.ehcache.Ehcache;
+
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
@@ -72,7 +73,7 @@ public class SpringCacheManagerWrapper implements CacheManager {
         @Override
         public int size() {
             if(springCache.getNativeCache() instanceof Ehcache) {
-                Ehcache ehcache = (Ehcache) springCache.getNativeCache();
+            	Ehcache ehcache = (Ehcache) springCache.getNativeCache();
                 return ehcache.getSize();
             }
             throw new UnsupportedOperationException("invoke spring cache abstract size method not supported");

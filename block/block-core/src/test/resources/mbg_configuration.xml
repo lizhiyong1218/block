@@ -40,7 +40,7 @@
             <property name="methodNameCalculator" value="extended" />
         </javaClientGenerator>
         <!-- schema你的数据库，tableName表明，domainObjectName对应你的javabean类名，是否生成相应的example -->
-        <table schema="mybatis_db" tableName="oa_leave" domainObjectName="Leave"
+        <table schema="mybatis_db" tableName="sys_user" domainObjectName="SysUser"
             enableCountByExample="false" enableUpdateByExample="false"
             enableDeleteByExample="false" enableSelectByExample="false"
             selectByExampleQueryId="false">
