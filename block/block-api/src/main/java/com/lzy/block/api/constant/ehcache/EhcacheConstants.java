@@ -17,6 +17,13 @@ package com.lzy.block.api.constant.ehcache;
  */
 public class EhcacheConstants {
 
+	 /***********缓存队列***********/
+    /*账号登录人数缓存*/
+    public static final String USERINFOCACHE = "userInfoCache";
+    /*账号登录人数缓存*/
+    public static final String ACCOUNSESSIONCACHE = "accountSessionCache";
+	
+    /***********缓存KEY前缀***********/
 	/*用户名称key前缀*/
 	public static final String USERNAMEKEYPRE = "user-info-name-";  
 	/*用户id key前缀*/

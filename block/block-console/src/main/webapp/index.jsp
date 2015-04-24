@@ -8,11 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <title>block</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
+	 
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>resources/css/base.css">
 	<%-- <link rel="stylesheet" type="text/css" href="<%=basePath %>resources/css/ui.css">   --%>
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>resources/css/myicons.css">
@@ -26,9 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body  class="easyui-layout" >
-	    
-	    <div data-options="region:'north',title:'North Title',split:true,href:'frame/north.jsp'" style="height:100px;"></div>
 	    <!-- 
+	    <div data-options="region:'north',title:'North Title',split:true,href:'frame/north.jsp'" style="height:100px;"></div>
+	    
 	    <div data-options="region:'south',title:'South Title',split:true,href:'frame/south.jsp'" style="height:100px;"></div>
 	    <div data-options="region:'east',title:'East',split:true,href:'frame/east.jsp'" style="width:100px;"></div>
 	     -->

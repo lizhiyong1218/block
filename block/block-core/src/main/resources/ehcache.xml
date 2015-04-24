@@ -27,6 +27,7 @@
        timeToLiveSeconds="10"
        memoryStoreEvictionPolicy="LFU" />
        
+   <!-- 用户信息缓存 -->    
    <cache name="userInfoCache"
            maxEntriesLocalHeap="2000"
            eternal="false"
@@ -73,7 +74,16 @@
            overflowToDisk="false"
            statistics="true">
     </cache>
-       
+    
+    <!-- 账号会话session数量限制 -->
+    <cache name="accountSessionCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>   
 	 
 </ehcache>
 

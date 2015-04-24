@@ -5,3 +5,8 @@
 5.ehcache缓存  余spring注解参加userservice
 6.redis缓存
 7.rabbitmq
+
+
+shiro:
+自定义标签
+相同账号登录人数限制

@@ -31,7 +31,7 @@ public class SysUserFilter extends PathMatchingFilter {
     private Cache<String, User> userInfoCache;
     
     public SysUserFilter(CacheManager cacheManager){
-    	userInfoCache = cacheManager.getCache("userInfoCache");
+    	userInfoCache = cacheManager.getCache(EhcacheConstants.USERINFOCACHE);
     }
 
     /**

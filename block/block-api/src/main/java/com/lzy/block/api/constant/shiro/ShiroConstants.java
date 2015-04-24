@@ -11,6 +11,12 @@ package com.lzy.block.api.constant.shiro;
 public class ShiroConstants {
 	/*当前用户*/
     public static final String CURRENT_USER = "currentUser";
+    
+    /***********异常***********/
     /*强制退出*/
     public static final String SESSION_FORCE_LOGOUT_KEY = "session.force.logout";
+    /*账号超过登录人数*/
+    public static final String SESSION_EXCEED_ACCOUNTLIMIT_KEY = "session.exceedAccountLimit.logout";
+    
+   
 }
