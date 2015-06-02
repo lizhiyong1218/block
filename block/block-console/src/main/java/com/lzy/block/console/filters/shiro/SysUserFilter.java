@@ -24,7 +24,7 @@ import com.lzy.block.core.service.user.IUserService;
  * 
  */
 public class SysUserFilter extends PathMatchingFilter {
-
+ 
     @Autowired
     private IUserService userService;
     
