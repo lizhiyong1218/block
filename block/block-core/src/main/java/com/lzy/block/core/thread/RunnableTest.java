@@ -1,5 +1,13 @@
 package com.lzy.block.core.thread;
 
+/**
+ * 
+* @ClassName: RunnableTest
+* @Description: runnable创建线程测试 
+* @author 李志勇
+* @date 2015年6月9日 上午10:40:24
+*
+ */
 public class RunnableTest  {
     public static void main(String[] args)
     {

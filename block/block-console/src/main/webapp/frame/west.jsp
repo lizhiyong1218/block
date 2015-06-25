@@ -57,6 +57,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!-- 
 				<input type="button" value="数据字典" onclick="tab_add('centertabs','数据字典','common/toListPage.do?pagePath=/dictionary/dictionaryList')"/>
 				 -->
+				 <input type="button" value="任务列表" onclick="tab_add('centertabs','任务管理','common/toListPage.do?pagePath=/quartz/taskList')"/>
+				 <input type="button" value="任务管理" onclick="tab_add('centertabs','任务管理','common/toListPage.do?pagePath=/quartz/quartzList')"/>
 			</div>
 			 
 			

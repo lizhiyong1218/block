@@ -15,21 +15,11 @@
 	<import resource="classpath:/applicationContext-mybatis.xml" />
 	<!-- 缓存配置-->
 	<import resource="classpath:/applicationContext-cache.xml" />
-	 
 	 <!-- redis配置 -->
 	 <import resource="classpath:/applicationContext-redis.xml" />
-	  <!-- rabbitmq配置
-	 <import resource="classpath:/applicationContext-rabbitmq.xml" />
-	  -->
-	 <!-- 写死的任务，灵活性小
-	 <import resource="classpath:/applicationContext-quartz.xml" />
-	  -->
-	 <!-- 动态引入quartz任务,比写死的任务要灵活-->
-	 <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
 	 <!-- activiti配置 -->
 	 <import resource="classpath:/applicationContext-activiti.xml" />
-	 <!-- 引入shiro -->
-	 <import resource="classpath:/applicationContext-shiro.xml" />
+	 
 	 
 	  
 </beans>

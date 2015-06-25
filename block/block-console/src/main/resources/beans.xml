@@ -14,4 +14,11 @@
 	
 	<import resource="classpath*:/applicationContext.xml" />
 	<import resource="classpath*:/applicationContext-shiro.xml" />
+	<import resource="classpath*:/applicationContext-quartz.xml" />
+	  <!-- rabbitmq配置
+	 <import resource="classpath:/applicationContext-rabbitmq.xml" />
+	  -->
+	 <!-- 动态引入quartz任务,比写死的任务要灵活
+	 <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+	 -->
 </beans>

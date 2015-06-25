@@ -9,7 +9,7 @@ package com.lzy.block.core.thread;
 
 /**
  * @ClassName: Test
- * @Description: Test 
+ * @Description: thread创建线程测试 
  * @author 李志勇
  * @date 2015年5月21日 上午11:56:49
  *

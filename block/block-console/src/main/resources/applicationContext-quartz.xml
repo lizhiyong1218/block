@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	 
+	<bean id="syncFutDataJob" class="com.lzy.block.console.task.quartz.SyncFutDataTask" />
+	<bean id="syncSapAtsJob" class="com.lzy.block.console.task.quartz.SyncSapAtsDataTask" />
+	<bean id="syncWpiJob" class="com.lzy.block.console.task.quartz.SyncWpiDataTask" />
+	<bean id="syncChipStopJob" class="com.lzy.block.console.task.quartz.SyncChipStopDataTask" />
+	<bean id="syncBPPSkuJob" class="com.lzy.block.console.task.quartz.SyncBPPSkuDataTask" />
+	<bean id="syncOtherSkuJob" class="com.lzy.block.console.task.quartz.SyncOtherSkuDataTask" />
+	<bean id="testJob" class="com.lzy.block.console.task.quartz.TestTask" />
+	
+	<bean id="syncFutDataJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="group" value="job_work" />		 
+		<property name="name" value="syncFutDataJob" /> 
+		<property name="concurrent" value="false" />
+		<property name="targetObject">
+			<ref bean="syncFutDataJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	<bean id="syncSapAtsJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="group" value="job_work" />	  
+		<property name="name" value="syncSapAtsJob" />  
+		<property name="concurrent" value="false" />
+		<property name="targetObject">
+			<ref bean="syncSapAtsJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+
+	<bean id="syncWpiJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="group" value="job_work" />	  
+		<property name="name" value="syncWpiJob" />  
+		<property name="concurrent" value="false" />
+		<property name="targetObject">
+			<ref bean="syncWpiJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	
+	<bean id="syncChipStopJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="group" value="job_work" />	  
+		<property name="name" value="syncChipStopJob" />  
+		<property name="concurrent" value="false" />
+		<property name="targetObject">
+			<ref bean="syncChipStopJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+
+	<bean id="syncBPPSkuDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="group" value="job_work" />	  
+		<property name="name" value="syncBPPSkuJob" />  
+		<property name="concurrent" value="false" />
+		<property name="targetObject">
+			<ref bean="syncBPPSkuJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+
+	<bean id="syncOtherSkuDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="group" value="job_work" />	  
+		<property name="name" value="syncOtherSkuJob" />  
+		<property name="concurrent" value="false" />
+		<property name="targetObject">
+			<ref bean="syncOtherSkuJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+
+	<bean id="testJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="group" value="job_work" />	  
+		<property name="name" value="testJob" />  
+		<property name="concurrent" value="false" />
+		<property name="targetObject">
+			<ref bean="testJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	
+	<bean id="syncSapAtsTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="group" value="work_default" />	 
+		<property name="name" value="syncSapAts" />	 
+		<property name="jobDetail">
+			<ref bean="syncSapAtsJobDetail" />
+		</property>
+		<property name="cronExpression">
+ 			<value>0 20 6 * * ?</value>    
+		</property>
+	</bean>
+	
+	<bean id="syncBPPSkuTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="group" value="work_default" />	 
+		<property name="name" value="syncBPPSkuData" />	 
+		<property name="jobDetail">
+			<ref bean="syncBPPSkuDetail" />
+		</property>
+		<property name="cronExpression">
+ 			<value>0 40 4 * * ?</value>    
+		</property>
+	</bean>
+
+	<bean id="syncOtherSkuTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="group" value="work_default" />	 
+		<property name="name" value="syncOhterSkuData" />	 
+		<property name="jobDetail">
+			<ref bean="syncOtherSkuDetail" />
+		</property>
+		<property name="cronExpression">
+ 			<value>0 40 6 * * ?</value>    
+		</property>
+	</bean>
+
+	<!-- chipStop时间得优先在当天晚上12点前 -->
+	<bean id="syncChipStopTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="group" value="work_default" />	 
+		<property name="name" value="syncChipStopData" />	 
+		<property name="jobDetail">
+			<ref bean="syncChipStopJobDetail" />
+		</property>
+		<property name="cronExpression">
+ 			<value>0 0 22 * * ?</value>    
+		</property>
+	</bean>
+
+	<bean id="syncFutDataTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="group" value="work_default" /> 
+		<property name="name" value="syncFutData" /> 
+		<property name="jobDetail">
+			<ref bean="syncFutDataJobDetail" />
+		</property>
+		<property name="cronExpression">
+ 			<value>0 30 23 * * ?</value>   
+		</property>
+	</bean>
+	
+	
+	<bean id="syncWpiTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="group" value="work_default" />	 
+		<property name="name" value="syncWpiData" />	 
+		<property name="jobDetail">
+			<ref bean="syncWpiJobDetail" />
+		</property>
+		<property name="cronExpression">
+ 			<value>0 50 1 * * ?</value>    
+		</property>
+	</bean>
+
+	<bean id="TestTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="group" value="work_default" />	 
+		<property name="name" value="testJob" />	 
+		<property name="jobDetail">
+			<ref bean="testJobDetail" />
+		</property>
+		<property name="cronExpression">
+ 			<value>30 59 14 * * ?</value>    
+		</property>
+	</bean>
+
+ 
+	<bean id="schedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="syncFutDataTrigger" />
+				<ref bean="syncSapAtsTrigger" />
+				<ref bean="syncWpiTrigger" />
+				<ref bean="syncChipStopTrigger" />
+				<ref bean="syncBPPSkuTrigger" />
+				<ref bean="syncOtherSkuTrigger" />
+				<ref bean="TestTrigger" />  
+			</list>
+		</property>
+ 		<property name="quartzProperties">
+			<props>
+				<prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+				<prop key="org.quartz.threadPool.threadCount">1</prop> 
+			</props>
+		</property> 
+	</bean>
+
+</beans>
