@@ -1,4 +1,4 @@
-//我的流程
+//我发起的流程
 	$(function() {
 		initMyStartList();
 	});
@@ -9,6 +9,7 @@
 		 url: basePath+'/activitiProcess/myStartProcess.do',
 		 width :'auto',  
 		 height:'auto',
+		 fit: false,
 		 fitColumns : true,
 		 nowrap:false,
 		 striped: true,//隔行变色
@@ -33,7 +34,8 @@
 	                    title: '流程名称',
 	                    field: 'name',
 	                    width: 100
-	                },
+	                }
+			        ,
 	                {
 	                    title: '类别',
 	                    field: 'category',
@@ -44,15 +46,19 @@
 	                    field: 'version',
 	                    width: 100
 	                },{
-	                    title: '图片',
-	                    field: 'diagramResourceName',
-	                    width: 200,
-	                    minWidth: 100,
-	                    formatter: function (value, rec, index) {
-	                    	var str = '<a style="color:blue" data-id=' + rec.id + ' href="javascript:;" class="photoContent">'+rec.diagramResourceName+'</a>';
-	                        return str;
-	                    }
-	                } 
+			             title: '当前节点',
+			             field: 'opt',
+			             width: 150,
+			             formatter: function (value, rec, index) {
+		                    	var str='';
+		                    	 if(rec.currentNode!=null){
+		                    		 str = '<a processInstanceId=' + rec.processInstanceId +' processDefId='+rec.id+ ' href="#" class="activity">'+rec.currentNode+'</a>';
+		                    	}else{
+		                    		str="已结束";
+		                    	} 
+		                        return str;
+		                    }
+			         } 
 		     ]
 		 ],
 	 	 onLoadSuccess: function () {
@@ -61,11 +67,8 @@
                 graphTrace( $(this));
                 return false;
             }); 
-         },
-		 onClickRow: function(rowIndex, rowData){
-			  
-		 }
+         } 
 		});
 		
-		initPager("#processList");
+//		initPager("#processList");
 	}

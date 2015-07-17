@@ -18,8 +18,10 @@ public class ProcessDefInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = -873639756188989912L;
 	
-	/*流程id*/
+	/*流程部署id*/
 	private String id;
+	/*流程实例id*/
+	private String processInstanceId;
 	/*名称*/
 	private String name;
 	/*类型*/
@@ -163,9 +165,18 @@ public class ProcessDefInfo implements Serializable {
 		this.activitiId = activitiId;
 	}
 
+	public String getProcessInstanceId() {
+		return processInstanceId;
+	}
+
+	public void setProcessInstanceId(String processInstanceId) {
+		this.processInstanceId = processInstanceId;
+	}
+
 	@Override
 	public String toString() {
-		return "ProcessDefInfo [id=" + id + ", name=" + name + ", category="
+		return "ProcessDefInfo [id=" + id + ", processInstanceId="
+				+ processInstanceId + ", name=" + name + ", category="
 				+ category + ", version=" + version + ", resourceName="
 				+ resourceName + ", diagramResourceName=" + diagramResourceName
 				+ ", deployTime=" + deployTime + ", deploymentId="

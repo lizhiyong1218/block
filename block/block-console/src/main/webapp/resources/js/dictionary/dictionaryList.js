@@ -21,6 +21,7 @@
 		 url: basePath+'/dictionary/dictionaryList.do',
 		 width :'auto',  
 		 height:'auto',
+		 fit: false,
 		 fitColumns : true,
 		 nowrap:false,
 		 striped: true,//隔行变色
@@ -190,11 +191,19 @@
     function saveEditDictionary(dg){
 		var url = basePath+'/dictionary/editDictionary.do';
 		var myform=$('#dictionaryEditForm');
+		var opt = {
+		        loadMsg: '处理中..',
+		        target:$('.window')
+		};
+		$.mask(opt);
 		myform.form("submit",{
 			url:url,
 			onSubmit:function(){
 				return $(this).form('validate');
 			},
+//		    beforeSend: function(jqXHR){
+//		    	$.mask(opt);
+//			},
 			success:function(result){
 				var dataObj=eval("("+result+")");//转换为json对象 
 	            if (dataObj.status == 102){
@@ -205,6 +214,10 @@
 	            	closeMyDialog(dg);
 	            }
 			}
+//			,
+//			complete: function(jqXHR, textStatus){
+//				$.unmask(opt);
+//			} 
 		});
     }
     

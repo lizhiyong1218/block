@@ -8,14 +8,24 @@
 <div class="easyui-layout" data-options="fit:true">
 	<div data-options="region:'north',border:false" class="toolbar-region">
 		<form id="taskInfoForm">
-			<input type="hidden" name="taskId" id="taskId" value="${taskId}" /> 
-			<input type="hidden" name="businessId" id="businessId" value="${bussinessId}" /> 
-			<input type="hidden" name="processInstanceId" id="processInstanceId" value="${processInstanceId}" /> 
-			<input type="hidden" name="taskName" id="taskName" value="${taskName}" /> 
-			<input type="hidden" name="suspended" id="suspended" value="${suspended}" />
-			<input type="hidden" name="taskKey" id="taskKey" value="${taskKey}" />
+			<input type="hidden" name="taskId" id="taskId" value="${detailVo.taskId}" /> 
+			<input type="hidden" name="businessKey" id="businessKey" value="${detailVo.businessKey}" /> 
+			<input type="hidden" name="processInstanceId" id="processInstanceId" value="${detailVo.processInstanceId}" /> 
+			<input type="hidden" name="taskName" id="taskName" value="${detailVo.taskName}" /> 
+			<%-- 
+			<input type="text" name="suspended" id="suspended" value="${suspended}" />
+			<input type="text" name="formKey" id="formKey" value="${detailVo.formKey}" />
+			 --%>
 		</form>
+		<!-- 
 		<div id="workflowButtonToolbar"></div>
+		 -->
+		 
+		 <a id="pass">通过</a>
+		 <a>驳回</a>
+		 <a>暂停</a>
+		 <a>激活</a>
+		 
 	</div>
 	
 	<div data-options="region:'center',border:false">

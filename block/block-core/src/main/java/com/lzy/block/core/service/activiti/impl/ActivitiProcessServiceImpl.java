@@ -188,8 +188,9 @@ public class ActivitiProcessServiceImpl implements IActivitiProcessService {
 		try {
 			//通过流程历史id获取流程实例对象
 			ProcessInstance	processInstance = activitiProcessInstanceService.getProcessInstanceById(historicProcessInstance.getId());
-			processDefInfo.setActivitiId(processInstance.getActivityId());
 			if (processInstance != null) {
+				processDefInfo.setActivitiId(processInstance.getActivityId());
+				processDefInfo.setProcessInstanceId(processInstance.getId());
 				ActivityImpl currentActiviti = getCurrentActiviti(processDef.getId(), processInstance.getActivityId());
 				if(currentActiviti!=null){
 					processDefInfo.setCurrentNode((String)currentActiviti.getProperty("name"));// 当前节点名称	

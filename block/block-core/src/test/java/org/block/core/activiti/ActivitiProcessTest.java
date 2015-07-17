@@ -41,7 +41,7 @@ public class ActivitiProcessTest extends BaseTest{
 	}
 	
 	@Test
-	public void testMyJoinProcess(){
+	public void testMyJoinProcess(){ 
 		PageModel pageModel=new PageModel(1,5);
 		try {
 			 activitiProcessService.getMyJoinProcess("kafeitu", pageModel);
@@ -51,7 +51,7 @@ public class ActivitiProcessTest extends BaseTest{
 	}
 	
 	@Test
-	public void testMyJoinFinishedProcess(){
+	public void testMyJoinFinishedProcess(){ 
 		PageModel pageModel=new PageModel(1,5);
 		try {
 			 Pagination<ProcessDefInfo> myJoinFinishedProcess = activitiProcessService.getMyJoinFinishedProcess("kafeitu", pageModel);

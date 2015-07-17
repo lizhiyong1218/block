@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-
+<%-- 
 <link href="${basePath}/resources/assets/qtip/jquery.qtip.min.css?jsVersion=${jsVersion}" type="text/css" rel="stylesheet" />
 <script src="${basePath}/resources/assets/qtip/jquery.qtip.pack.js?jsVersion=${jsVersion}" type="text/javascript"></script>
 <script	src="${basePath}/resources/js/activiti/drawGraph.js?jsVersion=${jsVersion}"></script>
-<script	src="${basePath}/resources/js/activiti/myProcessList.js?jsVersion=${jsVersion}"></script>
+ --%>
+<script	src="${basePath}/resources/js/activiti/myStartProcessList.js?jsVersion=${jsVersion}"></script>
 
 <div class="easyui-layout" data-options="fit:true">
+
 	<div data-options="region:'north',border:false" class="toolbar-region" style=" background-color: #f4f4f4;">
+	
 		<table class="toolbar-wrapper toolbar-align-left " >
 		    	<tbody>
 		    		<tr>
@@ -30,22 +33,13 @@
 								</span>
 		    				</a>
 		    			</td>
-		    			<!-- <td class="toolbar-item-container">
-		    				<a class="toolbar-item dialog-tool-separator"></a>
-		    			</td>
-		    			
-		    			<td class="toolbar-item-container">
-		    				<a  class="toolbar-item l-btn   l-btn-plain" onclick="openEdtProcessDialog()"   href="javascript:void(0)" >
-		    					<span class="l-btn-left l-btn-icon-left">
-									<span class="l-btn-icon-left icon-edit"> </span>
-									<span class="l-btn-text">修改</span>
-								</span>
-		    				</a>
-		    			</td> -->
+		    			 
 		    		</tr>
 		    	</tbody>
 		</table>  
+		
 	</div>
+ 
 	<div data-options="region:'center',border:false">
 		<div class="easyui-layout" data-options="fit:true">
 			<!--搜索start-->
@@ -73,6 +67,7 @@
 					</form>
 				</div>
 			</div>
+			
 			<!--搜索end-->
 			<!--列表-->
 			<div data-options="region:'center',border:false">

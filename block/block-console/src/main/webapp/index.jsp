@@ -13,12 +13,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<%-- <link rel="stylesheet" type="text/css" href="<%=basePath %>resources/css/ui.css">   --%>
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>resources/css/myicons.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>resources/jquery-easyui-1.3.4/themes/default/easyui.css">
+	<link href="${basePath}/resources/assets/qtip/jquery.qtip.min.css?jsVersion=${jsVersion}" type="text/css" rel="stylesheet" />
 	<%-- <link rel="stylesheet" type="text/css" href="<%=basePath %>resources/jquery-easyui-1.3.4/demo.css"> --%>
 	<script type="text/javascript" src="<%=basePath %>resources/js/common/jquery-1.9.0.min.js"></script>
 	<script type="text/javascript" src="<%=basePath %>resources/jquery-easyui-1.3.4/jquery.easyui.min.js"></script> 
 	<script type="text/javascript" src="<%=basePath %>resources/js/common/globalConfig.js"></script> 
 	<script type="text/javascript" src="<%=basePath %>resources/js/common/easyuicommons.js"></script>
-	<script type="text/javascript" src="<%=basePath %>resources/js/common/myextend.js"></script> 
+	<script type="text/javascript" src="<%=basePath %>resources/js/common/myextend.js"></script>
+	
+	
+	<script src="${basePath}/resources/assets/qtip/jquery.qtip.pack.js?jsVersion=${jsVersion}" type="text/javascript"></script>
+	<script	src="${basePath}/resources/js/activiti/drawGraph.js?jsVersion=${jsVersion}"></script>
+	<script	src="${basePath}/resources/js/common/jquery.mask.extend.js?jsVersion=${jsVersion}"></script> 
+	<%--
+	<script	src="${basePath}/resources/js/common/jquery.extend.js?jsVersion=${jsVersion}"></script> 
+	<script	src="${basePath}/resources/js/common/jquery.toolbar.js?jsVersion=${jsVersion}"></script>
+	  --%>
   </head>
   
   <body  class="easyui-layout" >

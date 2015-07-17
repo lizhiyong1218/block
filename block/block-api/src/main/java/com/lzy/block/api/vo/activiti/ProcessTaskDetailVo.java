@@ -18,6 +18,8 @@ import java.util.Date;
  *
  */
 public class ProcessTaskDetailVo {
+	/*任务ID*/
+	private String taskId;
 	/*流程启动人*/
 	private String processStartBy;
 	/*流程启动时间*/
@@ -88,13 +90,27 @@ public class ProcessTaskDetailVo {
 	public void setFormKey(String formKey) {
 		this.formKey = formKey;
 	}
+	
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
 
 	@Override
 	public String toString() {
-		return "ProcessTaskDetailVo [processStartBy=" + processStartBy
-				+ ", processStartTime=" + processStartTime + ", taskName="
-				+ taskName + ", assignee=" + assignee + "]";
+		return "ProcessTaskDetailVo [taskId=" + taskId + ", processStartBy="
+				+ processStartBy + ", processStartTime=" + processStartTime
+				+ ", taskName=" + taskName + ", assignee=" + assignee
+				+ ", businessKey=" + businessKey + ", processInstanceId="
+				+ processInstanceId + ", formKey=" + formKey + "]";
 	}
-	
+
+	 
+
+ 
+	 
 	
 }

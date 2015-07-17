@@ -2,6 +2,14 @@ var RmaBusiness = {
 	create : function() {
 		var business = {};
 		business.init = function(businessId, taskId) {
+			$("#rmaNo").html("test12345");
+			$("#state").html("1");
+			$("#createBy").html("tt");
+			$("#createTime").html("");
+			$("#planCloseDate").html("");
+			$("#shipVip").html("s");
+			$("#vendorNo").html("s");
+			
 			/*$.ajax({
 				type : "POST",
 				url : '../rma/rmaDetailByNo.do',
@@ -24,55 +32,50 @@ var RmaBusiness = {
 		var workflowVerifyConfirmDialog;
 		
 		business.complete = function(taskId, complete) {
-			var rmaNo = $('input[name=businessId]').val();
-			$('<div/>',{
-				title : '填写备注信息',
-				html : "<textarea id='checkDescPass' style='width: 300px; height: 150px;'></textarea>"
-			}).dialog({
-			modal : true,
-			
-			onOpen:function(){
-				workflowVerifyConfirmDialog = $(this);
-		    },
-		    
-		    onClose:function(){
-		    	workflowVerifyConfirmDialog.dialog('destroy');
-	        },
-			
-			buttons : [ {
-				text : '通过',
-				handler : function() {
-					var checkDesc = $('#checkDescPass').val();
-
-					// 设置流程变量
-					complete(taskId, [ {
-						key : 'checkState',
-						value : '1',
-						type : 'S'
-					}, {
-						key : 'checkDesc',
-						value : checkDesc,
-						type : 'S'
-					}, {
-						key : 'rmaNo',
-						value : rmaNo,
-						type : 'S'
-					} ]);
-					workflowVerifyConfirmDialog.dialog('destroy');
-					workflow.close();
-					$('#tbList').datagrid("reload"); 
-				}
-			}, {
-				text : '取消',
-				handler : function() {
-					workflowVerifyConfirmDialog.dialog('destroy');
-				}
-			} ]
-		});
-			
-			
-			
-			
+//			var rmaNo = $('input[name=businessId]').val();
+//			$('<div/>',{
+//				title : '填写备注信息',
+//				html : "<textarea id='checkDescPass' style='width: 300px; height: 150px;'></textarea>"
+//			}).dialog({
+//			modal : true,
+//			onOpen:function(){
+//				workflowVerifyConfirmDialog = $(this);
+//		    },
+//		    
+//		    onClose:function(){
+//		    	workflowVerifyConfirmDialog.dialog('destroy');
+//	        },
+//			
+//			buttons : [ {
+//				text : '通过',
+//				handler : function() {
+//					var checkDesc = $('#checkDescPass').val();
+//
+//					// 设置流程变量
+//					complete(taskId, [ {
+//						key : 'checkState',
+//						value : '1',
+//						type : 'S'
+//					}, {
+//						key : 'checkDesc',
+//						value : checkDesc,
+//						type : 'S'
+//					}, {
+//						key : 'rmaNo',
+//						value : rmaNo,
+//						type : 'S'
+//					} ]);
+//					workflowVerifyConfirmDialog.dialog('destroy');
+//					workflow.close();
+//					$('#tbList').datagrid("reload"); 
+//				}
+//			}, {
+//				text : '取消',
+//				handler : function() {
+//					workflowVerifyConfirmDialog.dialog('destroy');
+//				}
+//			} ]
+//		});
 		};
 
 		business.revert = function(taskId, complete) {
@@ -134,62 +137,7 @@ var RmaBusiness = {
 
 };
 
-/**
- * 状态格式化
- * @param val
- * @returns
- *//*
-function stateFormatter(val){
-	if(val == '0'){
-		return '已取消';
-	}else if(val == '1'){
-		return '已完成';
-	}else if(val == '2'){
-		return '待供应商换货';
-	}else if(val == '3'){
-		return '待供应商退款';
-	}else if(val == '4'){
-		return '部分发货';
-	}else if(val == '5'){
-		return '待发货';
-	}else if(val == '6'){
-		return '已驳回';
-	}else if(val == '7'){
-		return '待审核';
-	}else if(val == '8'){
-		return '同步失败';
-	}else{
-		return val;
-	}
-}
-*/
-/**
- * 货运方式格式化
- * @param val
- * @returns
- */
-/*function shipVipFormatter(val){
-	if(val == '0'){
-		return '快递';
-	}else if(val == '1'){
-		return '物流';
-	}else if(val == '2'){
-		return '上门自提';
-	}else{
-		return val;
-	}
-}*/
-
-/**
- * 时间格式化
- * @param val
- * @returns
- */
-/*function dateFormatter(val){
-	return val.substring(0,10);
-	
-}*/
-
 var workflow = Workflow.create(RmaBusiness.create());
-workflow.buttons.pass.text = '通过审核';
-workflow.addPassButton().addRevertButton().init();
+//workflow.buttons.pass.text = '通过审核';
+//workflow.addPassButton().addRevertButton().init();
+

@@ -9,6 +9,7 @@
 		 url: basePath+'/activitiTask/todoTaskList.do',
 		 width :'auto',  
 		 height:'auto',
+		 fit: false,
 		 fitColumns : true,
 		 nowrap:false,
 		 striped: true,//隔行变色
@@ -38,7 +39,8 @@
 		             title: '任务名称',
 		             field: 'taskName',
 		             width: 120
-		         },
+		         }
+				,
 		         {
 		             title: '流程名称',
 		             field: 'processName',
@@ -110,6 +112,5 @@
             }); 
          } 
 		});
-		
-		initPager("#todoTaskList");
+//		initPager("#todoTaskList");
 	}

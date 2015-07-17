@@ -32,21 +32,10 @@
 								</span>
 		    				</a>
 		    			</td>
-		    			<!-- <td class="toolbar-item-container">
-		    				<a class="toolbar-item dialog-tool-separator"></a>
-		    			</td>
-		    			
-		    			<td class="toolbar-item-container">
-		    				<a  class="toolbar-item l-btn   l-btn-plain" onclick="openEdtProcessDialog()"   href="javascript:void(0)" >
-		    					<span class="l-btn-left l-btn-icon-left">
-									<span class="l-btn-icon-left icon-edit"> </span>
-									<span class="l-btn-text">修改</span>
-								</span>
-		    				</a>
-		    			</td> -->
 		    		</tr>
 		    	</tbody>
 		</table>  
+		 
 	</div>
 	<div data-options="region:'center',border:false">
 		<div class="easyui-layout" data-options="fit:true">

@@ -29,38 +29,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="button" value="文章管理" onclick="tab_add('centertabs','文章管理','common/toListPage.do?pagePath=/article/articleList')"/>
 				<input type="button" value="任务管理" onclick="tab_add('centertabs','让我管理','common/toListPage.do?pagePath=/quartz/quartzList')"/>
 			</div>
-			 
+			 -->
 			<div title="工作流管理" data-options="iconCls:'icon-taskmanage'" style="padding:10px">
+				<!--  -->
 				<input type="button" value="流程管理" onclick="tab_add('centertabs','流程管理','common/toListPage.do?pagePath=/activiti/activitiList')"/>
 				<br/>
-				<input type="button" value="我发起的流程" onclick="tab_add('centertabs','我发起的流程','common/toListPage.do?pagePath=/activiti/myProcessList')"/>
+				<input type="button" value="我发起的流程" onclick="tab_add('centertabs','我发起的流程','common/toListPage.do?pagePath=/activiti/myStartProcessList')"/>
 				<br/>
-				<input type="button" value="我参加的流程" onclick="tab_add('centertabs','我参加的流程','common/toListPage.do?pagePath=/activiti/myProcess')"/>
+				<input type="button" value="我参加的流程" onclick="tab_add('centertabs','我参加的流程','common/toListPage.do?pagePath=/activiti/myJoinProcessList')"/>
 				<br/>
-				<input type="button" value="已经结束的流程" onclick="tab_add('centertabs','已经结束的流程','common/toListPage.do?pagePath=/activiti/myProcess')"/>
+				<input type="button" value="已经结束的流程" onclick="tab_add('centertabs','已经结束的流程','common/toListPage.do?pagePath=/activiti/finishProcessList')"/>
 				<br/>
 				<input type="button" value="我的待办" onclick="tab_add('centertabs','我的代办','common/toListPage.do?pagePath=/activiti/todoTaskList')"/>
 			</div>
-			 -->
 			 
+			 <!-- 
 			 <div title="系统管理" data-options="selected:true,iconCls:'icon-taskmanage'" style="padding:10px">
-			<!-- 	<input type="button" value="用户管理" onclick="tab_add('centertabs','用户管理','common/toListPage.do?pagePath=/activiti/activitiList')"/>
+			  	<input type="button" value="用户管理" onclick="tab_add('centertabs','用户管理','user/userList.do')"/>
 				<br/>
 				<input type="button" value="角色管理" onclick="tab_add('centertabs','角色管理','common/toListPage.do?pagePath=/activiti/myProcessList')"/>
 				<br/>
 				<input type="button" value="权限管理" onclick="tab_add('centertabs','权限管理','common/toListPage.do?pagePath=/activiti/myProcess')"/>
 				<br/>
 				<input type="button" value="组织机构管理" onclick="tab_add('centertabs','组织机构管理','common/toListPage.do?pagePath=/activiti/myProcess')"/>
-				<br/> -->
+				<br/>
 				<input type="button" value="会话管理" onclick="tab_add('centertabs','会话管理','common/toListPage.do?pagePath=/shiro/session/sessionList')"/>
 				<br/>
-				<!-- 
 				<input type="button" value="数据字典" onclick="tab_add('centertabs','数据字典','common/toListPage.do?pagePath=/dictionary/dictionaryList')"/>
-				 -->
-				 <input type="button" value="任务列表" onclick="tab_add('centertabs','任务管理','common/toListPage.do?pagePath=/quartz/taskList')"/>
-				 <input type="button" value="任务管理" onclick="tab_add('centertabs','任务管理','common/toListPage.do?pagePath=/quartz/quartzList')"/>
+				<br/>
+				<input type="button" value="任务列表" onclick="tab_add('centertabs','任务管理','common/toListPage.do?pagePath=/quartz/taskList')"/>
+				<br/>
+				<input type="button" value="任务添加" onclick="tab_add('centertabs','任务添加','common/toListPage.do?pagePath=/quartz/quartzList')"/>
 			</div>
-			 
+			  -->
 			
 		</div>
  </body> 

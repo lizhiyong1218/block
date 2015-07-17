@@ -38,6 +38,15 @@ public class ActivitiProcessController {
 	@Resource
 	private IActivitiProcessService activitiProcessService;
 	
+	/**
+	 * 
+	 * @Title: myStartProcess
+	 * @Description: 我发起的流程
+	 * @param processName
+	 * @param pageModel
+	 * @return: Map<String,Object>
+	 * @throws
+	 */
 	@ResponseBody
 	@RequestMapping(value="/myStartProcess")
 	public  Map<String, Object>  myStartProcess(String processName,PageModel pageModel) {
@@ -53,4 +62,43 @@ public class ActivitiProcessController {
 		return map;
 	}
 
+	/**
+	 * 
+	 * @Title: finishProcess
+	 * @Description: 我参与的已经完成流程
+	 * @param processName
+	 * @param pageModel
+	 * @return: Map<String,Object>
+	 * @throws
+	 */
+	@ResponseBody
+	@RequestMapping(value="/finishProcess")
+	public  Map<String, Object>  finishProcess(String processName,PageModel pageModel) {
+		Pagination<ProcessDefInfo> pm = new Pagination<ProcessDefInfo>();
+		try {				
+			pm = activitiProcessService.getMyJoinFinishedProcess("kafeitu", pageModel);
+		} catch (Exception e) {
+			logger.error(e.getMessage(),e);
+		}
+		ModelMap map=new ModelMap();
+		map.put("rows", pm.getRecordList());  
+		map.put("total", pm.getRecordCount()); 
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/myJoinProcess")
+	public  Map<String, Object>  myJoinProcess(String processName,PageModel pageModel) {
+		Pagination<ProcessDefInfo> pm = new Pagination<ProcessDefInfo>();
+		try {				
+			pm = activitiProcessService.getMyJoinProcess("kafeitu", pageModel);
+		} catch (Exception e) {
+			logger.error(e.getMessage(),e);
+		}
+		ModelMap map=new ModelMap();
+		map.put("rows", pm.getRecordList());  
+		map.put("total", pm.getRecordCount()); 
+		return map;
+	}
+	
 }

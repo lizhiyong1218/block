@@ -7,7 +7,9 @@
         	  <div data-options="region:'center',border:false">
         <div class="pd10">
         	<form id="rmaDetailForm" method="post">
+            <!-- 
             <div class="easyui-panel" data-options="title:'基本信息',plain:true,fitWidth:true,cls:'mt20'" >
+             -->
                 <div class="fl">
                     <table class="form-tb">
                        <col width=120 />
@@ -53,7 +55,7 @@
                          </tbody>                                                                  
                     </table>
                 </div>
-            </div>
+           <!--  </div> -->
             </form>
         </div>
         </div>

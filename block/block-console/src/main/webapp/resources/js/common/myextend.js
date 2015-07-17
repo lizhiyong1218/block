@@ -1,4 +1,5 @@
 /**
+ * 获取表单中的name:value对
  * 用来使用
  * $('#dictionaryList').datagrid('load',$('#searchForm').serializeJson());
  */

@@ -25,12 +25,15 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lzy.block.api.common.PageModel;
 import com.lzy.block.api.common.Pagination;
 import com.lzy.block.api.common.StrUtil;
+import com.lzy.block.api.constant.common.ResultStatus;
+import com.lzy.block.api.vo.ResultVo;
 import com.lzy.block.api.vo.activiti.ProcessHistoryVo;
 import com.lzy.block.api.vo.activiti.ProcessTaskDetailVo;
 import com.lzy.block.api.vo.activiti.ProcessTaskVo;
@@ -38,6 +41,7 @@ import com.lzy.block.core.service.activiti.IActivitiHistoryService;
 import com.lzy.block.core.service.activiti.IActivitiProcessInstanceService;
 import com.lzy.block.core.service.activiti.IActivitiProcessService;
 import com.lzy.block.core.service.activiti.IActivitiTaskService;
+import com.lzy.block.core.utils.Variable;
 
 /**
  * @ClassName: WorkFlowTaskController
@@ -193,6 +197,7 @@ public class ActivitiTaskController {
 				detailVo.setBusinessKey(businessKey);
 				detailVo.setProcessInstanceId(task.getProcessInstanceId());
 				detailVo.setFormKey(formKey);
+				detailVo.setTaskId(taskId);
 			}else{
 				logger.error("任务为空!"+taskId);
 			}
@@ -270,4 +275,35 @@ public class ActivitiTaskController {
 	}
 	
 */
+	
+	
+	@RequestMapping(value = "complete", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public ResultVo complete(String taskId,String arr) {
+		
+//		String userId = workflowUserService.getUserId(sessionId);
+//		if(!taskService.hasVerifyPermission(taskId, userId)){
+//			return JsonUtils.toJson(new SimpleReturnVo(ResponseCode.FAIL, "审核失败,对不起,您没有审核的权限！"));
+//		}
+		ResultVo res=new ResultVo();
+		res.setStatus(ResultStatus.FAILURE.value());
+		res.setMessage("操作失败!");
+		try {
+			Map<String, Object> variablesMap =  Variable.getVariableMap(arr);
+			Task task = activitiTaskService.getTaskById(taskId);
+			if(task.isSuspended()){
+				res.setMessage("审核失败,流程已经被挂起(暂停)！");
+				return res;
+			}
+			taskService.complete(taskId, variablesMap);
+			res.setStatus(ResultStatus.SUCCESS.value());
+			res.setMessage("审核成功!");
+		} catch (Exception e) {
+			logger.error("审核失败！"+ e.getMessage());
+			res.setMessage("审核失败！"+e.getMessage());
+		}
+		return res;
+	}
+	
 }
