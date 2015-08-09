@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.lzy.block</groupId>
-		<artifactId>block</artifactId>
+		<artifactId>block</artifactId> 
 		<version>0.0.1-SNAPSHOT</version> 
-	</parent>
+	</parent> 
 	<artifactId>block-console</artifactId>
 	<packaging>war</packaging>
 	<name>block-console Maven Webapp</name>
@@ -28,7 +28,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 		</dependency>
-		<dependency>
+		<dependency> 
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 		</dependency>
@@ -55,9 +55,9 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
+			<scope>test</scope>  
 		</dependency>
-		<dependency>
+		<dependency> 
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
@@ -71,7 +71,7 @@
 			<artifactId>aspectjrt</artifactId>
 		</dependency>
 
-
+ 
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
@@ -80,7 +80,7 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 		</dependency>
-		<dependency>
+		<dependency> 
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 		</dependency>
@@ -151,9 +151,9 @@
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-web</artifactId>
 		</dependency>
-
+ 
 		<!-- -->
-
+ 
 		<!-- Jackson JSON Processor -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -268,7 +268,7 @@
 			<version>2.4</version> 
 		</dependency>
 		
-		<!-- hibernate  -->
+		<!-- hibernate  --> 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -277,7 +277,7 @@
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 		</dependency>
-		
+		 
 		<!-- guava -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -306,6 +306,7 @@
 	
 	<build>
 		<finalName>block-console</finalName>
+		<!-- 
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -317,5 +318,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		 -->
 </build>
 </project>

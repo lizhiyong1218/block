@@ -612,7 +612,20 @@
 	            <version>${druid.version}</version>
 	        </dependency>
 	        <!-- druid -->
-
+		     <!-- commons-codec -->   
+		     <dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.8</version>
+			</dependency>
+	  		<!-- commons-codec -->   
+	  		<!-- 
+	  		<dependency>
+			    <groupId>commons-lang</groupId>
+			    <artifactId>commons-lang</artifactId>
+			    <version>20030203.000129</version>
+			</dependency>
+			 -->
 		</dependencies>
 	</dependencyManagement>
 	<build>

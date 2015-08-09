@@ -18,3 +18,4 @@ block-console/bin
 block-console/files
 block-console/src/main/webapp/activiti/
 
+/bin
