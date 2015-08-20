@@ -306,18 +306,130 @@
 	
 	<build>
 		<finalName>block-console</finalName>
-		<!-- 
+		 
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin> 
+			<!-- 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<showWarnings>true</showWarnings>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>com.pyx4me</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>proguard</goal>
+						</goals>
+					</execution>
+				</executions> 
+				<configuration>
+					<obfuscate>true</obfuscate>
+					<proguardInclude>${basedir}/proguard.conf</proguardInclude>
+					 
+					<libs>
+						<lib>${java.home}/lib/rt.jar</lib>
+						<lib>lib/fcexporter_jdk1.5.jar</lib>
+						<lib>lib/fcexporthandler.jar</lib>
+						<lib>lib/jsp-api.jar</lib>
+						<lib>lib/servlet-api.jar</lib>
+					</libs>
+					<addMavenDescriptor>false</addMavenDescriptor>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>net.sf.proguard</groupId>
+						<artifactId>proguard</artifactId>
+						<version>4.7</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>
+			</plugin>  -->
+  <!-- 
+		<plugin>
+			<groupId>com.pyx4me</groupId>
+			<artifactId>proguard-maven-plugin</artifactId>
+			<executions>
+				<execution>
+					<phase>package</phase>
+					<goals>
+						<goal>proguard</goal>
+					</goals>
+				</execution>
+			</executions>
+			<configuration>
+				<obfuscate>true</obfuscate>
+				<proguardInclude>${basedir}/proguard.pro</proguardInclude>
+				<libs>
+					<lib>${java.home}/lib/rt.jar</lib>
+					<lib>${java.home}/lib/jsse.jar</lib>
+					<lib>${java.home}/lib/jce.jar</lib>
+				</libs>
+			</configuration>
+		</plugin>
+ 
+			<plugin>
+				<groupId>com.pyx4me</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<version>2.0.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>proguard</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<obfuscate>true</obfuscate>
+					<proguardInclude>${basedir}/proguard.pro</proguardInclude>
+					<maxMemory>768m</maxMemory>
+					
+					添加依赖，这里你可以按你的需要修改 
+					<libs>
+						<lib>${java.home}/lib/rt.jar</lib>
+						<lib>lib/jsp-api.jar</lib>
+						<lib>lib/servlet-api.jar</lib>
+					</libs>
+					
+					
+					<addMavenDescriptor>false</addMavenDescriptor>
+					<injar>${project.build.finalName}.war</injar>
+					<outjar>${project.build.finalName}-pg.war</outjar>
+					<outputDirectory>${project.build.directory}</outputDirectory>
+				</configuration>
+				<dependencies>
+				
+					使用4.4版本来混淆
+					
+					<dependency>
+						<groupId>net.sf.proguard</groupId>
+						<artifactId>proguard</artifactId>
+						<version>4.7</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>
+			</plugin>
+			  -->
+			
 		</plugins>
-		 -->
 </build>
 </project>
