@@ -27,8 +27,14 @@ public class TxtUtil {
 						new FileInputStream(file), encoding);// 考虑到编码格式
 				BufferedReader bufferedReader = new BufferedReader(read);
 				String lineTxt = null;
+				String[] s=null;
 				while ((lineTxt = bufferedReader.readLine()) != null) {
-					System.out.println(lineTxt);
+//					System.out.println(lineTxt);
+					s=lineTxt.split("	");//特殊空格字符
+					System.out.println(s.length);
+					for(int i=0;i<s.length;i++){
+						System.out.println(i+"---"+s[i]);
+					}
 				}
 				read.close();
 			} else {
@@ -41,7 +47,7 @@ public class TxtUtil {
 	}
 
 	public static void main(String[] args) {
-		String filePath = "f:/testppp.txt";
+		String filePath = "f:/C1.txt";
 		// String filePath = "f:/过滤仓库11.txt";
 		readTxtFile(filePath);
 	}
