@@ -9,6 +9,9 @@ package com.lzy.block.core.common;
 
 import java.io.IOException;
 import java.util.List;
+
+import org.activiti.engine.impl.util.json.JSONArray;
+import org.activiti.engine.impl.util.json.JSONObject;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -101,5 +104,29 @@ public class JsonUtils {
             throw new IOException("json字符串转化为 list失败");
         }
     }
+    
+    /**
+     * 嵌套数组测试
+     */
+    public static void  testIncludeJsonArr(){
+//		String str="{'list':[{'oaPriceClassInstallPrice':'1','oaPriceClassName':'1','taxMoney':'1','oaPriceClassAccessories':'1','priceStr':[{'oaCommodityList_id':'983','oaCommodityListName':'中性笔','oaCommodityListBrand':'晨光','oaCommodityListSpecification':'油性金色','oaCommodityType':'','oaCommodityListUnits':'支','oaEngPriceNumber':'2','oaEngPricePrice':'3.0','oaEngPriceRemark':''},{'oaCommodityList_id':'982','oaCommodityListName':'移动硬盘','oaCommodityListBrand':'西部数据','oaCommodityListSpecification':'1TB','oaCommodityType':'','oaCommodityListUnits':'个','oaEngPriceNumber':'1','oaEngPricePrice':'450.0','oaEngPriceRemark':''}]},{'oaPriceClassInstallPrice':'22','oaPriceClassName':'22','taxMoney':'22','oaPriceClassAccessories':'22','priceStr':[{'oaCommodityList_id':'983','oaCommodityListName':'中性笔','oaCommodityListBrand':'晨光','oaCommodityListSpecification':'油性金色','oaCommodityType':'','oaCommodityListUnits':'支','oaEngPriceNumber':'2','oaEngPricePrice':'3.0','oaEngPriceRemark':''},{'oaCommodityList_id':'982','oaCommodityListName':'移动硬盘','oaCommodityListBrand':'西部数据','oaCommodityListSpecification':'1TB','oaCommodityType':'','oaCommodityListUnits':'个','oaEngPriceNumber':'3','oaEngPricePrice':'450.0','oaEngPriceRemark':''}]}]}";
+//		JSONObject object = new JSONObject(str);
+//		JSONArray list = object.getJSONArray("list");
+		
+    	JSONArray list=new JSONArray("[{'oaPriceClassInstallPrice':'1','oaPriceClassName':'1','taxMoney':'1','oaPriceClassAccessories':'1','priceStr':[{'oaCommodityList_id':'983','oaCommodityListName':'中性笔','oaCommodityListBrand':'晨光','oaCommodityListSpecification':'油性金色','oaCommodityType':'','oaCommodityListUnits':'支','oaEngPriceNumber':'2','oaEngPricePrice':'3.0','oaEngPriceRemark':''},{'oaCommodityList_id':'982','oaCommodityListName':'移动硬盘','oaCommodityListBrand':'西部数据','oaCommodityListSpecification':'1TB','oaCommodityType':'','oaCommodityListUnits':'个','oaEngPriceNumber':'1','oaEngPricePrice':'450.0','oaEngPriceRemark':''}]},{'oaPriceClassInstallPrice':'22','oaPriceClassName':'22','taxMoney':'22','oaPriceClassAccessories':'22','priceStr':[{'oaCommodityList_id':'983','oaCommodityListName':'中性笔','oaCommodityListBrand':'晨光','oaCommodityListSpecification':'油性金色','oaCommodityType':'','oaCommodityListUnits':'支','oaEngPriceNumber':'2','oaEngPricePrice':'3.0','oaEngPriceRemark':''},{'oaCommodityList_id':'982','oaCommodityListName':'移动硬盘','oaCommodityListBrand':'西部数据','oaCommodityListSpecification':'1TB','oaCommodityType':'','oaCommodityListUnits':'个','oaEngPriceNumber':'3','oaEngPricePrice':'450.0','oaEngPriceRemark':''}]}]");
+		for(int i=0; i<list.length(); i++){
+		    JSONObject entityObj = list.getJSONObject(i);           
+		    JSONArray entitys = entityObj.getJSONArray("priceStr");
+		        for(int j=0; j<entitys.length(); j++){
+		            JSONObject entity = entitys.getJSONObject(j);
+		        String date = entity.getString("oaCommodityList_id");
+		        System.err.println(date);
+		    }      
+		}
+    }
+    
+    public static void main(String[] args) {
+    	testIncludeJsonArr();
+	}
 
 }
