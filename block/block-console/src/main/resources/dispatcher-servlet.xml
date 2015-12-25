@@ -143,7 +143,9 @@
     </bean>  
       
     <!-- FreeMarker视图解析 -->  
-    <bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
+    <!-- 默认： <bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"> -->
+    <!-- 扩展freemarker视图解析 -->
+    <bean id="freeMarkerViewResolver" class="com.lzy.block.console.freemarker.FreeMarkerViewResolverExt">  
         <property name="cache" value="true"/>  
         <property name="suffix" value=".ftl"/>  
         <property name="contentType" value="text/html;charset=UTF-8" />
@@ -177,6 +179,15 @@
 			<bean class="com.iceasy.wms.core.web.servlet.interceptor.PrivilegeDiscriminatorInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors> -->
+	
+	<!-- token拦截器  -->
+    <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/token/*" />
+			<bean class="com.lzy.block.console.interceptor.TokenInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> 
+	
 
 	<!-- #################################################################### -->
 	<!-- # 9、定义静态资源 -->
@@ -216,6 +227,8 @@
 	 </property>
 	</bean> -->
 	
-
+	<!-- 宏命令标签 
+	<bean id="customerServiceDirective" class="com.lzy.block.console.freemarker.directive.CustomerServiceDirective"></bean>
+	 -->
 	 
 </beans>

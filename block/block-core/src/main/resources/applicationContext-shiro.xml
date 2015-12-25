@@ -155,6 +155,8 @@
         </property>
         <property name="filterChainDefinitions">
             <value>
+            	/token/**=anon
+            	/front/**=anon
                 /activiti/** = anon
                 /resources/** = anon
                 /frame/** = anon
