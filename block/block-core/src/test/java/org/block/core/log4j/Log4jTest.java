@@ -22,14 +22,36 @@ public class Log4jTest extends BaseTest{
 	
 	Logger logger=Logger.getLogger(Log4jTest.class.getName());
 	
+	Logger aloneLogger=Logger.getLogger("AlongTest");
+	
+	/**
+	 * 测试邮件
+	 */
 	@Test
-	public void testERREmail(){
-		logger.error("邮件测试 ~~~");
+	public void testfatalEmail(){
+		logger.fatal("邮件info测试 ~~~");
 	}
 	
+	
 	@Test
-	public void testInfoEmail(){
-		logger.info("邮件info测试 ~~~");
+	public void testInfoLogger(){
+		logger.info("info日志~~~~~");
+	}
+	
+	/**
+	 * 测试数据库
+	 */
+	@Test
+	public void testdatabaseLogger(){
+		logger.error("数据库日志~~~~~");
+	}
+	
+	/**
+	 * 测试单独存放日志到指定文件
+	 */
+	@Test
+	public void testaloneLogger(){
+		aloneLogger.info("单独日志~~~~~");
 	}
 	
 }
