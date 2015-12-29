@@ -8,6 +8,10 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 
 /**
  * 
@@ -52,4 +56,13 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
          }
          return matches;
     }
+    
+    public static void main(String[] args) {
+    	String username="admin";
+    	String str="111111";
+        String password =  new SimpleHash("md5",str,ByteSource.Util.bytes(username),2).toHex();  
+        System.err.println(password);
+	}
+    
+    
 }

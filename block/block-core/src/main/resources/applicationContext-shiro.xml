@@ -155,6 +155,9 @@
         </property>
         <property name="filterChainDefinitions">
             <value>
+            	/**/*.jsp=anon
+            	/common/**=anon
+            	/test/**=anon
             	/token/**=anon
             	/front/**=anon
                 /activiti/** = anon
