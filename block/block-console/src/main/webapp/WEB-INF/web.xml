@@ -151,6 +151,34 @@
 	      <scripting-invalid>false</scripting-invalid>
 	    </jsp-property-group>
 	  </jsp-config>
+	  
+	  <!-- 直接访问页面,不经过controller  -->  
+	  	<error-page>  
+		    <exception-type>java.lang.Throwable</exception-type>  
+		    <location>/error/error500.jsp</location>  
+		</error-page> 
+	  	<error-page>
+			<error-code>404</error-code>
+			<location>/error/error404.jsp</location>
+		</error-page>
+		<error-page>
+			<error-code>500</error-code>
+			<location>/error/error500.jsp</location>
+		</error-page>
+  <!--  经过controller跳转到错误页面 
+  	  	<error-page>  
+		    <exception-type>java.lang.Throwable</exception-type>  
+		    <location>/common/error/500</location>  
+		</error-page> 
+  		<error-page>
+			<error-code>404</error-code>
+			<location>/common/error/404</location>
+		</error-page>
+		<error-page>
+			<error-code>500</error-code>
+			<location>/common/error/500</location>
+		</error-page>
+   -->
   
 	  	<!-- #################################################################### -->
 		<!-- # 首页文件 -->
