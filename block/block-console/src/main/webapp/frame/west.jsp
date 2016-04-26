@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="button" value="我的待办" onclick="tab_add('centertabs','我的代办','common/toListPage.do?pagePath=/activiti/todoTaskList')"/>
 			</div>
 			 
-			 <!-- 
+			 
 			 <div title="系统管理" data-options="selected:true,iconCls:'icon-taskmanage'" style="padding:10px">
 			  	<input type="button" value="用户管理" onclick="tab_add('centertabs','用户管理','user/userList.do')"/>
 				<br/>
@@ -60,8 +60,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="button" value="任务列表" onclick="tab_add('centertabs','任务管理','common/toListPage.do?pagePath=/quartz/taskList')"/>
 				<br/>
 				<input type="button" value="任务添加" onclick="tab_add('centertabs','任务添加','common/toListPage.do?pagePath=/quartz/quartzList')"/>
+				<br/>
+				<input type="button" value="svn更新信息" onclick="tab_add('centertabs','svn更新信息','common/toListPage.do?pagePath=/svn/svnLogList')"/>
 			</div>
-			  -->
+			 <!--  -->
 			
 		</div>
  </body> 

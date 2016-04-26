@@ -225,6 +225,17 @@
 			  <artifactId>jsoup</artifactId>
 			  <version>1.6.3</version>
  		</dependency>
+ 		
+ 		<!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        
+        <dependency>
+		    <groupId>org.tmatesoft.svnkit</groupId>
+		    <artifactId>svnkit</artifactId>
+		</dependency>
  
 	</dependencies>
 
@@ -244,6 +255,11 @@
 					<exclude>log4j.properties</exclude> </excludes> -->
 			</resource>
 		</resources>
+		
+		<plugins>
+		
+		</plugins>
+		
 	</build>
 
 </project>

@@ -115,6 +115,48 @@
 		<property name="checkoutTimeout" value="5000" />
 	</bean>
 	
+	<!-- druid数据源 -->
+	<bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource"   init-method="init" destroy-method="close">  
+		<!-- 基本属性 url、user、password -->
+        <property name="url" value="jdbc:mysql://${db.ip}:${db.port}/${db.name}?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull" />  
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" /> 
+		<property name="maxActive" value="20" />
+		
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="60000" />
+		
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+		
+		<!-- 打开removeAbandoned功能,1800秒，也就是30分钟,关闭abanded连接时输出错误日志
+		一个连接被get后, 超过了 removeAbandonedTimeoutMillis这么久就强制关闭，要根据业务设置时间或者不设置
+		<property name="removeAbandoned" value="true" /> 
+    	<property name="removeAbandonedTimeout" value="1800" /> 
+    	<property name="logAbandoned" value="true" /> 
+		 -->
+		
+		<!-- 配置监控统计拦截的filters,拦截sql日志 -->
+		<property name="filters" value="stat,log4j" /> 
+        
+    </bean>   
+	
 	<!-- 
 		 多数据源  自定义数据源选择
 	-->
@@ -127,15 +169,13 @@
 				<entry key="slave" value-ref="slaveDataSource" />
 			</map>
 		</property>
-		<property name="defaultTargetDataSource" ref="masterDataSource" />
-	</bean> 
-	
-	 
+		<property name="defaultTargetDataSource" ref="druidDataSource" />
+	</bean>
 	
 	<!-- 定义事务通知 -->
 	 <bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dataSource" /> 
 	</bean>
 	
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -158,19 +198,54 @@
 		</tx:attributes> 
 	</tx:advice> 
 	
-	<!-- 事务切面-->	
+	<!-- 事务切面
 	<aop:config proxy-target-class="true">
 		<aop:pointcut id="interceptorPointCuts" expression="execution(* com.lzy.block.core.service..*.*(..))" />
 		<aop:advisor  pointcut-ref="interceptorPointCuts" advice-ref="txAdvice"/>
 	</aop:config>
-	
-	<!-- 多数据源选择切面 -->
+	-->	
+	<!-- 多数据源选择切面 
 	<bean id="dataSourceAspect" class="com.lzy.block.core.db.DataSourceAspect" />
-	 <aop:config>
+	<aop:config>
         <aop:aspect id="c" ref="dataSourceAspect">
             <aop:pointcut id="tx" expression="execution(* com.lzy.block.core.service..*.*(..))"/>
             <aop:before pointcut-ref="tx" method="before"/>
         </aop:aspect>
-    </aop:config> 
+    </aop:config>
+	-->
+	
+	<!-- druid拦截器 -->
+	<bean id="druid-stat-interceptor"
+		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+	</bean>
+
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+		scope="prototype">
+		<!-- <property name="patterns">
+			<list>
+				<value>com.lzy.block.core.service.*</value>
+				<value>com.lzy.block.core.dao.*</value>
+			</list>
+		</property> -->
+	</bean>
+	
+	<!-- 主从数据源动态切换 -->
+	<bean id="dataSourceAspect" class="com.lzy.block.core.db.DataSourceAspect" />
+	
+	<!-- 多个切面 -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="druid-stat-pointcut" expression="execution(* com.lzy.block.core.service..*.*(..))
+		  OR execution(* com.lzy.block.core.dao..*.*(..))" />
+		<aop:pointcut id="interceptorPointCuts" expression="execution(* com.lzy.block.core.service..*.*(..))" />
+		
+		<aop:advisor  pointcut-ref="druid-stat-pointcut" advice-ref="druid-stat-interceptor"/>
+		<aop:advisor  pointcut-ref="interceptorPointCuts" advice-ref="txAdvice"/>
+		
+		<aop:aspect id="c" ref="dataSourceAspect">
+            <aop:pointcut id="tx" expression="execution(* com.lzy.block.core.service..*.*(..))"/>
+            <aop:before pointcut-ref="tx" method="before"/>
+        </aop:aspect>
+		
+	</aop:config>
 	
 </beans>

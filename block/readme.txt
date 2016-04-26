@@ -19,3 +19,6 @@ shiro:
 
 
 加密工具类
+js，css文件压缩 block-console/pom.xml中
+自定义插件
+svn日志

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lzy.block.core.dao.dictionary.DictionaryMapper" >
+
+   <cache 
+       eviction="LRU"
+       flushInterval="60000"
+       size="1024"
+       readOnly="true"
+   /> 
+
   <resultMap id="BaseResultMap" type="dictionaryModel" >
     <id column="dictionary_id" property="dictionaryId" jdbcType="INTEGER" />
     <result column="dictionary_value" property="dictionaryValue" jdbcType="VARCHAR" />
@@ -22,29 +30,31 @@
   </sql>
   
   <sql id="pageModelwhere">
-	<if test="dictionaryValue != null and dictionaryValue != ''">
-		AND dictionary_value = #{dictionaryValue,jdbcType=VARCHAR}
-	</if>   
-	AND isavailable = 1
+  	<where>
+		<if test="dictionaryValue != null and dictionaryValue != ''">
+			AND dictionary_value = #{dictionaryValue,jdbcType=VARCHAR}
+		</if>   
+		AND isavailable = 1
+	</where>
   </sql>
   
-   <select id="getAll" parameterType="dictionaryModel" resultMap="BaseResultMap">
+   <select id="getAll" parameterType="dictionaryModel" resultMap="BaseResultMap" useCache="false" >
 		select
 		<include refid="Base_Column_List" />
-		from <include refid="table_name" /> where 1=1
+		from <include refid="table_name" /> 
 		<include refid="pageModelwhere" />
 	</select>
 	
 	<select id="getCount" parameterType="dictionaryModel" resultType="java.lang.Long">
 		select	count(1)
-		from <include refid="table_name" /> where 1=1
+		from <include refid="table_name" />  
 		<include refid="pageModelwhere" />
 	</select>
 	
 	<select id="selectModel" parameterType="dictionaryModel" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from <include refid="table_name" /> where 1=1
+		from <include refid="table_name" /> 
 		<include refid="pageModelwhere" />
 	</select>
   

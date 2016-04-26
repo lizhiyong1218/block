@@ -18,4 +18,9 @@ block-console/bin
 block-console/files
 block-console/src/main/webapp/activiti/
 
+block-plugin/target
+block-plugin/.settings/
+block-plugin/bin
+block-plugin/files
+
 /bin

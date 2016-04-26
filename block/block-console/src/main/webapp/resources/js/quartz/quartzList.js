@@ -41,7 +41,7 @@
 		                {
 		                    title: '任务组',
 		                    field: 'jobGroup',
-		                    width: 100
+		                    width: 40
 		                },
 		                {
 		                    title: '时间表达式',
@@ -53,6 +53,16 @@
 		                    field: 'jobStatus',
 		                    width: 60
 		                },
+//		                {
+//		                    title: '上次运行开始时间',
+//		                    field: 'cronExpression',
+//		                    width: 100 
+//		                },
+		                {
+		                    title: '上次运行',
+		                    field: 'cronExpression',
+		                    width: 60 
+		                },
 		                {
 		                    title: '备注',
 		                    field: 'desc',
@@ -61,7 +71,7 @@
 		                {
 		                    title: '操作',
 		                    field: 'phasePrice',
-		                    width: 60,
+		                    width: 160,
 		                    formatter:opFormatter
 		                } 
 		            ]

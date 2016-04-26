@@ -82,7 +82,7 @@ public class CryptoUtils {
 	
 	public static void main(String[] args) throws NoSuchAlgorithmException {
 		String salt = CryptoUtils.getSalt();
-		String password = "admin123";
+		String password = "123456";
 		String hashPassword = CryptoUtils.getHash(password, salt);
 		System.out.println("hashPassword:" + hashPassword);
 		System.out.println("salt:" + salt);
