@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+    <dataSource name="SHENZHEN">
+        <table name="t_sys_dictionary_item" min="1" max="10952556" />
+        <table name="t_sys_dictionary_item_1" min="10952557" max="200000000" />
+    </dataSource>
+<!--
+	针对不同的数据库里面的表    
+	<dataSource name="ZH">
+        <table name="t_picture" min="1" max="1921728" />
+        <table name="t_picture_1" min="1921729" max="200000000" />
+    </dataSource> 
+-->
+</configuration>
