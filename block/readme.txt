@@ -22,3 +22,6 @@ shiro:
 js，css文件压缩 block-console/pom.xml中
 自定义插件
 svn日志
+mybatis缓存，分库分表插件
+druid连接池监控
+自定义maven插件
