@@ -14,6 +14,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
      	<!-- <span>欢迎来到 李志勇 个人网站!</span> <br/>
      	<span> 项目开始时间:2013-10-19 16:26</span>  -->
+     	<img alt="ss" src="http://11.jpg"
+     	onerror="this.src='<%=basePath%>/resources/images/nopic.jpg';">
  </body> 
 </html>
  
