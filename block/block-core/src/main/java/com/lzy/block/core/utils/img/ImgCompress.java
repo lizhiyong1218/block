@@ -3,13 +3,12 @@ package com.lzy.block.core.utils.img;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+//import com.sun.image.codec.jpeg.JPEGCodec;
+//import com.sun.image.codec.jpeg.JPEGImageEncoder;
 /**
  * 图片压缩处理
  * @author 崔素强
@@ -73,11 +72,14 @@ public class ImgCompress {
 		// SCALE_SMOOTH 的缩略算法 生成缩略图片的平滑度的 优先级比速度高 生成的图片质量比较好 但速度慢
 		BufferedImage image = new BufferedImage(w, h,BufferedImage.TYPE_INT_RGB ); 
 		image.getGraphics().drawImage(img, 0, 0, w, h, null); // 绘制缩小后的图
-		File destFile = new File(desc);
-		FileOutputStream out = new FileOutputStream(destFile); // 输出到文件流
+//		File destFile = new File(desc);
+//		FileOutputStream out = new FileOutputStream(destFile); // 输出到文件流
 		// 可以正常实现bmp、png、gif转jpg
-		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-		encoder.encode(image); // JPEG编码
-		out.close();
+//		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+//		encoder.encode(image); // JPEG编码
+//		out.close();
+		String formatName = desc.substring(desc.lastIndexOf(".") + 1);
+		ImageIO.write(image, /*"GIF"*/ formatName /* format desired */ , new File(desc) /* target */ );
+
 	}
 }
