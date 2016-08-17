@@ -162,14 +162,14 @@
 		</dependency>
 		
 		
-		<!-- 多线程测试 -->
+		<!-- 多线程测试 
 		<dependency> 
 	      <groupId>com.lzy.test</groupId>
 		  <artifactId>GroboUtils-core</artifactId>
 		  <version>1.2.1</version>
 		  <scope>test</scope>
 	    </dependency>
-	    
+	    -->
 	    <!-- hibernate  -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -236,6 +236,19 @@
 		    <groupId>org.tmatesoft.svnkit</groupId>
 		    <artifactId>svnkit</artifactId>
 		</dependency>
+ 
+		<!-- mongodb -->
+		<!-- 
+		<dependency>
+		    <groupId>org.mongodb</groupId>
+		    <artifactId>mongo-java-driver</artifactId>
+		</dependency> 
+		-->
+        <dependency>   
+            <groupId>org.springframework.data</groupId>  
+            <artifactId>spring-data-mongodb</artifactId>  
+        </dependency>   
+		<!-- mongodb --> 
  
 	</dependencies>
 
