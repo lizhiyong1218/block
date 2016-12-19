@@ -23,4 +23,9 @@ block-plugin/.settings/
 block-plugin/bin
 block-plugin/files
 
+block-search/target
+block-search/.settings/
+block-search/bin
+block-search/files
+
 /bin

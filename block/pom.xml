@@ -15,6 +15,7 @@
 		<module>block-core</module>
 		<module>block-plugin</module>
 		<module>block-console</module>
+    <module>block-search</module>
   </modules>
 	
 	<properties>
@@ -81,8 +82,12 @@
 		<jcaptcha.version>1.0-RC6</jcaptcha.version>		
 		<!-- druid -->
 		<druid.version>1.0.9</druid.version>
-		
-		
+		<!-- mongodb -->
+		<spring.data.mongodb>1.2.0.RELEASE</spring.data.mongodb>
+		<mongo.java.driver>3.3.0</mongo.java.driver>
+		<!-- solr -->
+		<solr.version>5.5.3</solr.version> 
+		 
 	</properties>
  
 	<!-- #################################################################### -->
@@ -102,7 +107,7 @@
 	</distributionManagement>
 
 	<!-- #################################################################### -->
-	<!-- # 设定除中央仓�?http://repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查�? -->
+	<!-- # 设定除中央仓�?http://repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查�? -->
 	<!-- #################################################################### -->
 	<repositories>
 		
@@ -544,7 +549,7 @@
 	        
 	        
 	        <!--commons dependence begin -->
-			<!-- 提供对Java 反射和自省API的包�? -->
+			<!-- 提供对Java 反射和自省API的包�? -->
 			<dependency>
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
@@ -579,7 +584,7 @@
 	        </dependency>
 			<!-- shiro -->
 			
-	<!-- jcaptcha 验证�?-->
+	<!-- jcaptcha 验证�?-->
        <!--  <dependency>
             <groupId>com.octo.captcha</groupId>
             <artifactId>jcaptcha</artifactId>
@@ -648,15 +653,23 @@
 			<dependency>
 			    <groupId>org.mongodb</groupId>
 			    <artifactId>mongo-java-driver</artifactId>
-			    <version>3.3.0</version>
+			    <version>${mongo.java.driver}</version>
 			</dependency>
 	        <dependency>  
 	            <groupId>org.springframework.data</groupId>  
 	            <artifactId>spring-data-mongodb</artifactId>  
-	            <version>1.9.2.RELEASE</version>  
+	            <version>${spring.data.mongodb}</version>  
 	        </dependency> 
 			<!-- mongodb --> 
-		</dependencies>
+			
+			<!-- solr -->
+			<dependency>
+			    <groupId>org.apache.solr</groupId>
+			    <artifactId>solr-solrj</artifactId>
+			    <version>${solr.version}</version>
+			</dependency>
+			<!-- solr -->
+		</dependencies> 
 	</dependencyManagement>
 	
 	 
