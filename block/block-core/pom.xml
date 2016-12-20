@@ -21,6 +21,12 @@
 			<artifactId>block-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.lzy.block</groupId>
+			<artifactId>block-search</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -249,7 +255,13 @@
             <artifactId>spring-data-mongodb</artifactId>  
         </dependency>   
 		<!-- mongodb --> 
- 
+		
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-core</artifactId>
+			<version>4.7.2</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="example" version="1.5">
+	<fields>
+		<field name="_version_" type="long" indexed="true" stored="true"/>
+		<field name="id" type="string" indexed="true" stored="true" multiValued="false" required="true" />
+
+<!-- newhouse -->
+		
+		<field name="newhouseId" type="int" indexed="true" stored="true" multiValued="false"/>
+
+		<field name="saleStatus" type="string" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="openDate" type="date" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="createTime" type="date" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="updateTime" type="date" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="tel" type="string" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="houseType" type="string" indexed="true" stored="true" multiValued="false"/>
+		
+		 
+		<field name="avgPrice" type="double" indexed="true" stored="true" />
+		 
+		<field name="aroundFacilities" type="string" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="newhouseStatus" type="string" indexed="true" stored="true" multiValued="false"/>
+	 
+		<field name="clickCount" type="int" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="source" type="string" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="features" type="string" indexed="true" stored="true" multiValued="true"/>
+
+
+		<field name="stickNo" type="int" indexed="true" stored="true" multiValued="false"/>
+
+		<field name="stickStartDate" type="date" indexed="true" stored="true" multiValued="false"/>
+
+		<field name="stickEndDate" type="date" indexed="true" stored="true" multiValued="false"/>
+
+		 
+		<field name="homePictureUrl" type="string" indexed="true" stored="true" multiValued="false"/>
+		<field name="updateIndexTime" type="date" indexed="true" stored="true" multiValued="false"/>
+		<field name="supportHouseLoan" type="boolean" indexed="true" stored="true" multiValued="false"/>
+		<field name="decoration" type="string" indexed="true" stored="true" multiValued="false"/>
+		<field name="layoutType" type="string" indexed="true" stored="true" multiValued="true"/>
+
+<!-- groupby -->
+		 
+		<field name="groupBuyProductId" type="int" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="customerCount" type="int" indexed="true" stored="true" multiValued="false"/>
+		<field name="favorableTitle" type="string" indexed="true" stored="true" multiValued="false"/>
+
+<!-- garden -->
+	 	
+		<field name="gardenId" type="int" indexed="true" stored="true" multiValued="false"/>
+		 	
+		<field name="gardenName" type="string" indexed="true" stored="true" multiValued="false"/>
+	 	
+		<field name="gardenIndexPictureUrl" type="string" indexed="true" stored="true" multiValued="false"/>
+		 	
+		<field name="gardenAddress" type="string" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="city" type="string" indexed="true" stored="true" multiValued="false"/>
+	 	
+		<field name="gardenStatus" type="string" indexed="true" stored="true" multiValued="false"/>
+		 
+		<field name="propertyType" type="string" indexed="true" stored="true" multiValued="false"/>
+
+		<field name="busStationIds" type="string" indexed="true" stored="true" multiValued="true"/>
+
+		<field name="longitude" type="double" indexed="true" stored="true" multiValued="false"/>
+ 
+		<field name="latitude" type="double" indexed="true" stored="true" multiValued="false"/>
+ 
+		<field name="location" type="location" indexed="true" stored="true"/>
+
+		<field name="quanpin" type="string" indexed="true" stored="true" multiValued="false"/>
+ 
+		<field name="jianpin" type="string" indexed="true" stored="true" multiValued="false"/>
+
+<!-- area -->
+		<field name="parentAreaId" type="int" indexed="true" stored="true" multiValued="false"/> 
+		<field name="parentAreaName" type="string" indexed="true" stored="true" multiValued="false"/>
+		<field name="areaId" type="int" indexed="true" stored="true" multiValued="false"/> 	
+		<field name="areaName" type="string" indexed="true" stored="true" multiValued="false"/>
+
+
+<!-- subway -->
+	 	
+		<field name="lineName" type="string" indexed="true" stored="true" multiValued="true"/>
+		<field name="subwayStation" type="string" indexed="true" stored="true" multiValued="true"/>
+		<field name="subwayDistance" type="string" indexed="true" stored="true" multiValued="false"/>
+
+		<field name="keyword" type="text" indexed="true" stored="false" multiValued="true" />
+		<field name="pinyin" type="text" indexed="true" stored="false" multiValued="true" />
+
+		<dynamicField name="*_coordinate"  type="double" indexed="true"  stored="false"/>
+	</fields>
+	
+	<uniqueKey>id</uniqueKey>
+	<copyField source="gardenName" dest="keyword"/>
+	<copyField source="gardenAddress" dest="keyword"/>
+	<copyField source="areaName" dest="keyword"/>
+	<copyField source="parentAreaName" dest="keyword"/>
+	<copyField source="aroundFacilities" dest="keyword"/>
+
+	<copyField source="quanpin" dest="pinyin"/>
+	<copyField source="jianpin" dest="pinyin"/>
+	 
+	<types>
+		<fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true" />
+		<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true" />
+		<fieldtype name="binary" class="solr.BinaryField" />
+		<fieldType name="int" class="solr.TrieIntField" precisionStep="2" omitNorms="true" positionIncrementGap="0" />
+		<fieldType name="float" class="solr.TrieFloatField" precisionStep="2" omitNorms="true" positionIncrementGap="0" />
+		<fieldType name="long" class="solr.TrieLongField" precisionStep="2" omitNorms="true" positionIncrementGap="0" />
+		<fieldType name="double" class="solr.TrieDoubleField" precisionStep="2" omitNorms="true" positionIncrementGap="0" />
+		<fieldType name="date" class="solr.TrieDateField" omitNorms="true" precisionStep="2" positionIncrementGap="0" />
+		<fieldType name="random" class="solr.RandomSortField" indexed="true" />
+		<fieldType name="text" class="solr.TextField">
+			<analyzer class="org.apache.lucene.analysis.standard.StandardAnalyzer" />
+		</fieldType>
+		<fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
+	</types>
+
+</schema>
