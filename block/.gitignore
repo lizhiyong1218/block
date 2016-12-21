@@ -27,5 +27,7 @@ block-search/target
 block-search/.settings/
 block-search/bin
 block-search/files
+block-search/.project
+
 
 /bin

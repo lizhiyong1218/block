@@ -47,6 +47,7 @@
 				<!-- The first pair -->
 				<value>classpath:/config.properties</value>
 				<value>file:///etc/iceasy/conf/config.properties</value>
+				<value>classpath:/mongodb.properties</value>
 			</list>
 		</property>
 	</bean>
