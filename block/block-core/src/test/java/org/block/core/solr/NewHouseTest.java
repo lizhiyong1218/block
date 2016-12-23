@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+import java.util.Map;
+
 import org.block.core.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import com.lzy.block.search.solr.NewHouse;
 import com.lzy.block.search.solr.common.ContextHolder;
 import com.lzy.block.search.solr.condition.NewHouseSearchCondition;
 import com.lzy.block.search.solr.enums.CityEnum;
+import com.lzy.block.search.solr.page.GroupSolrPagination;
 import com.lzy.block.search.solr.page.Pagination;
 import com.lzy.block.search.solr.searcher.SolrSearcher;
 
@@ -29,11 +33,6 @@ public class NewHouseTest  extends BaseTest{
 	@Autowired
     private SolrSearcher<NewHouse> newHouseSearcher;
 	
-	
-	@Test
-	public void testFacet(){
-		
-	}
 	
 	@Test
 	public void testQueryIndex(){
@@ -72,7 +71,7 @@ public class NewHouseTest  extends BaseTest{
 		criteria.setParentAreaName(parentAreaName);
 		criteria.setAreaName(areaName);
 		criteria.setAvgPrice(avgPrice);
-		criteria.setPropertyTypeEnum(propertyTypeEnum);
+//		criteria.setPropertyTypeEnum(propertyTypeEnum);
 		criteria.setSaleStatus(saleStatus);
 		criteria.setLineName(lineName);
 		criteria.setSubwayStation(subwayStation);
@@ -91,13 +90,37 @@ public class NewHouseTest  extends BaseTest{
 		Pagination<NewHouse> pagination=new Pagination<NewHouse>();
 		pagination.setCurrentPage(1);
 		pagination.setPageSize(10);
-		Pagination<NewHouse> query = newHouseSearcher.query(criteria, pagination);
-		List<NewHouse> items = query.getItems();
+		newHouseSearcher.query(criteria, pagination);
+		List<NewHouse> items = pagination.getItems();
 		System.err.println(items.size()+">>>>>>>>>>>>>>>>>>>>>>>>>>>");
-//		for (NewHouse newHouse : items) {
-//			System.err.println(newHouse.getOpenDate());
-//		}
 	}
-	 
+	
+	@Test
+	public void testFacet(){
+		NewHouseSearchCondition criteria=new NewHouseSearchCondition();
+//		criteria.setGroup(isGroup);l
+//		newHouseSearcher.queryFacet(criteria, pagination)
+	}
+	
+	@Test
+	public void testGroupby(){
+		CityEnum city=CityEnum.SHENZHEN;
+		ContextHolder.setDataSource(city.toString());
+		NewHouseSearchCondition criteria=new NewHouseSearchCondition();
+		criteria.setCity(city);
+		criteria.setGroup(true);
+		criteria.setGroupField("saleStatus");
+		criteria.setGroupLimit(20);
+//		criteria.setGroupSortByField("");
+//		criteria.setGroupSortBy("desc");
+		GroupSolrPagination<NewHouse> pagination=new GroupSolrPagination<NewHouse>(5, 1);
+		newHouseSearcher.query(criteria, pagination);
+		Map<String, Map<String, List<NewHouse>>> groupRes = pagination.getGroupRes();
+		for(String key : groupRes.keySet()){
+			for(String gname: groupRes.get(key).keySet()){
+				System.err.println(key+":"+gname+":"+groupRes.get(key).get(gname).size());
+			}
+		}
+	}
 	
 }

@@ -8,6 +8,8 @@ public class GroupSolrPagination<T> extends Pagination<T> {
 
 	private static final long serialVersionUID = 1L;
 	
+	private Map<String, Map<String, List<T>>> groupRes=new HashMap<String, Map<String, List<T>>>();
+	
 	private Map<String, List<T>> groupResult = new HashMap<String, List<T>>();
     /**
      * 分组后的数量
@@ -46,4 +48,11 @@ public class GroupSolrPagination<T> extends Pagination<T> {
         return groupNumber;
     }
 
+	public Map<String, Map<String, List<T>>> getGroupRes() {
+		return groupRes;
+	}
+
+	public void setGroupRes(Map<String, Map<String, List<T>>> groupRes) {
+		this.groupRes = groupRes;
+	}
 }

@@ -18,10 +18,6 @@ import com.lzy.block.search.solr.page.Pagination;
 import com.lzy.block.search.solr.page.Pagination.Sort;
 
 
-/**
- * Group查询回调处理
- * 
- */
 public class SolrCallbackHandler<T> implements SolrCallback {
     
     protected Pagination<T> pagination;

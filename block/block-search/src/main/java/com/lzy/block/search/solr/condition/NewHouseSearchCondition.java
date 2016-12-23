@@ -7,8 +7,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
-import org.apache.solr.common.params.DisMaxParams;
 
+import com.lzy.block.search.solr.enums.CityEnum;
 import com.lzy.block.search.solr.searcher.NewHouseSearcher;
 
 
@@ -21,6 +21,12 @@ import com.lzy.block.search.solr.searcher.NewHouseSearcher;
 public class NewHouseSearchCondition extends SearchCondition {
 	
 	private Logger logger=Logger.getLogger(NewHouseSearchCondition.class.getName());
+	// 城市
+	private CityEnum city;
+	
+	protected String keyword; // 关键词（可以包括标题，小区名，位置，区域等）
+	protected List<String> andKeywords; // 关键词AND检索
+	protected List<String> orKeywords; // 关键词OR检索
 	
 	//父区域名称
 	private String parentAreaName;
@@ -58,17 +64,44 @@ public class NewHouseSearchCondition extends SearchCondition {
 	private String pinyin;
 	//是否只查团购
 	private Boolean onlyGroupbuy;
-	
-	private String location;// 经纬度，格式：31.2315430,121.5765490
-	private BigDecimal distance;// 距离经纬度location的距离
-	
 	private List<String> newhouseFacetFields;
-	
 	//售价排序:asc desc
 	private String priceSort;
 	//开盘时间排序:asc desc
 	private String openDateSort;
 	
+	public CityEnum getCity() {
+		return city;
+	}
+
+	public void setCity(CityEnum city) {
+		this.city = city;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public List<String> getAndKeywords() {
+		return andKeywords;
+	}
+
+	public void setAndKeywords(List<String> andKeywords) {
+		this.andKeywords = andKeywords;
+	}
+
+	public List<String> getOrKeywords() {
+		return orKeywords;
+	}
+
+	public void setOrKeywords(List<String> orKeywords) {
+		this.orKeywords = orKeywords;
+	}
+
 	public String getGardenStatus() {
 		return gardenStatus;
 	}
@@ -228,21 +261,7 @@ public class NewHouseSearchCondition extends SearchCondition {
 		this.pinyin = pinyin;
 	}
 
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public BigDecimal getDistance() {
-		return distance;
-	}
-
-	public void setDistance(BigDecimal distance) {
-		this.distance = distance;
-	}
+ 
 	
 
 	public List<String> getNewhouseFacetFields() {
@@ -261,40 +280,31 @@ public class NewHouseSearchCondition extends SearchCondition {
 		this.onlyGroupbuy = onlyGroupbuy;
 	}
 	
+
+	public String getKeywordString(List<String> keywordList, String operType) {
+		StringBuffer keywords = new StringBuffer();
+		if (keywordList != null && keywordList.size() > 0) {
+			for (String kw : keywordList) {
+				if (keywords.length() > 0) {
+					keywords.append(" " + operType + " ");
+				}
+//				kw = StringUtil.solrMetacharacter(kw);
+				keywords.append("keyword:\"" + kw + "\"");
+			}
+		}
+		return keywords.toString();
+	}
+	
 	@Override
 	public SolrQuery getSolrQuery() {
-		SolrQuery solrQuery = new SolrQuery();
-		if (query != null) {
-			solrQuery.setQuery(query);
-		} else {
-			solrQuery.setQuery("*:*");
-		}
-		if(StringUtils.isNotEmpty(keyword)){
-			solrQuery.addFilterQuery("keyword:\"" + keyword+"\"");
-		}
+		SolrQuery solrQuery = super.getSolrQuery();
 		if (city != null) {
 			solrQuery.addFilterQuery(NewHouseSearcher.CITY+":" + city.toString());
 		}
-		if (filterQuery != null) {
-			solrQuery.setFilterQueries(filterQuery);
-		}
-		if (null != defType) {
-			solrQuery.setParam("defType", defType);
-		}
-		if (null != queryType) {
-			solrQuery.setQueryType(queryType);
-		}
-		if (null != pf) {
-			solrQuery.setParam(DisMaxParams.PF, pf);
-		}
-		if (null != qf) {
-			solrQuery.setParam(DisMaxParams.QF, qf);
-		}
-		if (null != bf) {
-			solrQuery.setParam(DisMaxParams.BF, bf);
-		}
-		if (null != fields) {
-			solrQuery.setFields(fields);
+		
+		//单个关键字
+		if(StringUtils.isNotEmpty(keyword)){
+			solrQuery.addFilterQuery("keyword:\"" + keyword+"\"");
 		}
 		
 		/* 关键词AND检索 */
@@ -317,18 +327,12 @@ public class NewHouseSearchCondition extends SearchCondition {
 			solrQuery.setFacetMinCount(1);
 		}
 		
-		if(StringUtils.isNotEmpty(parentAreaId)){
-			solrQuery.addFilterQuery(NewHouseSearcher.PARENT_AREA_Id+":"+parentAreaId);
-		}
 		
 		//父区域
 		if(StringUtils.isNotBlank(parentAreaName)){
 			solrQuery.addFilterQuery(NewHouseSearcher.PARENT_AREA_NAME+":"+parentAreaName);
 		}
 		
-		if(StringUtils.isNotEmpty(areaId)){
-			solrQuery.addFilterQuery(NewHouseSearcher.AREA_Id+":"+areaId);
-		}
 		
 		//二级区域
 		if(StringUtils.isNotBlank(areaName)){
@@ -338,22 +342,6 @@ public class NewHouseSearchCondition extends SearchCondition {
 		//均价
 		if(StringUtils.isNotBlank(avgPrice)){
 			solrQuery.addFilterQuery(NewHouseSearcher.AVGPRICE+":"+avgPrice);
-		}
-		
-		if (priceFrom != null && priceTo != null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.AVGPRICE + ":[" + priceFrom + " TO " + priceTo + "]");
-		}
-		if (priceFrom != null && priceTo == null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.AVGPRICE + ":[" + priceFrom + " TO *]");
-		}
-		if (priceFrom == null && priceTo != null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.AVGPRICE + ":[* TO " + priceTo + "]");
-		}
-		
-		
-		// 物业类型
-		if (propertyTypeEnum != null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.PROPERTY_TYPE + ":" + propertyTypeEnum);
 		}
 		
 		//销售状态
@@ -398,43 +386,12 @@ public class NewHouseSearchCondition extends SearchCondition {
 //			solrQuery.addFilterQuery(str);
 //		}
 		
-		// 经纬度范围
-		if (latitudeFrom != null && latitudeTo != null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.LATITUDE + ":[" + latitudeFrom + " TO " + latitudeTo + "]");
-		}
-		if (latitudeFrom != null && latitudeTo == null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.LATITUDE + ":[" + latitudeFrom + " TO *]");
-		}
-		if (latitudeFrom == null && latitudeTo != null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.LATITUDE + ":[* TO " + latitudeTo + "]");
-		}
-		
-		if (longitudeFrom != null && longitudeTo != null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.LONGITUDE + ":[" + longitudeFrom + " TO " + longitudeTo + "]");
-		}
-		if (longitudeFrom != null && longitudeTo == null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.LONGITUDE + ":[" + longitudeFrom + " TO *]");
-		}
-		if (longitudeFrom == null && longitudeTo != null) {
-			solrQuery.addFilterQuery(NewHouseSearcher.LONGITUDE + ":[* TO " + longitudeTo + "]");
-		}
 		
 		//是否只查团购
 		if(onlyGroupbuy!=null&&onlyGroupbuy==true){
 			solrQuery.addFilterQuery(NewHouseSearcher.GROUPBUY_PRODUCT_ID +" : * ");
 		}
 		
-		if(gardenId!=null&&gardenId>0){
-			solrQuery.addFilterQuery(NewHouseSearcher.GARDEN_ID +" :  " +gardenId);
-		}
-		
-		//小区状态
-//		if(StringUtils.isNotEmpty(gardenStatus)){ //查询新房索引时不管
-//			solrQuery.addFilterQuery(NewHouseSearcher.GARDEN_STATUS+":"+gardenStatus);
-//		}
-		if(gardenName!=null){
-			solrQuery.addFilterQuery(NewHouseSearcher.GARDEN_NAME+":\""+gardenName+"\"");
-		}
 		//全拼
 		if(StringUtils.isNotEmpty(quanpin)){
 			solrQuery.addFilterQuery(NewHouseSearcher.QUANGPIN+":"+quanpin);
@@ -448,6 +405,50 @@ public class NewHouseSearchCondition extends SearchCondition {
 		if(StringUtils.isNotEmpty(pinyin)){
 			solrQuery.addFilterQuery(NewHouseSearcher.PINYIN+":"+pinyin);
 		}
+		
+		/* ID 包括 */
+//		if (roomIds != null && roomIds.size() > 0) {
+//			StringBuilder query = new StringBuilder();
+//			for (Integer roomId : roomIds) {
+//				query.append(" " + (isNotEqRoomIds ? "-" : "") + AbstractSearcher.ID + ":" + roomId);
+//			}
+//			solrQuery.addFilterQuery(query.substring(1));
+//		}
+
+
+		/* 经纪人ID 包括 */
+//		if (personIds != null && personIds.size() > 0) {
+//			StringBuilder query = new StringBuilder();
+//			for (Integer personId : personIds) {
+//				query.append(" " + AbstractSearcher.PERSON_ID + ":" + personId);
+//			}
+//			solrQuery.addFilterQuery(query.substring(1));
+//		}
+
+		
+		// 价格
+//		if (priceFrom != null && priceTo != null) {
+//			solrQuery.addFilterQuery((isNotEqPrice ? "-" : "") + AbstractSearcher.PRICE + ":[" + priceFrom + " TO " + priceTo + "]");
+//		}
+//		if (priceFrom != null && priceTo == null) {
+//			solrQuery.addFilterQuery((isNotEqPrice ? "-" : "") + AbstractSearcher.PRICE + ":[" + priceFrom + " TO *]");
+//		}
+//		if (priceFrom == null && priceTo != null) {
+//			solrQuery.addFilterQuery((isNotEqPrice ? "-" : "") + AbstractSearcher.PRICE + ":[* TO " + priceTo + "]");
+//		}
+		// 发布时间
+//		if (StringUtils.isNotEmpty(createTime)) {
+//			solrQuery.addFilterQuery(AbstractSearcher.CREATE_TIME + ":[" + createTime + " TO *]");
+//		}
+//		// 更新时间,这里只取一天的数据
+//		if (StringUtils.isNotEmpty(updateTime)) {
+//			if (updateTimeFlag) {
+//				solrQuery.addFilterQuery(AbstractSearcher.UPDATE_TIME + ":[" + updateTime + "T00:00:000Z TO " + updateTime + "T23:59:590Z]");
+//			} else {
+//				solrQuery.addFilterQuery(AbstractSearcher.UPDATE_TIME + ":[* TO " + updateTime + "T00:00:000Z]");
+//			}
+//		}
+
 		
 		//按售价排序
 		if(StringUtils.isNotEmpty(priceSort)){
