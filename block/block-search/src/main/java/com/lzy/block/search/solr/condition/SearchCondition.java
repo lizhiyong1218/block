@@ -8,15 +8,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.common.params.DisMaxParams;
 
-import com.lzy.block.search.solr.SolrFacetEntity;
 import com.lzy.block.search.solr.searcher.NewHouseSearcher;
 
-/**
- * 售盘查询条件
- * 
- * @author Administrator
- * 
- */
 public abstract class SearchCondition{
 	protected String queryType;// 查询类型
 	protected String defType;// 默认查询类型
@@ -28,12 +21,20 @@ public abstract class SearchCondition{
 	protected String filterQuery;// 过滤查询字符串
 
 	protected boolean isFacet;// 是否facet查询
-	protected List<SolrFacetEntity> facetFields;
+	protected String[] facetFields;
+	protected Integer facetLimit;
+	protected boolean facetMissing;
+	protected Integer facetMinCount;
+	protected boolean facetSort;
+	protected String facetSortField;
+	protected String facetSortBy;
+	protected String facetPrefixField;
+	protected String facetPrefixValue;
 	
 	public boolean isGroup;// 是否facet查询
 	protected String groupField;// 单个group查询
 	protected List<String> groupFields;// 多个group查询
-	protected int groupLimit;// 多个group查询
+	protected Integer groupLimit;// 多个group查询
 	protected String groupSortByField;
 	protected String groupSortBy;
 	
@@ -125,6 +126,10 @@ public abstract class SearchCondition{
 
 	public void setGroupField(String groupField) {
 		this.groupField = groupField;
+		if(this.groupFields==null){
+			this.groupFields=new ArrayList<String>();
+		}
+		this.groupFields.add(groupField);
 	}
 
 	public List<String> getGroupFields() {
@@ -135,11 +140,11 @@ public abstract class SearchCondition{
 		this.groupFields = groupFields;
 	}
 
-	public int getGroupLimit() {
+	public Integer getGroupLimit() {
 		return groupLimit;
 	}
 
-	public void setGroupLimit(int groupLimit) {
+	public void setGroupLimit(Integer groupLimit) {
 		this.groupLimit = groupLimit;
 	}
 
@@ -223,7 +228,6 @@ public abstract class SearchCondition{
 		this.createEndDate = createEndDate;
 	}
 
-	//---------------------------------------//
 	public void setFields(String... fields) {
 		this.fields = fields;
 	}
@@ -237,37 +241,77 @@ public abstract class SearchCondition{
 	public String[] getFields() {
 		return this.fields;
 	}
-
-	public void setFacetFields(List<SolrFacetEntity> facetFields) {
-		this.facetFields = facetFields;
-	}
 	
-	public List<SolrFacetEntity> getFacetFields() {
+	public String[] getFacetFields() {
 		return facetFields;
 	}
-	
-	public void addFacetField(SolrFacetEntity facetField) {
-		initFacetFieldList();
-		this.facetFields.add(facetField);
+
+	public void setFacetFields(String[] facetFields) {
+		this.facetFields = facetFields;
 	}
 
-	public void addFacetFields(SolrFacetEntity[] values) {
-		initFacetFieldList();
-		for (SolrFacetEntity solrEnum : values) {
-			this.facetFields.add(solrEnum);
-		}
-	}
-	
-	private void initFacetFieldList() {
-		if (this.facetFields == null) {
-			this.facetFields = new ArrayList<SolrFacetEntity>();
-		}
+	public Integer getFacetLimit() {
+		return facetLimit;
 	}
 
-	public void clearFacetFields() {
-		if (this.facetFields != null) {
-			this.facetFields.clear();
-		}
+	public void setFacetLimit(Integer facetLimit) {
+		this.facetLimit = facetLimit;
+	}
+
+	public boolean isFacetMissing() {
+		return facetMissing;
+	}
+
+	public void setFacetMissing(boolean facetMissing) {
+		this.facetMissing = facetMissing;
+	}
+
+	public Integer getFacetMinCount() {
+		return facetMinCount;
+	}
+
+	public void setFacetMinCount(Integer facetMinCount) {
+		this.facetMinCount = facetMinCount;
+	}
+
+	public boolean isFacetSort() {
+		return facetSort;
+	}
+
+	public void setFacetSort(boolean facetSort) {
+		this.facetSort = facetSort;
+	}
+
+	public String getFacetSortField() {
+		return facetSortField;
+	}
+
+	public void setFacetSortField(String facetSortField) {
+		this.facetSortField = facetSortField;
+	}
+
+	public String getFacetSortBy() {
+		return facetSortBy;
+	}
+
+	public void setFacetSortBy(String facetSortBy) {
+		this.facetSortBy = facetSortBy;
+	}
+
+	public String getFacetPrefixField() {
+		return facetPrefixField;
+	}
+
+	public void setFacetPrefixField(String facetPrefixField) {
+		this.facetPrefixField = facetPrefixField;
+	}
+
+	public String getFacetPrefixValue() {
+		return facetPrefixValue;
+	}
+
+	public void setFacetPrefixValue(String facetPrefixValue) {
+		this.facetPrefixValue = facetPrefixValue;
 	}
 
 	public SolrQuery getSolrQuery() {
@@ -306,24 +350,31 @@ public abstract class SearchCondition{
 			solrQuery.setFields(fields);
 		}
 
-		if (facetFields != null) {
+		if (facetFields != null && facetFields.length>0) {
 			solrQuery.setFacet(true);
-			for (SolrFacetEntity facetField : facetFields) {
-				if(facetField!=null){
-					solrQuery.addFacetQuery(facetField.createFacetQuery());
-				}
+			solrQuery.addFacetField(facetFields);//设置需要facet的字段
+			if(facetLimit!=null&&facetLimit>0){
+				solrQuery.setFacetLimit(facetLimit);//限制facet返回的数量
+			}
+			solrQuery.setFacetMissing(facetMissing);
+			if(facetMinCount!=null&&facetMinCount>0){
+				solrQuery.setFacetMinCount(facetMinCount);
+			}
+//			solrQuery.setFacetSort(facetSort);
+			if(StringUtils.isNotBlank(facetPrefixField)&&StringUtils.isNotBlank(facetPrefixValue)){
+				solrQuery.setFacetPrefix(facetPrefixField, facetPrefixValue);
 			}
 		}
-		if (isGroup) {
+		if (groupFields!= null&&groupFields.size()>0) {
 			solrQuery.add("group", "true");
-			if (groupFields != null) {
-				for (String groupField : groupFields) {
-					solrQuery.add("group.field", groupField);
-				}
+			for (String groupField : groupFields) {
+				solrQuery.add("group.field", groupField);
 			}
 			solrQuery.add("group.field", groupField);
-			solrQuery.add("group.limit", String.valueOf(groupLimit));
-			if (groupSortByField != null) {
+			if(groupLimit!=null&&groupLimit>0){
+				solrQuery.add("group.limit", String.valueOf(groupLimit));
+			}
+			if (StringUtils.isNotBlank(groupSortByField)) {
 				String groupSortByTemp = groupSortBy != null ? groupSortBy : "asc";
 				solrQuery.add("group.sort",groupSortByField+" " + groupSortByTemp);
 			}

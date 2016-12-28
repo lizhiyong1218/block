@@ -14,17 +14,17 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 
-import com.lzy.block.search.solr.page.Pagination;
-import com.lzy.block.search.solr.page.Pagination.Sort;
+import com.lzy.block.search.solr.page.SolrPagination;
+import com.lzy.block.search.solr.page.SolrPagination.Sort;
 
 
 public class SolrCallbackHandler<T> implements SolrCallback {
     
-    protected Pagination<T> pagination;
+    protected SolrPagination<T> pagination;
     protected SolrQuery solrQuery;
     protected SolrTemplate<T> solrTemplate;
 
-    public SolrCallbackHandler(SolrTemplate<T> solrTemplate, SolrQuery solrQuery, Pagination<T> pagination){
+    public SolrCallbackHandler(SolrTemplate<T> solrTemplate, SolrQuery solrQuery, SolrPagination<T> pagination){
         this.solrTemplate = solrTemplate;
         this.solrQuery = solrQuery;
         this.pagination = pagination;

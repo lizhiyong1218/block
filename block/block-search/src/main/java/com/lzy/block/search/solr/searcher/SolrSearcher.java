@@ -3,7 +3,6 @@ package com.lzy.block.search.solr.searcher;
 import java.util.List;
 
 import com.lzy.block.search.solr.condition.SearchCondition;
-import com.lzy.block.search.solr.page.Pagination;
 import com.lzy.block.search.solr.page.SolrPagination;
 
 public interface SolrSearcher<T> {
@@ -58,8 +57,6 @@ public interface SolrSearcher<T> {
 	public static final String GARDEN_EXPERT = "gardenExpert";// 商圈对应父区域名称列表
 	
 
-	void reIndexAll();
-
 	void save(T entity);
 
 	void saveList(List<T> entityList);
@@ -74,9 +71,11 @@ public interface SolrSearcher<T> {
 
 	void deleteByQuery(final String query);
 
-	Pagination<T> query(SearchCondition criteria, Pagination<T> pagination);
+	void query(SearchCondition criteria, SolrPagination<T> pagination);
 
-	SolrPagination<T> queryFacet(SearchCondition criteria, SolrPagination<T> pagination);
+	void queryFacet(SearchCondition criteria, SolrPagination<T> pagination);
+	
+	void queryGroup(SearchCondition criteria, SolrPagination<T> pagination);
 
 	void optimize(int maxSegments);
 
