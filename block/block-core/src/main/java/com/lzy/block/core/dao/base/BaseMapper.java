@@ -8,6 +8,7 @@
 package com.lzy.block.core.dao.base;
 
 import java.util.List;
+import java.util.Map;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
@@ -71,6 +72,8 @@ public interface BaseMapper<T> {
 	 * @throws
 	 */
     public T selectModel(T para);
+    
+    public List<T> getByParams(Map<String, Object> params);
     
 	/**
 	 * 

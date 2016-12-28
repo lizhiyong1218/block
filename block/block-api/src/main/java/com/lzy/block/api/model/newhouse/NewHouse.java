@@ -1,4 +1,4 @@
-package com.lzy.block.search.solr;
+package com.lzy.block.api.model.newhouse;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -8,8 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import com.lzy.block.search.solr.enums.CityEnum;
+
+
+
+import com.lzy.block.api.constant.newhouse.CityEnum;
 
 /**
  * 新盘
@@ -18,13 +20,16 @@ public class NewHouse implements Serializable{
 	private static final long serialVersionUID = 5910811382419338313L;
 	
 	private Integer id;
+	private Integer gardenId;
+	private String saleStatus;
+	private String source;
 	private String houseType; // 户型
 	private String decoration; // 装修情况
 	private String uniqueFeature; // 楼盘特色
 	private String lightspot; // 楼盘亮点
 	private String aroundFacilities; // 周边配套
 	private String trafficFacilities; // 交通配套
-	private String chargeRanking; // 收费权重
+	private BigDecimal chargeRanking; // 收费权重
 	private Date createTime; // 创建时间
 	private Date updateTime; // 更新时间
 	private Integer clickCount;//点击数
@@ -148,7 +153,7 @@ public class NewHouse implements Serializable{
 		}
 		
 		public static FeatureEnum getFeatureByNameOrDesc(String text) {
-			if (StringUtils.isBlank(text)) {
+			if (text==null||text.equals("")) {
 				return null;
 			}
 			List<FeatureEnum> features = cityGroups.get(null);
@@ -314,12 +319,15 @@ public class NewHouse implements Serializable{
 	public void setTrafficFacilities(String trafficFacilities) {
 		this.trafficFacilities = trafficFacilities;
 	}
-	public String getChargeRanking() {
+	 
+	public BigDecimal getChargeRanking() {
 		return chargeRanking;
 	}
-	public void setChargeRanking(String chargeRanking) {
+
+	public void setChargeRanking(BigDecimal chargeRanking) {
 		this.chargeRanking = chargeRanking;
 	}
+
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -523,6 +531,30 @@ public class NewHouse implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getGardenId() {
+		return gardenId;
+	}
+
+	public void setGardenId(Integer gardenId) {
+		this.gardenId = gardenId;
+	}
+
+	public String getSaleStatus() {
+		return saleStatus;
+	}
+
+	public void setSaleStatus(String saleStatus) {
+		this.saleStatus = saleStatus;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
 	}
 	
 }

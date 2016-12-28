@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzy.block.core.dao.newhouse.NewHouseMapper" >
+  <resultMap id="BaseResultMap" type="newHouse" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="garden_id" property="gardenId" jdbcType="INTEGER" />
+    <result column="sale_status" property="saleStatus" jdbcType="VARCHAR" />
+    <result column="decoration" property="decoration" jdbcType="VARCHAR" />
+    <result column="uniqueFeature" property="uniqueFeature" jdbcType="VARCHAR" />
+    <result column="charge_ranking" property="chargeRanking" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="avg_price" property="avgPrice" jdbcType="DOUBLE" />
+    <result column="property_company" property="propertyCompany" jdbcType="VARCHAR" />
+    <result column="developer" property="developer" jdbcType="VARCHAR" />
+    <!-- 
+    <result column="open_time" property="openTime" jdbcType="DATE" />
+     -->
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+    <result column="home_picture_url" property="homePictureUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, garden_id, sale_status, decoration, uniqueFeature, charge_ranking, create_time, 
+    update_time, source, avg_price, property_company, developer, open_time, tel, finish_time, 
+    home_picture_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_new_house
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getByParams" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_new_house
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_new_house
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+   
+  <insert id="insertSelective" parameterType="newHouse" >
+    insert into t_new_house
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      id,
+      <if test="gardenId != null" >
+        garden_id,
+      </if>
+      <if test="saleStatus != null" >
+        sale_status,
+      </if>
+      <if test="decoration != null" >
+        decoration,
+      </if>
+      <if test="uniquefeature != null" >
+        uniqueFeature,
+      </if>
+      <if test="chargeRanking != null" >
+        charge_ranking,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="avgPrice != null" >
+        avg_price,
+      </if>
+      <if test="propertyCompany != null" >
+        property_company,
+      </if>
+      <if test="developer != null" >
+        developer,
+      </if>
+      <if test="openTime != null" >
+        open_time,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="homePictureUrl != null" >
+        home_picture_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=INTEGER},
+      <if test="gardenId != null" >
+        #{gardenId,jdbcType=INTEGER},
+      </if>
+      <if test="saleStatus != null" >
+        #{saleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="decoration != null" >
+        #{decoration,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquefeature != null" >
+        #{uniquefeature,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeRanking != null" >
+        #{chargeRanking,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="avgPrice != null" >
+        #{avgPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="propertyCompany != null" >
+        #{propertyCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null" >
+        #{developer,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null" >
+        #{openTime,jdbcType=DATE},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homePictureUrl != null" >
+        #{homePictureUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="newHouse" >
+    update t_new_house
+    <set >
+      <if test="gardenId != null" >
+        garden_id = #{gardenId,jdbcType=INTEGER},
+      </if>
+      <if test="saleStatus != null" >
+        sale_status = #{saleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="decoration != null" >
+        decoration = #{decoration,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquefeature != null" >
+        uniqueFeature = #{uniquefeature,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeRanking != null" >
+        charge_ranking = #{chargeRanking,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="avgPrice != null" >
+        avg_price = #{avgPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="propertyCompany != null" >
+        property_company = #{propertyCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null" >
+        developer = #{developer,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null" >
+        open_time = #{openTime,jdbcType=DATE},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homePictureUrl != null" >
+        home_picture_url = #{homePictureUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+ 
+</mapper>

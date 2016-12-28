@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
 
-import com.lzy.block.search.solr.enums.CityEnum;
+import com.lzy.block.api.constant.newhouse.CityEnum;
 import com.lzy.block.search.solr.searcher.NewHouseSearcher;
 
 

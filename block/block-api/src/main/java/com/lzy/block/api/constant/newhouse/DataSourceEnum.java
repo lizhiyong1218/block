@@ -1,4 +1,4 @@
-package com.lzy.block.search.solr.enums;
+package com.lzy.block.api.constant.newhouse;
 
 
 public enum DataSourceEnum {

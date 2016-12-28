@@ -4,23 +4,22 @@
 package org.block.core.solr;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-
-
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.block.core.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lzy.block.api.constant.activiti.PropertyTypeEnum;
-import com.lzy.block.search.solr.NewHouse;
+import com.lzy.block.api.constant.newhouse.CityEnum;
+import com.lzy.block.api.model.newhouse.NewHouse;
+import com.lzy.block.core.dao.newhouse.NewHouseMapper;
 import com.lzy.block.search.solr.common.ContextHolder;
 import com.lzy.block.search.solr.condition.NewHouseSearchCondition;
-import com.lzy.block.search.solr.enums.CityEnum;
 import com.lzy.block.search.solr.page.SolrPagination;
 import com.lzy.block.search.solr.searcher.SolrSearcher;
 import com.lzy.block.search.solr.vo.SolrGroupVo;
@@ -32,9 +31,20 @@ public class NewHouseTest  extends BaseTest{
 //	@Resource
 //	NewHouseSearcher newHouseSearcher;
 	
-	@Autowired
+	@Resource
     private SolrSearcher<NewHouse> newHouseSearcher;
+	@Resource
+	private NewHouseMapper newHouseMapper;
 	
+	@Test
+	public void testGetByParams(){
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("id", 1000276);
+		List<NewHouse> list = newHouseMapper.getByParams(params);
+		for (NewHouse newHouse : list) {
+			System.err.println(newHouse.getId());
+		}
+	}
 	
 	@Test
 	public void testQueryIndex(){

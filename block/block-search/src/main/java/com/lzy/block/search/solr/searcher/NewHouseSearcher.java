@@ -15,11 +15,11 @@ import org.apache.log4j.Logger;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrInputDocument;
 
-import com.lzy.block.search.solr.NewHouse;
-import com.lzy.block.search.solr.NewHouse.FeatureEnum;
+import com.lzy.block.api.constant.newhouse.CityEnum;
+import com.lzy.block.api.constant.newhouse.DataSourceEnum;
+import com.lzy.block.api.model.newhouse.NewHouse;
+import com.lzy.block.api.model.newhouse.NewHouse.FeatureEnum;
 import com.lzy.block.search.solr.common.ContextHolder;
-import com.lzy.block.search.solr.enums.CityEnum;
-import com.lzy.block.search.solr.enums.DataSourceEnum;
 import com.lzy.block.search.solr.spring.SolrTemplate;
 
 
