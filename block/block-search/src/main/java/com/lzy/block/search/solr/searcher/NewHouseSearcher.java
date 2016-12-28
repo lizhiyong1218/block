@@ -18,10 +18,8 @@ import org.apache.solr.common.SolrInputDocument;
 import com.lzy.block.search.solr.NewHouse;
 import com.lzy.block.search.solr.NewHouse.FeatureEnum;
 import com.lzy.block.search.solr.common.ContextHolder;
-import com.lzy.block.search.solr.condition.SearchCondition;
 import com.lzy.block.search.solr.enums.CityEnum;
 import com.lzy.block.search.solr.enums.DataSourceEnum;
-import com.lzy.block.search.solr.page.Pagination;
 import com.lzy.block.search.solr.spring.SolrTemplate;
 
 
@@ -96,21 +94,6 @@ public class NewHouseSearcher extends SolrTemplate<NewHouse> implements SolrSear
 	public static Pattern hzpattern = Pattern.compile("[\u4e00-\u9fa5]");
 	
 	private HashMap<String, String> solrUrls;
-	
-	@Override
-	public void reIndexAll() {
-		
-	}
-
-	@Override
-	public Pagination<NewHouse> query(SearchCondition criteria,
-			Pagination<NewHouse> pagination) {
-		logger.info("query newhouse");
-		if (criteria.isGroup()) {
-			return queryGroup(criteria, pagination);
-		}
-		return query(criteria.getSolrQuery(), pagination);
-	}
 
 	@Override
 	public NewHouse solrDocumentToEntity(SolrDocument solrDocument)

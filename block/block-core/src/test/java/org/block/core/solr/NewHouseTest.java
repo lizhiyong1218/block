@@ -4,6 +4,8 @@
 package org.block.core.solr;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -19,9 +21,9 @@ import com.lzy.block.search.solr.NewHouse;
 import com.lzy.block.search.solr.common.ContextHolder;
 import com.lzy.block.search.solr.condition.NewHouseSearchCondition;
 import com.lzy.block.search.solr.enums.CityEnum;
-import com.lzy.block.search.solr.page.GroupSolrPagination;
-import com.lzy.block.search.solr.page.Pagination;
+import com.lzy.block.search.solr.page.SolrPagination;
 import com.lzy.block.search.solr.searcher.SolrSearcher;
+import com.lzy.block.search.solr.vo.SolrGroupVo;
 
 
 public class NewHouseTest  extends BaseTest{
@@ -87,7 +89,7 @@ public class NewHouseTest  extends BaseTest{
 //		criteria.setPf("quanpin1323 jianpin");
 //		criteria.setBf("quanpin^1 jianpin^0.8");
 		
-		Pagination<NewHouse> pagination=new Pagination<NewHouse>();
+		SolrPagination<NewHouse> pagination=new SolrPagination<NewHouse>();
 		pagination.setCurrentPage(1);
 		pagination.setPageSize(10);
 		newHouseSearcher.query(criteria, pagination);
@@ -97,9 +99,28 @@ public class NewHouseTest  extends BaseTest{
 	
 	@Test
 	public void testFacet(){
+		CityEnum city=CityEnum.SHENZHEN;
+		ContextHolder.setDataSource(city.toString());
 		NewHouseSearchCondition criteria=new NewHouseSearchCondition();
-//		criteria.setGroup(isGroup);l
-//		newHouseSearcher.queryFacet(criteria, pagination)
+		List<String> facetFields=new ArrayList<String>();
+		facetFields.add("saleStatus");
+		criteria.setFacetFields((String[])facetFields.toArray(new String[facetFields.size()]));
+		criteria.setCity(city);
+		SolrPagination<NewHouse> pagination=new SolrPagination<NewHouse>();
+		pagination.setPageSize(5);
+		pagination.setCurrentPage(1);
+		newHouseSearcher.queryFacet(criteria, pagination);
+		Map<String, Map<String, Long>> facetRes = pagination.getFacetRes();
+		for(String fieldName:facetRes.keySet()){
+			Map<String, Long> map = facetRes.get(fieldName);
+			for(String fieldValue:map.keySet()){
+				System.err.println(fieldName+">>"+fieldValue+">>"+map.get(fieldValue));
+			}
+		}
+		List<NewHouse> items = pagination.getItems();
+		for (NewHouse newHouse : items) {
+			System.err.println(newHouse.getId());
+		}
 	}
 	
 	@Test
@@ -108,17 +129,21 @@ public class NewHouseTest  extends BaseTest{
 		ContextHolder.setDataSource(city.toString());
 		NewHouseSearchCondition criteria=new NewHouseSearchCondition();
 		criteria.setCity(city);
-		criteria.setGroup(true);
 		criteria.setGroupField("saleStatus");
-		criteria.setGroupLimit(20);
-//		criteria.setGroupSortByField("");
-//		criteria.setGroupSortBy("desc");
-		GroupSolrPagination<NewHouse> pagination=new GroupSolrPagination<NewHouse>(5, 1);
-		newHouseSearcher.query(criteria, pagination);
-		Map<String, Map<String, List<NewHouse>>> groupRes = pagination.getGroupRes();
-		for(String key : groupRes.keySet()){
-			for(String gname: groupRes.get(key).keySet()){
-				System.err.println(key+":"+gname+":"+groupRes.get(key).get(gname).size());
+		criteria.setGroupLimit(5);
+		criteria.setGroupSortByField("avgPrice");
+		criteria.setGroupSortBy("desc");
+		SolrPagination<NewHouse> pagination=new SolrPagination<NewHouse>(5, 1);
+		newHouseSearcher.queryGroup(criteria, pagination);
+		Map<String, Map<String, SolrGroupVo<NewHouse>>> groupRes = pagination.getGroupRes();
+		SolrGroupVo<NewHouse> solrGroupVo=null;
+		for(String filedName : groupRes.keySet()){
+			for(String fieldValue: groupRes.get(filedName).keySet()){
+				solrGroupVo = groupRes.get(filedName).get(fieldValue);
+				List<NewHouse> list = solrGroupVo.getList();
+				for (NewHouse newHouse : list) {
+					System.out.println(solrGroupVo.getFieldName()+">>"+solrGroupVo.getFieldValue()+">>"+solrGroupVo.getCount()+">>"+newHouse.getAvgPrice());
+				}
 			}
 		}
 	}
