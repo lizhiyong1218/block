@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 
 import com.lzy.block.search.solr.condition.SearchCondition;
-import com.lzy.block.search.solr.page.Pagination;
 import com.lzy.block.search.solr.page.SolrPagination;
 
 
@@ -113,15 +111,12 @@ public abstract class SolrTemplate<T> {
 	 * @param pagination
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	public Pagination<T> query(final SolrQuery solrQuery, final Pagination<T> pagination) {
-		return (Pagination<T>) execute(new SolrCallbackHandler<T>(this, solrQuery, pagination));
+	public void query(SearchCondition criteria, SolrPagination<T> pagination) {
+		execute(new SolrCallbackHandler<T>(this, criteria.getSolrQuery(), pagination));
 	}
 	
-    @SuppressWarnings("unchecked")
-    public SolrPagination<T> queryFacet(SearchCondition criteria, SolrPagination<T> pagination) {
-        pagination.setCriteria(criteria);
-	    return (SolrPagination<T>) execute(new FacetCallbackHandler<T>(this, criteria.getSolrQuery(), pagination));
+    public void queryFacet(SearchCondition criteria, SolrPagination<T> pagination) {
+	    execute(new FacetCallbackHandler<T>(this, criteria.getSolrQuery(), pagination));
 	}
 	
 	protected List<T> solrDocumentsToEntities(SolrDocumentList solrDocumentList) throws Exception {
@@ -132,9 +127,8 @@ public abstract class SolrTemplate<T> {
 		return entities;
 	}
 	
-	@SuppressWarnings("unchecked")
-    public Pagination<T> queryGroup(SearchCondition criteria, Pagination<T> pagination) {
-        return (Pagination<T>) execute(new GroupCallbackHandler<T>(this, criteria.getSolrQuery(), pagination));
+    public void queryGroup(SearchCondition criteria, SolrPagination<T> pagination) {
+        execute(new GroupCallbackHandler<T>(this, criteria.getSolrQuery(), pagination));
     }
 
 	/**
