@@ -21,6 +21,9 @@ public class SellTicketTest {
         Booth b1 = new Booth(r);
         Booth b2 = new Booth(r);
         Booth b3 = new Booth(r);
+        b1.start();
+        b2.start();
+        b3.start();
         
     }
 }
@@ -84,7 +87,7 @@ class Booth extends Thread {
         while(true) {
             if(this.release.sellTicket()) {
                 this.count = this.count + 1;
-//                System.out.println(this.getName() + ": sell 1");
+                System.out.println(this.getName() + ": sell 1");
                 try {
                     sleep((int) Math.random()*100);   // random intervals
                 }
