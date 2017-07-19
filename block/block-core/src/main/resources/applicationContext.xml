@@ -19,8 +19,9 @@
 	 <import resource="classpath:/applicationContext-redis.xml" />
 	 <!-- activiti配置 -->
 	 <import resource="classpath:/applicationContext-activiti.xml" />
-	 <!-- mongodb配置 -->
+	 <!-- mongodb配置 
 	 <import resource="classpath:/applicationContext-mongodb.xml" />
+	 -->
 	 <!-- solr配置 -->
 	 <import resource="classpath:/applicationContext-search.xml" />
 	 
