@@ -21,7 +21,7 @@
 	<properties>
 		<!-- other -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdk.version>1.6</jdk.version>
+		<jdk.version>1.7</jdk.version>
 		<nexus.content>http://localhost:8080/content</nexus.content>
 <!-- 		<nexus.content>http://10.1.100.61:8044/content</nexus.content> -->
 		
@@ -676,7 +676,7 @@
 	 
 	<build>
 		<plugins>
-		<!--
+		<!-- -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -688,7 +688,7 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-		-->
+		
 		
 		</plugins>
 	</build>
