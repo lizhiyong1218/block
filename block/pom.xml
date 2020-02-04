@@ -77,7 +77,7 @@
 		<!--commons.beanutils  -->
 		<commons.beanutils.version>1.8.3</commons.beanutils.version>
 		<!-- shiro -->
-		<shiro.version>1.2.3</shiro.version>
+		<shiro.version>1.5.0</shiro.version>
 		<!-- jcaptcha -->
 		<jcaptcha.version>1.0-RC6</jcaptcha.version>		
 		<!-- druid -->
