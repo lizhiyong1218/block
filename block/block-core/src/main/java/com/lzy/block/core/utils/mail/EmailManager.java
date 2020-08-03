@@ -114,15 +114,15 @@ public class EmailManager {
 
 	public static void main(String[] args) {
 		String smtp = "smtp.263.net";
-		String username = "system@cecport.com";
-		String password = "cecport1028i";
-		String from = "system@cecport.com";
-		String to = "zhiyong.li@ceacsz.com.cn" ;
-		String copyto = "zhiyong.li@ceacsz.com.cn" ;
+		String username = "system@test.com";
+		String password = "test";
+		String from = "system@test.com";
+		String to = "zhiyong.li@test.com.cn" ;
+		String copyto = "zhiyong.li@test.com.cn" ;
 		String subject = "主题";
 		String content = "邮件内容xx";
 //		String filename = "f:/过滤仓库11.txt";
-		String filename = "d:/大唐产品模板-new.csv";
+		String filename = "d:/test.csv";
 		EmailManager email = new EmailManager(smtp, username, password);
 		email.sendMail(from, to, copyto, subject, content, filename);
 		 
