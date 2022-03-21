@@ -50,7 +50,7 @@
 		<fasterxml.jackson.version>2.2.2</fasterxml.jackson.version>
 		
 		<!-- dubbo -->
-		<dubbo.version>2.5.3</dubbo.version>
+		<dubbo.version>2.6.9</dubbo.version>
 		<!-- zookeeper -->
 		<zookeeper.version>3.3.3</zookeeper.version>
 		<zkclient.version>0.1</zkclient.version>
