@@ -83,7 +83,7 @@
 		<!-- druid -->
 		<druid.version>1.0.9</druid.version>
 		<!-- mongodb -->
-		<spring.data.mongodb>1.2.0.RELEASE</spring.data.mongodb>
+		<spring.data.mongodb>3.3.5</spring.data.mongodb>
 		<mongo.java.driver>3.3.0</mongo.java.driver>
 		<!-- solr -->
 		<solr.version>4.7.2</solr.version> 
