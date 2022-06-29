@@ -52,7 +52,7 @@
 		<!-- dubbo -->
 		<dubbo.version>2.5.3</dubbo.version>
 		<!-- zookeeper -->
-		<zookeeper.version>3.3.3</zookeeper.version>
+		<zookeeper.version>3.4.14</zookeeper.version>
 		<zkclient.version>0.1</zkclient.version>
 		<!-- redis -->
 		<spring.data.redis.version>1.4.1.RELEASE</spring.data.redis.version> 
