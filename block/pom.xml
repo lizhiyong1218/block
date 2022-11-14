@@ -25,7 +25,7 @@
 		<nexus.content>http://localhost:8080/content</nexus.content>
 <!-- 		<nexus.content>http://10.1.100.61:8044/content</nexus.content> -->
 		
-		<spring.version>3.2.8.RELEASE</spring.version>
+		<spring.version>3.2.18.RELEASE</spring.version>
 		<aspectj.version>1.6.10</aspectj.version>
 		<aspectjrt.version>1.5.3</aspectjrt.version>
 		<!-- mybatis -->
